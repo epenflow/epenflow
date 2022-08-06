@@ -20,5 +20,6 @@ li > h3 {
 @media (min-width: 320px) and (max-width: 700px) {
   .resume {
     width: auto;
+    background-color: #f6f6f6;
   }
 }
