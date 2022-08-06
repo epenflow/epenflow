@@ -1,0 +1,50 @@
+.profile {
+  background-color: #0042bf;
+  height: 100vh;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #f6f6f6;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: justify;
+  font-family: helvetica;
+}
+.profile h2 {
+  padding-top: 400px;
+  position: relative;
+}
+.profile p {
+  position: relative;
+  font-size: 20px;
+}
+.about-img {
+  width: 30%;
+  position: absolute;
+  justify-items: center;
+  top: 25%;
+  z-index: 0;
+  animation: rotating 3s linear infinite;
+  -webkit-animation: rotating 3s linear infinite;
+}
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 320px) and (max-width: 700px) {
+  .about-img {
+    width: 70%;
+  }
+  .profile h2 {
+    padding: 0;
+  }
+  .profile p {
+    top: -150px;
+    font-size: 15px;
+  }
+}

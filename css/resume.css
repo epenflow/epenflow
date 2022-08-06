@@ -1,0 +1,24 @@
+.resume {
+  background-color: #f6f6f6;
+  height: 100vh;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-family: helvetica;
+}
+li {
+  border-bottom: 1px solid #0042bf;
+  list-style: none;
+}
+li a {
+  text-decoration: none;
+  color: #000;
+}
+li > h3 {
+  font-family: helvetica-bold;
+  color: #0042bf;
+}
+@media (min-width: 320px) and (max-width: 700px) {
+  .resume {
+    width: auto;
+  }
+}
