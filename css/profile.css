@@ -11,10 +11,9 @@
   font-family: helvetica;
 }
 .profile h2 {
-  padding-top: 300px;
   position: relative;
 }
-.profile p {
+.profile p1 {
   position: relative;
   font-size: 20px;
 }
@@ -40,10 +39,7 @@
   .about-img {
     width: 70%;
   }
-  .profile h2 {
-    padding: 120px;
-  }
-  .profile p {
+  .profile p1 {
     top: -150px;
     font-size: 15px;
   }
