@@ -21,6 +21,11 @@
   text-align: justify;
   font-family: helvetica;
 }
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
 .profile h2 {
   position: relative;
 }
