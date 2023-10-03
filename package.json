@@ -1,0 +1,35 @@
+{
+	"babelMacros": {
+		"twin": {
+			"preset": "emotion"
+		}
+	},
+	"scripts": {
+		"dev": "next",
+		"build": "next build",
+		"start": "next start"
+	},
+	"license": "UNLICENSED",
+	"dependencies": {
+		"@emotion/react": "latest",
+		"@emotion/styled": "latest",
+		"gsap": "^3.12.2",
+		"next": "latest",
+		"react": "latest",
+		"react-dom": "latest",
+		"react-icons": "^4.11.0"
+	},
+	"devDependencies": {
+		"@babel/core": "latest",
+		"@babel/preset-react": "latest",
+		"@babel/preset-typescript": "latest",
+		"@emotion/babel-plugin": "latest",
+		"@types/node": "latest",
+		"@types/react": "latest",
+		"babel-loader": "latest",
+		"babel-plugin-macros": "latest",
+		"tailwindcss": "latest",
+		"twin.macro": "latest",
+		"typescript": "latest"
+	}
+}
