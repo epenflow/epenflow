@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.neon-border {
+	border: solid 2px #39ff14;
+}

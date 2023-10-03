@@ -26,6 +26,7 @@ module.exports = function withTwin(nextConfig) {
 							sourceMaps: dev,
 							plugins: [
 								require.resolve('babel-plugin-macros'),
+
 								require.resolve('@emotion/babel-plugin'),
 								[
 									require.resolve(

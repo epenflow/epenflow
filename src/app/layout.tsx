@@ -1,8 +1,6 @@
-import Navbar from '@/components/Navbar';
 import { DEFAULT_TEXT } from '@/constants/text';
 import GlobalStyles from '@/styles/GlobalStyles';
-import { getAge } from '@/utils/getYear';
-
+import './global.css';
 export const metadata = {
 	title: 'EPEN FLOW',
 	description: DEFAULT_TEXT.description,
