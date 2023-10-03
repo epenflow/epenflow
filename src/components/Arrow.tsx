@@ -14,7 +14,7 @@ const Arrow = ({ to, text }: { to: string; text: string }) => {
 			href={to}
 			onMouseEnter={() => setOver((prev) => (prev = true))}
 			onMouseLeave={() => setOver((prev) => (prev = false))}
-			tw='flex flex-row items-center  relative text-xl justify-between'>
+			tw='flex flex-row items-center  relative text-xl justify-between font-medium'>
 			{text}
 			{isOver ? <ImArrowRight2 /> : <ImArrowDownRight2 />}
 		</Link>
