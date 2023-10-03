@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar';
 import GlobalStyles from '@/styles/GlobalStyles';
 
 export const metadata = {
-	title: 'Twin',
+	title: 'EPEN FLOW',
 	description: '',
 };
 

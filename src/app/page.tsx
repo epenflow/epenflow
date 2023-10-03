@@ -7,7 +7,6 @@ import Arrow from '@/components/Arrow';
 import EFLogo from '@/components/EFLogo';
 import React from 'react';
 import Link from 'next/link';
-
 type TDefaultText = {
 	heading: string;
 	social: Array<{
