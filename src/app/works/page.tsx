@@ -7,7 +7,7 @@ import React from 'react';
 export default async function Works() {
 	return (
 		<React.Fragment>
-			<main className='relative overflow-y-hidden flex flex-col flex-wrap justify-center gap-2 p-4 box-border'>
+			<main className='relative overflow-y-hidden flex flex-col flex-wrap justify-center gap-2 p-4 box-border mb-14'>
 				<div className=''>
 					<Link
 						href={'/'}
