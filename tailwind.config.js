@@ -9,7 +9,19 @@ module.exports = {
 		'./src/**/*.{js,ts,jsx,tsx,mdx}',
 	],
 	theme: {
-		extend: {},
+		extend: {
+			animation: {
+				'slow-spin': 'newspin 2s linear infinite',
+			},
+			keyframes: {
+				newspin: {
+					from: { transform: 'rotate(360deg)' },
+					to: {
+						transform: 'rotate(0deg)',
+					},
+				},
+			},
+		},
 	},
 	plugins: [],
 };
