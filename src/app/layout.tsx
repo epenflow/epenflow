@@ -1,9 +1,11 @@
 import Navbar from '@/components/Navbar';
+import { DEFAULT_TEXT } from '@/constants/text';
 import GlobalStyles from '@/styles/GlobalStyles';
+import { getAge } from '@/utils/getYear';
 
 export const metadata = {
 	title: 'EPEN FLOW',
-	description: '',
+	description: DEFAULT_TEXT.description,
 };
 
 export default async function RootLayout({

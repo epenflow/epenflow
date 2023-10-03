@@ -7,29 +7,7 @@ import Arrow from '@/components/Arrow';
 import EFLogo from '@/components/EFLogo';
 import React from 'react';
 import Link from 'next/link';
-type TDefaultText = {
-	heading: string;
-	social: Array<{
-		name: string;
-		link: string;
-	}>;
-	description: string;
-};
-const DEFAULT_TEXT: TDefaultText = {
-	heading: 'epen flow',
-	social: [
-		{
-			link: 'https://www.instagram.com/epenflow/',
-			name: 'instagram',
-		},
-		{
-			name: 'facebook',
-			link: 'https://web.facebook.com/epenflow',
-		},
-	],
-	description: `I'm Epen Flow visual artist who translate inspirations into viusal narative.`,
-};
-
+import { DEFAULT_TEXT } from '@/constants/text';
 export default function Page() {
 	return (
 		<React.Fragment>
