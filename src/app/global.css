@@ -5,3 +5,6 @@
 .neon-border {
 	border: solid 2px #39ff14;
 }
+.black-border {
+	border: solid 2px black;
+}

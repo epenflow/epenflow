@@ -4,7 +4,7 @@ import React from 'react';
 const CardWorks = ({ images, category, client, title, year }: TRecentWorks) => {
 	return (
 		<div className='p-2 w-[320px] md:w-1/2 bg-white flex flex-col justify-center text-black neon-border gap-2'>
-			<div className='h-[290px] w-[300px] md:w-full flex justify-center neon-border overflow-hidden hover:cursor-pointer'>
+			<div className='h-[290px] w-[300px] md:w-full flex justify-center black-border overflow-hidden hover:cursor-pointer'>
 				<img
 					src={images.src}
 					className='h-[290px] w-[300px] object-contain transition duration-300 ease-in-out hover:scale-125'
