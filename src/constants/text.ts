@@ -23,5 +23,5 @@ export const DEFAULT_TEXT: TDefaultText = {
 	],
 	description: `Hi I'm Epen Flow ${getAge(
 		2000
-	)} years old, I'm visual artist who translate my inspirations into viusal narative.`,
+	)} years old, I'm visual artist who translate my inspirations into visual narative.`,
 };

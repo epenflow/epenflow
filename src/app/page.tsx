@@ -1,3 +1,4 @@
+'use client';
 import Arrow from '@/components/Arrow';
 import EFLogo from '@/components/EFLogo';
 import React from 'react';
@@ -5,7 +6,23 @@ import Link from 'next/link';
 import { DEFAULT_TEXT } from '@/constants/text';
 import tw from 'twin.macro';
 import Footer from '@/components/Footer';
+import gsap from 'gsap';
+import { TextPlugin } from 'gsap/TextPlugin';
+gsap.registerPlugin(TextPlugin);
 export default function Page() {
+	const descRef = React.useRef<HTMLParagraphElement>(null);
+	React.useLayoutEffect(() => {
+		const ctx = gsap.context(() => {
+			gsap.from(descRef.current, {
+				duration: 10,
+				text: '',
+				y: 50,
+			});
+		});
+		return () => {
+			ctx.revert();
+		};
+	}, []);
 	return (
 		<React.Fragment>
 			<main className='flex justify-center items-center max-h-screen h-screen flex-col relative overflow-y-hidden overflow-x-hidden'>
@@ -22,7 +39,9 @@ export default function Page() {
 							/>
 						))}
 					</div>
-					<p className='text-center italic'>
+					<p
+						className='text-center italic'
+						ref={descRef}>
 						{DEFAULT_TEXT.description}
 					</p>
 				</div>

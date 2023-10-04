@@ -11,12 +11,13 @@ const ListWorks = ({ category, client, images, title, year }: TRecentWorks) => {
 		<div
 			className='flex flex-col cursor-pointer relative'
 			onMouseEnter={() => setOver((prev) => (prev = true))}
-			onMouseLeave={() => setOver((prev) => (prev = false))}
-			onClick={() => setClick((prev) => !prev)}>
+			onMouseLeave={() => setOver((prev) => (prev = false))}>
 			<div className='flex flex-row justify-between items-center'>
-				<h1 className='uppercase line-clamp-2 md:text-6xl sm:text-3xl'>
-					{title}
-				</h1>
+				<button onClick={() => setClick((prev) => !prev)}>
+					<h1 className='uppercase line-clamp-2 md:text-6xl sm:text-3xl'>
+						{title}
+					</h1>
+				</button>
 
 				{isOver ? (
 					<ImArrowRight2 className='text-1xl md:text-4xl sm:text-3xl' />
