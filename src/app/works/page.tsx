@@ -16,12 +16,12 @@ export default async function Works() {
 					<Link
 						href={'/'}
 						className='text-xl uppercase font-bold'>
-						back
+						back,
 					</Link>
 					<Link
-						href={'#'}
-						className='italic'>
-						work with me
+						href={'/works/chat'}
+						className='italic capitalize'>
+						&nbsp; let's chat
 					</Link>
 				</div>
 				<div className='relative'>
