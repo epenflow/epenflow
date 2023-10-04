@@ -4,6 +4,7 @@ import { RECENT_WORKS } from '@/constants/works';
 import Link from 'next/link';
 import React from 'react';
 import Cakra from '@/components/Cakra';
+import WorkHeader from '@/components/works/WorkHeader';
 
 // import { ImArrowUp } from 'react-icons/im';
 
@@ -19,9 +20,7 @@ export default async function Works() {
 					</Link>
 				</div>
 				<div className='relative'>
-					<h1 className='text-3xl sm:text-6xl md:text-9xl uppercase font-bold'>
-						this featured some recent works
-					</h1>
+					<WorkHeader />
 					<Cakra />
 				</div>
 				{RECENT_WORKS.map((items, index) => (
