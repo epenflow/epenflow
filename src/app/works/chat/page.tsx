@@ -189,7 +189,7 @@ export default function Page() {
 				</div>
 				{isChange === '' ? null : (
 					<button
-						onClick={() => handleClick}
+						onClick={() => handleClick()}
 						className='bg-blue-600 p-2 rounded-md neon-border'>
 						<h1>send message</h1>
 					</button>
