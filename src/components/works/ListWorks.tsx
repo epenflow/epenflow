@@ -6,6 +6,7 @@ import tw from 'twin.macro';
 import CardWorks from './CardWorks';
 import gsap from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
+import Image from 'next/image';
 gsap.registerPlugin(TextPlugin);
 const ListWorks = ({ category, client, images, title, year }: TRecentWorks) => {
 	const [isOver, setOver] = React.useState<boolean>(false);
@@ -79,10 +80,12 @@ const ListWorks = ({ category, client, images, title, year }: TRecentWorks) => {
 			<div
 				className='absolute md:block hidden  -top-[185px] right-10 z-20 bg-white neon-border'
 				ref={hoverRef}>
-				<img
+				<Image
 					src={images.src}
-					alt=''
-					className='h-60 w-60 object-contain'
+					height={240}
+					width={240}
+					alt={title}
+					style={{ objectFit: 'contain' }}
 				/>
 			</div>
 

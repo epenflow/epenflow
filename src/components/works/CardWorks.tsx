@@ -1,15 +1,17 @@
 import { TRecentWorks } from '@/constants/works';
 import React from 'react';
-
+import Image from 'next/image';
 const CardWorks = ({ images, category, client, title, year }: TRecentWorks) => {
 	return (
 		<div className='p-2 w-[320px] md:w-1/2 bg-white flex flex-col justify-center text-black neon-border gap-2'>
 			<div className='h-[290px] w-[300px] md:w-full flex justify-center black-border overflow-hidden hover:cursor-pointer'>
-				<img
-					src={images.src}
-					className='h-[290px] w-[300px] object-contain transition duration-300 ease-in-out hover:scale-125'
+				<Image
 					alt={title}
-					placeholder='blur'
+					src={images.src}
+					width={300}
+					height={290}
+					style={{ objectFit: 'contain' }}
+					className='transition duration-300 ease-in-out hover:scale-125'
 				/>
 			</div>
 			<h1 className='font-bold line-clamp-2 capitalize'>{title}</h1>
