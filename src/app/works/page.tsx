@@ -18,6 +18,11 @@ export default async function Works() {
 						className='text-xl uppercase font-bold'>
 						back
 					</Link>
+					<Link
+						href={'#'}
+						className='italic'>
+						work with me
+					</Link>
 				</div>
 				<div className='relative'>
 					<WorkHeader />

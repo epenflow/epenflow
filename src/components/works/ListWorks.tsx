@@ -11,6 +11,8 @@ const ListWorks = ({ category, client, images, title, year }: TRecentWorks) => {
 	const [isOver, setOver] = React.useState<boolean>(false);
 	const [isClick, setClick] = React.useState<boolean>(false);
 	const titleRef = React.useRef<HTMLHeadingElement>(null);
+	const hoverRef = React.useRef<HTMLDivElement>(null);
+
 	React.useLayoutEffect(() => {
 		const ctx = gsap.context(() => {
 			gsap.from(titleRef.current, {
@@ -20,15 +22,44 @@ const ListWorks = ({ category, client, images, title, year }: TRecentWorks) => {
 				yPercent: -200,
 			});
 		});
+		const hoverAnimations = gsap.fromTo(
+			hoverRef.current,
+			{
+				opacity: 0,
+				scale: 0,
+				yPercent: -100,
+				stagger: {
+					amount: 1,
+					each: 1,
+				},
+				visibility: 'none',
+			},
+			{
+				opacity: 1,
+				paused: true,
+				scale: 1,
+				yPercent: 0,
+				visibility: 'block',
+			}
+		);
+		titleRef.current?.addEventListener('mouseenter', () => {
+			hoverAnimations.play();
+			setOver((prev) => (prev = true));
+		});
+		titleRef.current?.addEventListener('mouseleave', () => {
+			hoverAnimations.reverse();
+			setOver((prev) => (prev = false));
+		});
 		return () => {
 			ctx.revert();
+			titleRef.current?.removeEventListener('mouseenter', () => {
+				hoverAnimations.kill();
+				setOver((prev) => (prev = false));
+			});
 		};
 	}, []);
 	return (
-		<div
-			className='flex flex-col cursor-pointer relative'
-			onMouseEnter={() => setOver((prev) => (prev = true))}
-			onMouseLeave={() => setOver((prev) => (prev = false))}>
+		<div className='flex flex-col cursor-pointer relative'>
 			<div className='flex flex-row justify-between items-center'>
 				<button onClick={() => setClick((prev) => !prev)}>
 					<h1
@@ -44,15 +75,17 @@ const ListWorks = ({ category, client, images, title, year }: TRecentWorks) => {
 					<ImArrowDownRight2 className='text-1xl md:text-4xl sm:text-3xl' />
 				)}
 			</div>
-			{isOver ? (
-				<div className='absolute md:block hidden  -top-[185px] right-10 z-20 bg-white neon-border'>
-					<img
-						src={images.src}
-						alt=''
-						className='h-60 w-60 object-contain'
-					/>
-				</div>
-			) : null}
+
+			<div
+				className='absolute md:block hidden  -top-[185px] right-10 z-20 bg-white neon-border'
+				ref={hoverRef}>
+				<img
+					src={images.src}
+					alt=''
+					className='h-60 w-60 object-contain'
+				/>
+			</div>
+
 			<span className='w-full h-0.5 bg-white block' />
 			{isClick ? (
 				<div className='flex justify-center mt-2 md:justify-center'>
