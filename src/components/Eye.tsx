@@ -14,11 +14,15 @@ const Eye = () => {
 	});
 	const eyeRef = React.useRef<HTMLImageElement>(null);
 	const eyeContainerRef = React.useRef<HTMLDivElement>(null);
+	const angle = Math.atan2(
+		whereMouse.y - eyePosition.y,
+		whereMouse.x - whereMouse.y
+	);
 	const handleWhereMouse = (event: MouseEvent) => {
 		setMouse((prev) => ({ ...prev, x: event.clientX, y: event.clientY }));
 	};
 	React.useEffect(() => {
-		const rect = eyeContainerRef.current?.getBoundingClientRect();
+		const rect = eyeRef.current?.getBoundingClientRect();
 		const xRect = rect?.left === undefined ? 0 : rect?.left;
 		const yRect = rect?.top === undefined ? 0 : rect?.top;
 
@@ -46,13 +50,7 @@ const Eye = () => {
 					height={50}
 					alt='eyeball'
 					style={{
-						transform: `rotate(${
-							360 -
-							Math.atan2(
-								whereMouse.x - eyePosition.x,
-								whereMouse.y - eyePosition.y
-							)
-						}rad)`,
+						transform: `rotate(${360 - angle * 57.29}rad)`,
 						objectFit: 'contain',
 						transformOrigin: 'center center',
 					}}
