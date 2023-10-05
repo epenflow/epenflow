@@ -8,6 +8,7 @@ import tw from 'twin.macro';
 import Footer from '@/components/Footer';
 import gsap from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
+import { COLOR_PALETTE } from '@/constants/color';
 gsap.registerPlugin(TextPlugin);
 export default function Page() {
 	const descRef = React.useRef<HTMLParagraphElement>(null);
@@ -47,7 +48,7 @@ export default function Page() {
 				</div>
 				<EFLogo
 					size={tw`w-[340px] sm:w-[680px]`}
-					color='#39FF14'
+					color={`${COLOR_PALETTE.neon}`}
 					zIndex={-5}
 				/>
 				<div className='absolute z-20 top-0 right-0 uppercase p-1.5 font-extrabold'>

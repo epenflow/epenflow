@@ -3,6 +3,7 @@ import GlobalStyles from '@/styles/GlobalStyles';
 import './global.css';
 import { Metadata } from 'next';
 import EFLogoSVG from '/public/EFLogoSVG.svg';
+import ProgressBar from '@/components/ProgressBar';
 export const metadata: Metadata = {
 	title: 'EPEN FLOW',
 	description: DEFAULT_TEXT.description,
@@ -18,6 +19,7 @@ export default async function RootLayout({
 	return (
 		<html lang='en'>
 			<body>
+				<ProgressBar />
 				<GlobalStyles />
 				{children}
 			</body>

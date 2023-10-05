@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import Cakra from '@/components/Cakra';
 import Image from 'next/image';
 import epen from '/public/epen.png';
+import { COLOR_PALETTE } from '@/constants/color';
 gsap.registerPlugin(TextPlugin);
 type TWhereMouse = {
 	x: number;
@@ -124,19 +125,21 @@ export default function Page() {
 						style={{ objectFit: 'contain' }}
 					/>
 				</div>
+
 				<div
-					className='fixed h-5 w-5  bg-white rounded-full z-50 outline-2 outline-[#39FF14] flex justify-center items-center p-1 neon-border'
+					className={`fixed h-5 w-5  bg-white rounded-full z-50 outline-2 outline-[${COLOR_PALETTE.neon}] flex justify-center items-center neon-border`}
 					style={{
 						left: whereMouse.x,
 						top: whereMouse.y + 10,
 					}}>
-					<div className='bg-[#39FF14] rounded-full h-2 w-2'></div>
+					<div className='bg-blue-600 neon-border  rounded-full h-3 w-3'></div>
 				</div>
 
 				<div
-					className='bg-blue-600 w-full h-3/4 md:h-1/2 md:w-1/2 relative rounded-lg border-solid border-2 border-[#39FF14] box-content overflow-y-hidden'
+					className={`bg-blue-600 w-full h-3/4 md:h-1/2 md:w-1/2 relative rounded-lg border-solid border-2 border-[${COLOR_PALETTE.neon}] box-content overflow-y-hidden`}
 					ref={terminalRef}>
-					<div className='absolute bg-white top-0 h-7 items-center flex flex-row gap-1  shadow-lg w-full rounded-t-md border-b-2 border-solid border-[#39FF14]'>
+					<div
+						className={`absolute bg-white top-0 h-7 items-center flex flex-row gap-1  shadow-lg w-full rounded-t-md border-b-2 border-solid border-[${COLOR_PALETTE.neon}]`}>
 						<Link href={'/works'}>
 							<span
 								className='h-3 w-3 block bg-red-500 rounded-full ml-1 hover:animate-pulse'
@@ -167,7 +170,7 @@ export default function Page() {
 									type='text'
 									placeholder='Type here...'
 									onKeyDown={(el) => handleEnter(el)}
-									className='bg-blue-600 w-1/2 focus:border-none focus:outline-none placeholder-[#39FF14] placeholder:italic italic animate-pulse'
+									className={`bg-blue-600 w-1/2 focus:border-none focus:outline-none placeholder-[${COLOR_PALETTE.neon}] placeholder:italic italic animate-pulse`}
 									onChange={(el) => handleChange(el)}
 								/>
 							</div>
