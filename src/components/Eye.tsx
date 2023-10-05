@@ -13,17 +13,21 @@ const Eye = () => {
 		y: 0,
 	});
 	const eyeRef = React.useRef<HTMLImageElement>(null);
+	const eyeContainerRef = React.useRef<HTMLDivElement>(null);
 	const handleWhereMouse = (event: MouseEvent) => {
 		setMouse((prev) => ({ ...prev, x: event.clientX, y: event.clientY }));
 	};
 	React.useEffect(() => {
-		const rect = eyeRef.current?.getBoundingClientRect();
+		const rect = eyeContainerRef.current?.getBoundingClientRect();
+		const xRect = rect?.left === undefined ? 0 : rect?.left;
+		const yRect = rect?.top === undefined ? 0 : rect?.top;
+
 		window.addEventListener('mousemove', (event) => {
 			handleWhereMouse(event);
 			setEyePosition((prev) => ({
 				...prev,
-				x: rect?.x,
-				y: rect?.y,
+				x: xRect,
+				y: yRect,
 			}));
 		});
 		return () => {
@@ -31,7 +35,9 @@ const Eye = () => {
 		};
 	}, [whereMouse, eyePosition]);
 	return (
-		<div className='flex flex-row w-auto'>
+		<div
+			className='flex flex-row w-auto'
+			ref={eyeContainerRef}>
 			{Array.from({ length: 2 }).map((_, index) => (
 				<Image
 					key={index}
@@ -48,6 +54,7 @@ const Eye = () => {
 							)
 						}rad)`,
 						objectFit: 'contain',
+						transformOrigin: 'center center',
 					}}
 					ref={eyeRef}
 				/>

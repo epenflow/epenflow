@@ -22,7 +22,7 @@ export default function Page() {
 			setEyePosition((prev) => ({
 				...prev,
 				x: rect?.x,
-				y: rect?.y,
+				y: rect?.top,
 			}));
 		});
 		return () => {
@@ -31,6 +31,12 @@ export default function Page() {
 	}, [whereMouse]);
 	return (
 		<div className='relative flex justify-center items-center rounded-full'>
+			<p>
+				x: {eyePosition.x.toFixed()}
+				<br />
+				top: {eyePosition.y.toFixed()}
+			</p>
+			<p>x mouse:{whereMouse.x}</p>
 			{Array.from({ length: 2 }).map((_, index) => (
 				<img
 					key={index}
