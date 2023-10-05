@@ -27,7 +27,7 @@ export default async function Works() {
 				</div>
 				<Eye />
 			</nav>
-			<main className='relative overflow-y-hidden flex flex-col flex-wrap justify-center gap-2 p-4 box-border mb-14 mt-11 md:mt-10'>
+			<main className='relative overflow-y-hidden flex flex-col flex-wrap justify-center gap-2 p-4 box-border mb-14 mt-12 md:mt-10'>
 				<div className='relative'>
 					<WorkHeader />
 					<Cakra />
