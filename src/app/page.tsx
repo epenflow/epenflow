@@ -9,6 +9,7 @@ import Footer from '@/components/Footer';
 import gsap from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
 import { COLOR_PALETTE } from '@/constants/color';
+import Eye from '@/components/Eye';
 gsap.registerPlugin(TextPlugin);
 export default function Page() {
 	const descRef = React.useRef<HTMLParagraphElement>(null);
@@ -40,6 +41,7 @@ export default function Page() {
 							/>
 						))}
 					</div>
+					<Eye />
 					<p
 						className='text-center italic'
 						ref={descRef}>

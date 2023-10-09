@@ -9,6 +9,7 @@ import Cakra from '@/components/Cakra';
 import Image from 'next/image';
 import epen from '/public/epen.png';
 import { COLOR_PALETTE } from '@/constants/color';
+import Eye from '@/components/Eye';
 gsap.registerPlugin(TextPlugin);
 type TWhereMouse = {
 	x: number;
@@ -99,6 +100,7 @@ export default function Page() {
 		previusRef.current?.addEventListener('mouseleave', () => {
 			hoverAnimations.reverse();
 		});
+
 		return () => {
 			ctx.revert();
 		};

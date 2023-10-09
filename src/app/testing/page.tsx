@@ -31,7 +31,7 @@ const EyeWrapper = styled.div`
 	}
 `;
 
-const Eye = () => {
+const Page = () => {
 	const eyeRef = React.useRef<HTMLDivElement>(null);
 	const containerRef = React.useRef<HTMLDivElement>(null);
 	const [mouseCoord, setMouseCoord] = React.useState<TPos>({ x: 0, y: 0 });
@@ -64,18 +64,22 @@ const Eye = () => {
 	}, []);
 
 	return (
-		<div ref={eyeRef}>
-			<EyeWrapper
-				style={{
-					transform: `rotate(${rotasi(eyeRef)}deg)`,
-				}}
-			/>
-			<EyeWrapper
-				style={{
-					transform: `rotate(${rotasi(eyeRef)}deg)`,
-				}}
-			/>
+		<div className='w-full flex h-screen items-center justify-center p-56'>
+			<div
+				className='w-full'
+				ref={eyeRef}>
+				<EyeWrapper
+					style={{
+						transform: `rotate(${rotasi(eyeRef)}deg)`,
+					}}
+				/>
+				<EyeWrapper
+					style={{
+						transform: `rotate(${rotasi(eyeRef)}deg)`,
+					}}
+				/>
+			</div>
 		</div>
 	);
 };
-export default Eye;
+export default Page;
