@@ -1,85 +1,25 @@
 'use client';
 import React from 'react';
-import eyeballs from '/public/eyeballs.svg';
-import Image from 'next/image';
-import { styled } from 'twin.macro';
-type TPos = {
-	x: number;
-	y: number;
-};
-type TEyeWrapper = {
-	rotasi: number;
-};
-const EyeWrapper = styled.div`
-	position: relative;
-	height: 50px;
-	width: 50px;
-	border: solid 2px black;
-	border-radius: 50%;
-	background-color: white;
-	display: inline-block;
-
-	::after {
-		content: '';
-		width: 25px;
-		height: 25px;
-		background-color: black;
-		border-radius: 50%;
-		position: absolute;
-		left: 10px;
-		top: 5px;
-	}
-`;
-
+import { useDragControls, motion } from 'framer-motion';
+import useMouse from '@/utils/hooks/useMouse';
+import Pointer from '@/components/Pointer';
 const Page = () => {
-	const eyeRef = React.useRef<HTMLDivElement>(null);
-	const containerRef = React.useRef<HTMLDivElement>(null);
-	const [mouseCoord, setMouseCoord] = React.useState<TPos>({ x: 0, y: 0 });
-	const handleMove = (event: MouseEvent) => {
-		setMouseCoord((prev) => ({
-			...prev,
-			x: event.clientX,
-			y: event.clientY,
-		}));
-	};
-	const rotasi = (element: React.RefObject<HTMLDivElement>) => {
-		const rectX: number =
-			element.current?.offsetLeft ||
-			0 + (element.current?.clientWidth || 0) / 2;
-
-		const rectY: number =
-			element.current?.offsetTop ||
-			0 + (element.current?.clientHeight || 0) / 2;
-
-		const x = rectX - mouseCoord.x;
-		const y = rectY - mouseCoord.y;
-		const rad = Math.atan2(x, y);
-		const rot = ((rad * 180) / Math.PI) * -1;
-		return rot;
-	};
-	React.useEffect(() => {
-		window.addEventListener('mousemove', handleMove);
-		return () => {};
-		window.removeEventListener('mousemove', handleMove);
-	}, []);
-
+	const controls = useDragControls();
+	const { mouseX, mouseY } = useMouse();
 	return (
-		<div className='w-full flex h-screen items-center justify-center p-56'>
-			<div
-				className='w-full'
-				ref={eyeRef}>
-				<EyeWrapper
-					style={{
-						transform: `rotate(${rotasi(eyeRef)}deg)`,
-					}}
-				/>
-				<EyeWrapper
-					style={{
-						transform: `rotate(${rotasi(eyeRef)}deg)`,
-					}}
-				/>
+		<>
+			<Pointer />
+			<div className='flex items-center justify-center w-full h-screen'>
+				<div className='bg-blue-500 p-2 relative'>
+					<motion.div
+						dragControls={controls}
+						drag
+						className='bg-white h-20 w-20 m-20'
+					/>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
+
 export default Page;

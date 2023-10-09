@@ -6,12 +6,14 @@ import React from 'react';
 import Cakra from '@/components/Cakra';
 import WorkHeader from '@/components/works/WorkHeader';
 import Eye from '@/components/Eye';
+import Pointer from '@/components/Pointer';
 
 // import { ImArrowUp } from 'react-icons/im';
 
 export default async function Works() {
 	return (
 		<React.Fragment>
+			<Pointer />
 			<nav className='z-50 flex flex-row w-full justify-between fixed top-0 left-0 bg-black items-center p-2'>
 				<div>
 					<Link

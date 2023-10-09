@@ -5,33 +5,24 @@ import gsap from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
 import { useRouter } from 'next/navigation';
 import Footer from '@/components/Footer';
-import Cakra from '@/components/Cakra';
-import Image from 'next/image';
-import epen from '/public/epen.png';
 import { COLOR_PALETTE } from '@/constants/color';
-import Eye from '@/components/Eye';
+import { AnimatePresence, motion } from 'framer-motion';
+import { isMobile } from 'react-device-detect';
+import { CloseHover } from '@/components/works/chat/CloseHover';
+import Pointer from '@/components/Pointer';
 gsap.registerPlugin(TextPlugin);
-type TWhereMouse = {
-	x: number;
-	y: number;
-};
+
 export default function Page() {
 	const [isChange, setChange] = React.useState<string>('');
 	const welcomeRef = React.useRef<HTMLHeadingElement>(null);
 	const terminalRef = React.useRef<HTMLDivElement>(null);
-	const [whereMouse, setWhereMoues] = React.useState<TWhereMouse>({
-		x: 0,
-		y: 0,
-	});
 	const previusRef = React.useRef<HTMLSpanElement>(null);
-	const hoverRef = React.useRef<HTMLDivElement>(null);
 	const router = useRouter();
 	const handleChange = (el: ChangeEvent<HTMLInputElement>) => {
 		setChange((prev) => (prev = el.target.value));
 	};
 	const handleEnter = (el: React.KeyboardEvent<HTMLInputElement>) => {
 		if (el.key === 'Enter') {
-			console.info('hit enter');
 			router.push(
 				`https://api.whatsapp.com/send/?phone=%2B62895330148034&text=${isChange}&type=phone_number&app_absent=0`
 			);
@@ -42,13 +33,7 @@ export default function Page() {
 			`https://api.whatsapp.com/send/?phone=%2B62895330148034&text=${isChange}&type=phone_number&app_absent=0`
 		);
 	};
-	const handleMouseMove = (event: MouseEvent) => {
-		setWhereMoues((prev) => ({
-			...prev,
-			x: event.clientX,
-			y: event.clientY,
-		}));
-	};
+
 	React.useLayoutEffect(() => {
 		const tl = gsap.timeline({
 			defaults: {
@@ -74,69 +59,16 @@ export default function Page() {
 				2
 			);
 		});
-		const hoverAnimations = gsap.fromTo(
-			hoverRef.current,
-			{
-				opacity: 0,
-				scale: 0,
-				yPercent: -100,
-				stagger: {
-					amount: 1,
-					each: 1,
-				},
-				visibility: 'none',
-			},
-			{
-				opacity: 1,
-				paused: true,
-				scale: 1,
-				yPercent: 0,
-				visibility: 'block',
-			}
-		);
-		previusRef.current?.addEventListener('mouseenter', () => {
-			hoverAnimations.play();
-		});
-		previusRef.current?.addEventListener('mouseleave', () => {
-			hoverAnimations.reverse();
-		});
 
 		return () => {
 			ctx.revert();
 		};
 	}, []);
-	React.useEffect(() => {
-		window.addEventListener('mousemove', handleMouseMove);
-
-		return () => {
-			window.removeEventListener('mousemove', handleMouseMove);
-		};
-	}, []);
 	return (
 		<React.Fragment>
+			<Pointer />
+			{!isMobile ? <CloseHover previusRef={previusRef} /> : null}
 			<main className='flex justify-center items-center h-screen max-h-screen p-4 flex-col gap-3 overflow-y-hidden'>
-				<div
-					className='bg-blue-600 h-52 w-52 z-50 hidden md:flex sm:flex fixed neon-border justify-center '
-					style={{ left: whereMouse.x + 5, top: whereMouse.y + 20 }}
-					ref={hoverRef}>
-					<Image
-						src={epen.src}
-						width={208}
-						height={208}
-						alt='epen flow'
-						style={{ objectFit: 'contain' }}
-					/>
-				</div>
-
-				<div
-					className={`fixed h-5 w-5  bg-white rounded-full z-50 outline-2 outline-[${COLOR_PALETTE.neon}] flex justify-center items-center neon-border`}
-					style={{
-						left: whereMouse.x,
-						top: whereMouse.y + 10,
-					}}>
-					<div className='bg-blue-600 neon-border  rounded-full h-3 w-3'></div>
-				</div>
-
 				<div
 					className={`bg-blue-600 w-full h-3/4 md:h-1/2 md:w-1/2 relative rounded-lg border-solid border-2 border-[${COLOR_PALETTE.neon}] box-content overflow-y-hidden`}
 					ref={terminalRef}>
@@ -192,13 +124,29 @@ export default function Page() {
 						</div>
 					</div>
 				</div>
-				{isChange === '' ? null : (
-					<button
-						onClick={() => handleClick()}
-						className='bg-blue-600 p-2 rounded-md neon-border'>
-						<h1>send message</h1>
-					</button>
-				)}
+				<AnimatePresence>
+					{isChange === '' ? null : (
+						<motion.button
+							initial={{
+								clipPath: 'inset(0% 50%)',
+							}}
+							animate={{
+								opacity: 1,
+								clipPath: 'inset(0%)',
+							}}
+							exit={{
+								clipPath: 'inset(0% 50%)',
+							}}
+							transition={{
+								type: 'tween',
+								duration: 2,
+							}}
+							onClick={() => handleClick()}
+							className='bg-blue-600 p-2 rounded-md border-solid border-[2px] border-white italic font-bold'>
+							<h1>send message</h1>
+						</motion.button>
+					)}
+				</AnimatePresence>
 			</main>
 			<Footer />
 		</React.Fragment>
