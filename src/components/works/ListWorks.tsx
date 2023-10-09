@@ -7,6 +7,7 @@ import CardWorks from './CardWorks';
 import gsap from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
 import Image from 'next/image';
+import { AnimatePresence, motion } from 'framer-motion';
 gsap.registerPlugin(TextPlugin);
 const ListWorks = ({ category, client, images, title, year }: TRecentWorks) => {
 	const [isOver, setOver] = React.useState<boolean>(false);
@@ -90,17 +91,28 @@ const ListWorks = ({ category, client, images, title, year }: TRecentWorks) => {
 			</div>
 
 			<span className='w-full h-0.5 bg-white block' />
-			{isClick ? (
-				<div className='flex justify-center mt-2 md:justify-center'>
-					<CardWorks
-						category={category}
-						client={client}
-						images={images}
-						title={title}
-						year={year}
-					/>
-				</div>
-			) : null}
+			<AnimatePresence>
+				{isClick ? (
+					<motion.div
+						initial={{ clipPath: 'inset(0% 50%)', translateY: 25 }}
+						animate={{ clipPath: 'inset(0%)', translateY: 0 }}
+						exit={{ clipPath: 'inset(0% 50%)', translateY: 25 }}
+						transition={{
+							duration: 2.5,
+							delay: 0.5,
+							ease: 'easeInOut',
+						}}
+						className='flex justify-center mt-2 md:justify-center'>
+						<CardWorks
+							category={category}
+							client={client}
+							images={images}
+							title={title}
+							year={year}
+						/>
+					</motion.div>
+				) : null}
+			</AnimatePresence>
 		</div>
 	);
 };

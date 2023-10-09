@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { styled } from 'twin.macro';
 import { isMobile, isDesktop, BrowserView } from 'react-device-detect';
+import Cakra from './Cakra';
 
 const PointerWrapper = styled(motion.div)`
 	height: 25px;

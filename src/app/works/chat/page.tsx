@@ -140,6 +140,7 @@ export default function Page() {
 							transition={{
 								type: 'tween',
 								duration: 2,
+								delay: 0.5,
 							}}
 							onClick={() => handleClick()}
 							className='bg-blue-600 p-2 rounded-md border-solid border-[2px] border-white italic font-bold'>
