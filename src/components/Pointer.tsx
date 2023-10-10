@@ -37,9 +37,7 @@ const Pointer = () => {
 				}}
 				transition={{
 					type: 'spring',
-					damping: 5,
-					stiffness: 55,
-					restDelta: 0.001,
+					mass: 0.6,
 				}}></PointerWrapper>
 		</BrowserView>
 	);
