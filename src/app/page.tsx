@@ -83,7 +83,7 @@ export default function Page() {
 					/>
 				</div>
 				<div
-					className='w-full h-screen bg-white flex items-center justify-center relative'
+					className='w-full h-screen bg-black flex items-center justify-center relative'
 					ref={con}>
 					<video
 						src='/theeye.mp4'
@@ -92,12 +92,6 @@ export default function Page() {
 						loop
 						muted
 						className='min-w-full min-h-full'></video>
-					<h1
-						className='absolute text-5xl font-bold uppercase text-black '
-						data-scroll
-						data-scroll-speed='-0.1'>
-						want to talk?
-					</h1>
 				</div>
 			</main>
 

@@ -1,5 +1,6 @@
 'use client';
 import gsap, { Bounce } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import React from 'react';
 interface IEFLogoEffect {
 	children: JSX.Element;
@@ -35,6 +36,15 @@ const EFLogoEffect: React.FC<IEFLogoEffect> = ({
 				},
 			},
 		});
+		// const scroll = gsap
+		// 	.timeline()
+		// 	.to(pathOne.current, { xPercent: -300 }, 6)
+		// 	.to(pathTwo.current, { xPercent: 300 }, 6)
+		// 	.to(pathThree.current, { yPercent: -300 }, 6)
+		// 	.to(pathFour.current, { xPercent: 300 }, 6)
+		// 	.to(pathFive.current, { yPercent: 300 }, 6)
+		// 	.to(pathSix.current, { xPercent: 300 }, 6)
+		// 	.to(pathSeven.current, { yPercent: 300 }, 0);
 		let ctx = gsap.context(() => {
 			tl.fromTo(
 				pathOne.current,
