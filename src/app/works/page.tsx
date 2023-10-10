@@ -5,11 +5,7 @@ import Link from 'next/link';
 import React from 'react';
 import Cakra from '@/components/Cakra';
 import WorkHeader from '@/components/works/WorkHeader';
-import Eye from '@/components/Eye';
 import Pointer from '@/components/Pointer';
-
-// import { ImArrowUp } from 'react-icons/im';
-
 export default async function Works() {
 	return (
 		<React.Fragment>
@@ -40,6 +36,7 @@ export default async function Works() {
 					/>
 				))}
 			</main>
+
 			<Footer />
 		</React.Fragment>
 	);
