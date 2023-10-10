@@ -14,7 +14,7 @@ const ListWorks = ({ category, client, images, title, year }: TRecentWorks) => {
 	const [isClick, setClick] = React.useState<boolean>(false);
 	const titleRef = React.useRef<HTMLHeadingElement>(null);
 	const hoverRef = React.useRef<HTMLDivElement>(null);
-
+	const containerRef = React.useRef<HTMLDivElement>(null);
 	React.useLayoutEffect(() => {
 		const ctx = gsap.context(() => {
 			gsap.from(titleRef.current, {
@@ -52,16 +52,18 @@ const ListWorks = ({ category, client, images, title, year }: TRecentWorks) => {
 			hoverAnimations.reverse();
 			setOver((prev) => (prev = false));
 		});
+
+		const containerHover = gsap.to(containerRef.current, {
+			marginBottom: 0,
+		});
+
 		return () => {
 			ctx.revert();
-			titleRef.current?.removeEventListener('mouseenter', () => {
-				hoverAnimations.kill();
-				setOver((prev) => (prev = false));
-			});
 		};
 	}, []);
+
 	return (
-		<div className='flex flex-col cursor-pointer relative'>
+		<div className='flex flex-col cursor-pointer relative bg-black'>
 			<div className='flex flex-row justify-between items-center'>
 				<button onClick={() => setClick((prev) => !prev)}>
 					<h1
@@ -77,7 +79,7 @@ const ListWorks = ({ category, client, images, title, year }: TRecentWorks) => {
 					<ImArrowDownRight2 className='text-1xl md:text-4xl sm:text-3xl' />
 				)}
 			</div>
-
+			<span className='w-full h-0.5 bg-white block' />
 			<div
 				className='absolute md:block hidden  -top-[185px] right-10 z-20 bg-white neon-border'
 				ref={hoverRef}>
@@ -88,9 +90,10 @@ const ListWorks = ({ category, client, images, title, year }: TRecentWorks) => {
 					alt={title}
 					style={{ objectFit: 'contain' }}
 				/>
+				s
 			</div>
 
-			<span className='w-full h-0.5 bg-white block' />
+			{/* <span className='w-full h-0.5 bg-white block' /> */}
 			<AnimatePresence>
 				{isClick ? (
 					<motion.div

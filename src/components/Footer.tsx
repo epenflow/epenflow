@@ -17,7 +17,7 @@ const Footer = () => {
 	return (
 		<footer
 			ref={footerRef}
-			className='fixed bottom-0 flex justify-center items-center w-screen bg-black p-2'>
+			className='fixed bottom-0 flex justify-center items-center w-screen bg-black p-2 z-[999]'>
 			<Link
 				href={'mailto:epenflow@gmail.com'}
 				className='uppercase font-bold'>
