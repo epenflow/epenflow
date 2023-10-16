@@ -99,7 +99,11 @@ const ListWorks = ({ category, client, images, title, year }: TRecentWorks) => {
 					<motion.div
 						initial={{ clipPath: 'inset(0% 50%)', translateY: 25 }}
 						animate={{ clipPath: 'inset(0%)', translateY: 0 }}
-						exit={{ clipPath: 'inset(0% 50%)', translateY: 25 }}
+						exit={{
+							clipPath: 'inset(0% 50%)',
+							translateY: 25,
+							transition: { duration: 1.2, delay: 0 },
+						}}
 						transition={{
 							duration: 2.5,
 							delay: 0.5,
