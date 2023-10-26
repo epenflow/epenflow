@@ -22,7 +22,7 @@ export const DEFAULT_TEXT: TDefaultText = {
 		},
 		{
 			name: 'linkedln',
-			link: 'https://linkedin.com/in/i-putu-m-883145120',
+			link: 'https://linkedin.com/in/iputumegakrisnayana',
 		},
 	],
 	description: `"Hi, I'm I Putu Mega Krisnayana ${getAge(
