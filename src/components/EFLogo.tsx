@@ -45,9 +45,7 @@ const EFLogo: React.FC<Partial<IEFLogo>> = ({
 				viewBox='0 0 1000 1000'
 				size={size}
 				color={color}
-				ref={pathRef}
-				data-scroll
-				data-scroll-speed='0.5'>
+				ref={pathRef}>
 				<defs></defs>
 				<path
 					ref={pathOne}

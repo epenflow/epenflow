@@ -60,6 +60,7 @@ export default function Page() {
 						<h1 className='text-5xl sm:text-8xl uppercase font-extrabold text-center'>
 							{DEFAULT_TEXT.heading}
 						</h1>
+						<Eye />
 						<div className='capitalize flex flex-row flex-wrap gap-1.5'>
 							{DEFAULT_TEXT.social.map((socialMedia, index) => (
 								<Arrow
@@ -69,7 +70,6 @@ export default function Page() {
 								/>
 							))}
 						</div>
-						<Eye />
 						<p
 							className='xl:text-center italic xl:ml-24 xl:mr-24 ml-2 mr-2 md:ml-10 md:mr-10 md:text-center text-justify'
 							ref={descRef}>
