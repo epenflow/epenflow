@@ -93,6 +93,18 @@ export default function Page() {
 						muted
 						controlsList='nodownload'
 						className='min-w-full min-h-full'></video>
+					<div className='absolute text-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-black text-center w-full xl:pl-24 xl:pr-24 pr-4 pl-4 md:pl-14 md:pr-14'>
+						<p className={`italic font-medium`}>
+							Limitless from the anime Jujutsu Kaisen, which is an
+							inherited technique passed down in the Gojo Family.
+							This technique brings the concept of “Infinity” into
+							reality, allowing the user to manipulate and distort
+							space at will
+						</p>
+						<h1 className='text-3xl font-bold'>
+							"The Infinity Eye"
+						</h1>
+					</div>
 				</div>
 			</main>
 

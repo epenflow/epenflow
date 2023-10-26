@@ -10,6 +10,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { isMobile } from 'react-device-detect';
 import { CloseHover } from '@/components/works/chat/CloseHover';
 import Pointer from '@/components/Pointer';
+import { DEFAULT_TERMINAL_TEXT } from '@/constants/text';
 gsap.registerPlugin(TextPlugin);
 
 export default function Page() {
@@ -87,13 +88,7 @@ export default function Page() {
 						<h1
 							className=''
 							ref={welcomeRef}>
-							~👾Hi Mate, I think you interested about my work
-							maybe you want to send me a text?
-							<br />
-							send your text in form field below!
-							<br />
-							Click the red button to navigate to the previous
-							page
+							{DEFAULT_TERMINAL_TEXT.heading_text}
 						</h1>
 						<div className='flex flex-col'>
 							<div>
@@ -111,8 +106,7 @@ export default function Page() {
 							{isChange === '' ? null : (
 								<div className=''>
 									<p className='italic'>
-										hit enter to send message or you can use
-										button send message below!
+										{DEFAULT_TERMINAL_TEXT.message_text}
 									</p>
 									<div className='w-full overflow-x-hidden overflow-y-auto h-[240px]  md:h-[140px] p-2'>
 										<p className='w-full h-full'>
