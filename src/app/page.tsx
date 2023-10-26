@@ -54,7 +54,7 @@ export default function Page() {
 			<main>
 				<div className='flex justify-center items-center max-h-screen h-screen flex-col relative overflow-y-hidden overflow-x-hidden'>
 					<div
-						className='z-10 flex flex-col gap-0.5 sm:gap-2.5 items-center	justify-center p-2 bg-black'
+						className='z-10 flex flex-col gap-0.5 sm:gap-2.5 items-center	justify-center p-2'
 						data-scroll
 						data-scroll-speed='-0.6'>
 						<h1 className='text-5xl sm:text-8xl uppercase font-extrabold text-center'>
@@ -91,6 +91,7 @@ export default function Page() {
 						autoPlay
 						loop
 						muted
+						controlsList='nodownload'
 						className='min-w-full min-h-full'></video>
 				</div>
 			</main>

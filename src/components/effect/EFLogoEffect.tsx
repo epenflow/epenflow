@@ -129,6 +129,13 @@ const EFLogoEffect: React.FC<IEFLogoEffect> = ({
 						rotate: 0,
 					},
 					3
+				)
+				.to(
+					pathRef.current,
+					{
+						opacity: '50%',
+					},
+					7
 				);
 		});
 		return () => {
