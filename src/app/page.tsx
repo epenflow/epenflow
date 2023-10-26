@@ -71,7 +71,7 @@ export default function Page() {
 						</div>
 						<Eye />
 						<p
-							className='text-center italic'
+							className='xl:text-center italic xl:ml-24 xl:mr-24 ml-2 mr-2 md:ml-10 md:mr-10 md:text-center text-justify'
 							ref={descRef}>
 							{DEFAULT_TEXT.description}
 						</p>

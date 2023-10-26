@@ -21,7 +21,7 @@ export const DEFAULT_TEXT: TDefaultText = {
 			link: 'https://web.facebook.com/epenflow',
 		},
 	],
-	description: `Hi I'm Epen Flow ${getAge(
+	description: `Hi, I'm I Putu Mega Krisnayana ${getAge(
 		2000
-	)} years old, I'm visual artist who translate my inspirations into visual narative.`,
+	)}y/o, but you can call me Epen Flow. I live in Bali, and I'm really enthusiastic about technology and art. I believe that technology should make our lives easier, faster, and more efficient. That's why I decide to pursue a degree in information systems at ITB STIKOM BALI.  Moreover, I'm also self-taught, and whenever I have free time, I spend it studying programming and other topics that I find interesting.`,
 };
