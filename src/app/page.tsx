@@ -70,6 +70,13 @@ export default function Page() {
 								/>
 							))}
 						</div>
+						<Link
+							href={
+								'https://drive.google.com/drive/folders/1ONDovi1jdQqFAAB4F_UPoW7qsDrepNjU?usp=sharing'
+							}
+							className='font-medium'>
+							Download EpenFlow CV
+						</Link>
 						<p
 							className='xl:text-center italic xl:ml-24 xl:mr-24 ml-2 mr-2 md:ml-10 md:mr-10 md:text-center text-justify'
 							ref={descRef}>
