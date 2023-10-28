@@ -8,6 +8,7 @@ import gsap from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
+import Desktop from '../views/Desktop';
 gsap.registerPlugin(TextPlugin);
 const ListWorks = ({ category, client, images, title, year }: TRecentWorks) => {
 	const [isOver, setOver] = React.useState<boolean>(false);
@@ -53,17 +54,13 @@ const ListWorks = ({ category, client, images, title, year }: TRecentWorks) => {
 			setOver((prev) => (prev = false));
 		});
 
-		const containerHover = gsap.to(containerRef.current, {
-			marginBottom: 0,
-		});
-
 		return () => {
 			ctx.revert();
 		};
 	}, []);
 
 	return (
-		<div className='flex flex-col cursor-pointer relative bg-black'>
+		<section className='flex flex-col cursor-pointer relative bg-black'>
 			<div className='flex flex-row justify-between items-center'>
 				<button onClick={() => setClick((prev) => !prev)}>
 					<h1
@@ -73,11 +70,13 @@ const ListWorks = ({ category, client, images, title, year }: TRecentWorks) => {
 					</h1>
 				</button>
 
-				{isOver ? (
-					<ImArrowRight2 className='text-1xl md:text-4xl sm:text-3xl' />
-				) : (
-					<ImArrowDownRight2 className='text-1xl md:text-4xl sm:text-3xl' />
-				)}
+				<Desktop>
+					{isOver ? (
+						<ImArrowRight2 className='text-1xl md:text-4xl sm:text-3xl' />
+					) : (
+						<ImArrowDownRight2 className='text-1xl md:text-4xl sm:text-3xl' />
+					)}
+				</Desktop>
 			</div>
 			<span className='w-full h-0.5 bg-white block' />
 			<div
@@ -120,7 +119,7 @@ const ListWorks = ({ category, client, images, title, year }: TRecentWorks) => {
 					</motion.div>
 				) : null}
 			</AnimatePresence>
-		</div>
+		</section>
 	);
 };
 

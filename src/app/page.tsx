@@ -110,9 +110,7 @@ export default function Page() {
 							reality, allowing the user to manipulate and distort
 							space at will
 						</p>
-						<h1 className='text-3xl font-bold'>
-							"The Infinity Eye"
-						</h1>
+						<h1 className='text-3xl font-bold'>"LIMITLESS"</h1>
 					</div>
 				</div>
 			</main>
