@@ -4,6 +4,8 @@ import Image from 'next/image';
 import epen from '/public/epen.png';
 import useMouse from '@/utils/hooks/useMouse';
 import { gsap } from 'gsap';
+import { BrowserView } from 'react-device-detect';
+import Desktop from '@/components/views/Desktop';
 export const CloseHover = ({
 	previusRef,
 }: {

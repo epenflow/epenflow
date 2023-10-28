@@ -3,8 +3,8 @@ import useMouse from '@/utils/hooks/useMouse';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { styled } from 'twin.macro';
-import { isMobile, isDesktop, BrowserView } from 'react-device-detect';
-import Cakra from './Cakra';
+import { BrowserView } from 'react-device-detect';
+import Desktop from './views/Desktop';
 
 const PointerWrapper = styled(motion.div)`
 	height: 25px;
@@ -28,7 +28,7 @@ const PointerWrapper = styled(motion.div)`
 const Pointer = () => {
 	const { mouseX, mouseY } = useMouse();
 	return (
-		<BrowserView>
+		<Desktop>
 			<PointerWrapper
 				animate={{
 					x: mouseX + 10,
@@ -39,7 +39,7 @@ const Pointer = () => {
 					type: 'spring',
 					mass: 0.6,
 				}}></PointerWrapper>
-		</BrowserView>
+		</Desktop>
 	);
 };
 

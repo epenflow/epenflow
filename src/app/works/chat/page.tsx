@@ -7,10 +7,11 @@ import { useRouter } from 'next/navigation';
 import Footer from '@/components/Footer';
 import { COLOR_PALETTE } from '@/constants/color';
 import { AnimatePresence, motion } from 'framer-motion';
-import { isMobile } from 'react-device-detect';
 import { CloseHover } from '@/components/works/chat/CloseHover';
 import Pointer from '@/components/Pointer';
 import { DEFAULT_TERMINAL_TEXT } from '@/constants/text';
+import Reveal from '@/components/Reveal';
+import Desktop from '@/components/views/Desktop';
 gsap.registerPlugin(TextPlugin);
 
 export default function Page() {
@@ -67,8 +68,11 @@ export default function Page() {
 	}, []);
 	return (
 		<React.Fragment>
+			<Reveal />
 			<Pointer />
-			{!isMobile ? <CloseHover previusRef={previusRef} /> : null}
+			<Desktop>
+				<CloseHover previusRef={previusRef} />
+			</Desktop>
 			<main className='flex justify-center items-center h-screen max-h-screen p-4 flex-col gap-3 overflow-y-hidden'>
 				<div
 					className={`bg-blue-600 w-full h-3/4 md:h-1/2 md:w-1/2 relative rounded-lg border-solid border-2 border-[${COLOR_PALETTE.neon}] box-content overflow-y-hidden`}

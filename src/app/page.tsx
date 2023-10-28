@@ -11,6 +11,7 @@ import { TextPlugin } from 'gsap/TextPlugin';
 import { COLOR_PALETTE } from '@/constants/color';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Eye from '@/components/Eye';
+import Reveal from '@/components/Reveal';
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 export default function Page() {
 	const descRef = React.useRef<HTMLParagraphElement>(null);
@@ -48,6 +49,7 @@ export default function Page() {
 
 	return (
 		<React.Fragment>
+			<Reveal />
 			<nav className=' z-20  right-0 uppercase p-1.5 font-extrabold fixed top-0'>
 				<Link href={'/works'}>works</Link>
 			</nav>
