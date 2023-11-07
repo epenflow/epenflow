@@ -8,7 +8,6 @@ const Reveal = () => {
 			gsap.to('#reveal', {
 				height: 0,
 				delay: 0.5,
-				borderBottomLeftRadius: '50%',
 				stagger: {
 					amount: 0.5,
 				},

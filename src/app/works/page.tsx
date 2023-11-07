@@ -7,10 +7,11 @@ import Cakra from '@/components/Cakra';
 import WorkHeader from '@/components/works/WorkHeader';
 import Pointer from '@/components/Pointer';
 import Reveal from '@/components/Reveal';
+import LeftReveal from '@/components/LeftReveal';
 export default async function Works() {
 	return (
 		<React.Fragment>
-			<Reveal />
+			<LeftReveal />
 			<Pointer />
 			<nav className='z-50 flex flex-row w-full justify-between fixed top-0 left-0 bg-black items-center p-2'>
 				<div>
