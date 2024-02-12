@@ -1,6 +1,8 @@
 'use client';
 import gsap, { Power4 } from 'gsap';
 import React from 'react';
+import TextPlugin from 'gsap/TextPlugin';
+gsap.registerPlugin(TextPlugin);
 const colorCode = [
 	'#FFFFFF',
 	'#F8FB02',
@@ -16,25 +18,36 @@ export const Modal = () => {
 			repeat: -1,
 		});
 		const colorItems = gsap.utils.toArray('#color__items');
+		const nosignal = document.querySelector('#no-signal');
 
 		const ctx = gsap.context(() => {
-			tl.fromTo(
-				colorItems,
-				{
-					height: 0,
-					width: 0,
-					repeat: -1,
-				},
-				{
-					height: '100%',
-					width: '100%',
-					stagger: 0.5,
-					repeat: -1,
-					ease: Power4.easeInOut,
-					duration: 1.5,
-					yoyo: true,
-				}
-			);
+			tl
+				.fromTo(
+					colorItems,
+					{
+						height: 0,
+						width: 0,
+						repeat: -1,
+					},
+					{
+						height: '100%',
+						width: '100%',
+						stagger: 0.5,
+						repeat: -1,
+						ease: Power4.easeInOut,
+						duration: 1.5,
+						yoyo: true,
+					},
+					'-=0.5'
+				)
+				.fromTo(
+					nosignal,
+					{
+						text: '',
+					},
+					{ text: 'oops no signal!' }
+				),
+				'-=1';
 		});
 
 		return () => ctx.revert();
@@ -71,7 +84,9 @@ lg:h-4/5 lg:w-1/2 fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 flex-
 							key={index}></div>
 					))}
 					<div className='absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-black p-2'>
-						<h1 className='text-white text-1xl lg:text-6xl font-mono font-bold uppercase text-justify'>
+						<h1
+							className='text-white text-1xl lg:text-6xl font-mono font-bold uppercase text-justify'
+							id='no-signal'>
 							oops no signal!
 						</h1>
 					</div>
