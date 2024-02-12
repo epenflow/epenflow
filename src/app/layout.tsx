@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import EFLogoSVG from '/public/EFLogoSVG.svg';
 import ProgressBar from '@/components/ProgressBar';
 import Locomotive from '@/components/Locomotive';
+import { Modal } from '@/components/Modal';
 export const metadata: Metadata = {
 	title: 'EPEN FLOW',
 	description: DEFAULT_TEXT.description,
@@ -22,6 +23,8 @@ export default async function RootLayout({
 			<body>
 				<ProgressBar />
 				<GlobalStyles />
+
+				<Modal />
 				<Locomotive>{children}</Locomotive>
 			</body>
 		</html>

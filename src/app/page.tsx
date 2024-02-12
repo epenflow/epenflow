@@ -12,6 +12,7 @@ import { COLOR_PALETTE } from '@/constants/color';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Eye from '@/components/Eye';
 import Reveal from '@/components/Reveal';
+import { Modal } from '@/components/Modal';
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 export default function Page() {
 	const descRef = React.useRef<HTMLParagraphElement>(null);
@@ -53,6 +54,7 @@ export default function Page() {
 			<nav className=' z-20  right-0 uppercase p-1.5 font-extrabold fixed top-0'>
 				<Link href={'/works'}>works</Link>
 			</nav>
+
 			<main>
 				<div className='flex justify-center items-center max-h-screen h-screen flex-col relative overflow-y-hidden overflow-x-hidden'>
 					<div
