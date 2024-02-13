@@ -57,17 +57,17 @@ export const Modal = () => {
 			className='w-4/5 h-4/5
 lg:h-4/5 lg:w-1/2 fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 flex-col z-[9999999999999] bg-[#f2f2f2] text-black rounded-md border border-solid border-[#e0e0e0] shadow-md overflow-hidden'>
 			<div className='p-1 bg-[#f5f5f5] h-8 flex items-center rounded-t-md border border-solid border-b-[#e0e0e0] shadow-sm justify-center relative z-30'>
-				<div className='flex flex-row gap-1 absolute left-0'>
-					<span className='h-3 w-3 block bg-red-500 rounded-full ml-1 hover:animate-pulse' />
-					<span className='h-3 w-3 block bg-yellow-500 rounded-full ml-1' />
-					<span className='h-3 w-3 block bg-green-500 rounded-full ml-1' />
+				<div className='absolute left-0 flex flex-row gap-1'>
+					<span className='block w-3 h-3 ml-1 bg-red-500 rounded-full hover:animate-pulse' />
+					<span className='block w-3 h-3 ml-1 bg-yellow-500 rounded-full' />
+					<span className='block w-3 h-3 ml-1 bg-green-500 rounded-full' />
 				</div>
-				<h1 className='font-bold text-xs'>
+				<h1 className='text-xs font-bold'>
 					epenflow<span className='italic'>@</span>2022
 				</h1>
 			</div>
-			<div className='px-2 relative h-full text-white'>
-				<h1 className='font-semibold z-20 relative text-white mix-blend-difference'>
+			<div className='relative h-full px-2 text-white'>
+				<h1 className='relative z-20 font-semibold text-white mix-blend-difference'>
 					"This site is currently undergoing maintenance,
 					<br />
 					We'll be back soon with a fresh design, content, etc. Stay
@@ -75,7 +75,7 @@ lg:h-4/5 lg:w-1/2 fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 flex-
 					<br />
 					<span className=''>---Epen FLow</span>
 				</h1>
-				<div className='absolute top-0 left-0 bg-black w-full h-full flex'>
+				<div className='absolute top-0 left-0 flex w-full h-full bg-black'>
 					{colorCode.map((item, index) => (
 						<div
 							className={`w-full h-full block`}
@@ -83,9 +83,9 @@ lg:h-4/5 lg:w-1/2 fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 flex-
 							style={{ backgroundColor: item }}
 							key={index}></div>
 					))}
-					<div className='absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-black p-2'>
+					<div className='absolute p-2 -translate-x-1/2 -translate-y-1/2 bg-black top-1/2 left-1/2'>
 						<h1
-							className='text-white text-1xl lg:text-6xl font-mono font-bold uppercase text-justify'
+							className='font-mono font-bold text-justify text-white uppercase text-1xl lg:text-6xl'
 							id='no-signal'>
 							oops no signal!
 						</h1>

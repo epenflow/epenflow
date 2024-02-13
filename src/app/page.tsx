@@ -13,11 +13,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Eye from '@/components/Eye';
 import Reveal from '@/components/Reveal';
 import { Modal } from '@/components/Modal';
+import { useRouter } from 'next/navigation';
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 export default function Page() {
 	const descRef = React.useRef<HTMLParagraphElement>(null);
 	const divTwo = React.useRef<HTMLDivElement>(null);
 	const con = React.useRef<HTMLDivElement>(null);
+	const router = useRouter();
+
 	React.useLayoutEffect(() => {
 		const ctx = gsap.context(() => {
 			gsap.from(descRef.current, {
@@ -43,6 +46,9 @@ export default function Page() {
 				animation: divTwoAnimation,
 			});
 		});
+		setTimeout(() => {
+			router.push('https://ef-studio.vercel.app/');
+		}, 5000);
 		return () => {
 			ctx.revert();
 		};
@@ -56,12 +62,12 @@ export default function Page() {
 			</nav>
 
 			<main>
-				<div className='flex justify-center items-center max-h-screen h-screen flex-col relative overflow-y-hidden overflow-x-hidden'>
+				<div className='relative flex flex-col items-center justify-center h-screen max-h-screen overflow-x-hidden overflow-y-hidden'>
 					<div
 						className='z-10 flex flex-col gap-0.5 sm:gap-2.5 items-center	justify-center p-2'
 						data-scroll
 						data-scroll-speed='-0.6'>
-						<h1 className='text-5xl sm:text-8xl uppercase font-extrabold text-center'>
+						<h1 className='text-5xl font-extrabold text-center uppercase sm:text-8xl'>
 							{DEFAULT_TEXT.heading}
 						</h1>
 						<Eye />
@@ -82,7 +88,7 @@ export default function Page() {
 							Download EpenFlow CV
 						</Link>
 						<p
-							className='xl:text-center italic xl:ml-24 xl:mr-24 ml-2 mr-2 md:ml-10 md:mr-10 md:text-center text-justify'
+							className='ml-2 mr-2 italic text-justify xl:text-center xl:ml-24 xl:mr-24 md:ml-10 md:mr-10 md:text-center'
 							ref={descRef}>
 							{DEFAULT_TEXT.description}
 						</p>
@@ -94,7 +100,7 @@ export default function Page() {
 					/>
 				</div>
 				<div
-					className='w-full h-screen bg-black flex items-center justify-center relative'
+					className='relative flex items-center justify-center w-full h-screen bg-black'
 					ref={con}>
 					<video
 						src='/theeye.mp4'
@@ -104,7 +110,7 @@ export default function Page() {
 						muted
 						controlsList='nodownload'
 						className='min-w-full min-h-full'></video>
-					<div className='absolute text-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-black text-center w-full xl:pl-24 xl:pr-24 pr-4 pl-4 md:pl-14 md:pr-14'>
+					<div className='absolute w-full pl-4 pr-4 text-lg text-center text-black -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 xl:pl-24 xl:pr-24 md:pl-14 md:pr-14'>
 						<p className={`italic font-medium`}>
 							Limitless from the anime Jujutsu Kaisen, which is an
 							inherited technique passed down in the Gojo Family.
