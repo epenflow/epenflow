@@ -46,9 +46,7 @@ export default function Page() {
 				animation: divTwoAnimation,
 			});
 		});
-		setTimeout(() => {
-			router.push('https://ef-studio.vercel.app/');
-		}, 5000);
+
 		return () => {
 			ctx.revert();
 		};
