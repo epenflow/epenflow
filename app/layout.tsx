@@ -18,6 +18,10 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={inter.className} suppressHydrationWarning>
 				{children}
+				<div
+					id="terminal-portal"
+					className="fixed bottom-8 right-2 flex h-full flex-col-reverse gap-1 lg:bottom-10 lg:right-5"
+				></div>
 			</body>
 		</html>
 	);

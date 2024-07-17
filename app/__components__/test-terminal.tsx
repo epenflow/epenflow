@@ -13,6 +13,7 @@ import Draggable, {
 	DraggableProps,
 } from 'react-draggable';
 import { TerminalModal } from '@/components/terminal/terminal-modal';
+import { TerminalPortal } from '@/components/terminal/terminal-portal';
 const DragPosition = {
 	x: 0,
 	y: 0,
@@ -86,7 +87,7 @@ export const TestTerminal = () => {
 			cancel=".terminal-cancel"
 			offsetParent={document.body}
 			positionOffset={{ x: 0, y: 0 }}
-			disabled={isMaximize}
+			disabled={isMaximize || isMinimize}
 			position={{
 				x: isMaximize ? 0 : dragPosition.x,
 				y: isMaximize ? 0 : dragPosition.y,
@@ -100,30 +101,32 @@ export const TestTerminal = () => {
 		>
 			<TerminalModal
 				variant={isMaximize ? 'maximize' : 'default'}
-				className={'bg-[#00ff0d]'}
+				className={`bg-[#00ff0d]`}
 			>
-				<TerminalCard variant={terminalCardState}>
-					<TerminalHeader
-						variant={isMinimize ? 'minimize' : 'default'}
-					>
-						<TerminalTrigger
-							fnMaximize={fnMaximize}
-							fnMinimize={fnMinimize}
+				<TerminalPortal condition={isMinimize}>
+					<TerminalCard variant={terminalCardState}>
+						<TerminalHeader
 							variant={isMinimize ? 'minimize' : 'default'}
-							isFullscreen={isMaximize}
-						/>
-						<TerminalTitle ref={terminalTitleRef}>
-							<span>{__visitors.header}</span>
-						</TerminalTitle>
-					</TerminalHeader>
-					<TerminalContent
-						variant={isMinimize ? 'minimize' : 'default'}
-					>
-						<p className="py-10 text-justify text-xl">
-							{__visitors.descriptions}
-						</p>
-					</TerminalContent>
-				</TerminalCard>
+						>
+							<TerminalTrigger
+								fnMaximize={fnMaximize}
+								fnMinimize={fnMinimize}
+								variant={isMinimize ? 'minimize' : 'default'}
+								isFullscreen={isMaximize}
+							/>
+							<TerminalTitle ref={terminalTitleRef}>
+								<span>{__visitors.header}</span>
+							</TerminalTitle>
+						</TerminalHeader>
+						<TerminalContent
+							variant={isMinimize ? 'minimize' : 'default'}
+						>
+							<p className="py-10 text-justify text-xl">
+								{__visitors.descriptions}
+							</p>
+						</TerminalContent>
+					</TerminalCard>
+				</TerminalPortal>
 			</TerminalModal>
 		</Draggable>
 	);
