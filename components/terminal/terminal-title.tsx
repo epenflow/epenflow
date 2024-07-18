@@ -12,7 +12,7 @@ export const TerminalTitle = React.forwardRef<
 			{...rest}
 			ref={ref}
 			className={cn(
-				'terminal-handler line-clamp-1 flex w-full cursor-grab items-center justify-center font-mono text-sm font-bold text-muted-foreground',
+				'terminal-handler line-clamp-1 flex w-full cursor-grab items-center justify-center truncate font-mono text-sm font-bold text-foreground/75',
 				className,
 			)}
 		>

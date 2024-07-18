@@ -13,12 +13,12 @@ export const TerminalPortal: React.FC<TerminalPortal> = ({
 	React.useEffect(() => {
 		setMounted(true);
 	}, [mounted]);
-	const portalElement = document.querySelector(
-		'#terminal-portal',
-	) as HTMLDivElement;
-	return condition
-		? mounted
+	if (mounted) {
+		const portalElement = document.querySelector(
+			'#terminal-portal',
+		) as HTMLDivElement;
+		return condition
 			? ReactDOM.createPortal(children, portalElement)
-			: null
-		: children;
+			: children;
+	}
 };

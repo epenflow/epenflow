@@ -2,13 +2,12 @@
 import { cn } from '@/lib/utils';
 import { cva, VariantProps } from 'class-variance-authority';
 import React from 'react';
-
-const TerminalContentVariants = cva(
-	'no-scrollbar terminal-cancel h-full overflow-x-hidden overflow-y-scroll transition-all',
+const WindowContentVariants = cva(
+	'w-full overflow-x-hidden overflow-y-scroll transition-all',
 	{
 		variants: {
 			variant: {
-				default: 'flex flex-col',
+				default: 'flex',
 				minimize: 'hidden',
 			},
 		},
@@ -17,21 +16,21 @@ const TerminalContentVariants = cva(
 		},
 	},
 );
-interface TerminalContentProps
+interface WindowContentProps
 	extends React.HTMLAttributes<HTMLDivElement>,
-		VariantProps<typeof TerminalContentVariants> {}
-export const TerminalContent: React.FC<TerminalContentProps> = ({
-	className,
+		VariantProps<typeof WindowContentVariants> {}
+export const WindowContent: React.FC<WindowContentProps> = ({
 	children,
 	variant,
+	className,
 	...rest
 }) => {
 	return (
 		<div
 			{...rest}
-			className={cn(TerminalContentVariants({ className, variant }))}
+			className={cn(WindowContentVariants({ className, variant }))}
 			style={{
-				height: `calc(100% - 33.6px)`,
+				height: `calc(100% - 32px)`,
 			}}
 		>
 			{children}

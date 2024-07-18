@@ -61,6 +61,16 @@ const config = {
 					500: '#007AFF',
 					600: '#c9e3ff',
 				},
+				window: {
+					'header-accent': 'rgba(var(--window-header-accent,1))',
+					'header-secondary': 'rgba(var--window-header-secondary,1)',
+				},
+			},
+			backgroundImage: {
+				'window-header-gradient':
+					'linear-gradient(90deg, rgba(var(--window-header-accent), 1) 0%, rgba(var(--window-header-secondary), 1) 100%)',
+				'terminal-header-gradient':
+					'linear-gradient(180deg,#e7e6e7,#d1d0d1)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -82,7 +92,12 @@ const config = {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 			},
 		},
+		boxShadow: {
+			'terminal-box-shadow':
+				'0 0 1px 0 rgba(0, 0, 0, .9), 0 20px 30px 0 rgb(0 0 0 / 0%), 0 10px 50px 0 rgb(0 0 0 / 0%)',
+		},
 	},
+
 	plugins: [
 		require('tailwindcss-animate'),
 		({ addUtilities }: { addUtilities: any }) => {
@@ -96,6 +111,9 @@ const config = {
 				'.shadow-terminal-200': {
 					boxShadow:
 						'rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px',
+				},
+				'.window-border': {
+					border: '4px ridge #d8d8d8',
 				},
 			});
 		},

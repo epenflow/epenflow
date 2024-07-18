@@ -1,0 +1,33 @@
+
+all terminal style control using variants
+
+TerminalModalVariants = {
+    variant :{
+        default, maximize
+    }
+}
+TerminalCardVariants = {
+    variant:{
+        default, maximize, minimize
+    }
+}
+TerminalHeaderVariants = {
+    variant:{
+        default, minimize
+    }
+}
+TerminalTriggerVariants = {
+    variant:{
+        default, minimize
+    }
+}
+TerminalContent = {
+    variant:{
+        default, minimize
+    }
+}
+TerminalButtonVariants = {
+    variant:{
+        close, minimize, maximize
+    }
+}

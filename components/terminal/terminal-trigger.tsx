@@ -10,20 +10,17 @@ import {
 	Minimize,
 } from '@/components/terminal/icon';
 
-const TerminalTriggerVariants = cva(
-	'flex gap-1 bg-terminal-300 transition-all',
-	{
-		variants: {
-			variant: {
-				default: 'absolute',
-				minimize: 'relative',
-			},
-		},
-		defaultVariants: {
-			variant: 'default',
+const TerminalTriggerVariants = cva('flex gap-1 transition-all', {
+	variants: {
+		variant: {
+			default: 'absolute',
+			minimize: 'relative',
 		},
 	},
-);
+	defaultVariants: {
+		variant: 'default',
+	},
+});
 interface TerminalTriggerProps
 	extends React.HTMLAttributes<React.ElementRef<'div'>>,
 		VariantProps<typeof TerminalTriggerVariants> {

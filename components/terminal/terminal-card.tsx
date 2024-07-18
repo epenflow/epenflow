@@ -4,7 +4,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import React from 'react';
 
 const TerminalCardVariants = cva(
-	'border-terminal-default bg-card rounded-lg transition-all',
+	'bg-card rounded-lg transition-all shadow-terminal-100 shadow-terminal-box-shadow',
 	{
 		variants: {
 			variant: {

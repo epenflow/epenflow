@@ -19,8 +19,16 @@ const DragPosition = {
 } satisfies Record<string, number>;
 interface TerminalProps extends React.HTMLAttributes<HTMLDivElement> {
 	label?: string;
+	position?: typeof DragPosition;
 }
-export const Terminal: React.FC<TerminalProps> = ({ children, title }) => {
+export const Terminal: React.FC<TerminalProps> = ({
+	children,
+	title,
+	position = {
+		x: 0,
+		y: 0,
+	},
+}) => {
 	/**
 	 * useRef
 	 */
@@ -29,7 +37,7 @@ export const Terminal: React.FC<TerminalProps> = ({ children, title }) => {
 	 * useState
 	 */
 	const [dragPosition, setDragPosition] =
-		React.useState<typeof DragPosition>(DragPosition);
+		React.useState<typeof DragPosition>(position);
 	const [isMaximize, setMaximize] = React.useState<boolean>(false);
 	const [isMinimize, setMinimize] = React.useState<boolean>(false);
 	/**
@@ -72,7 +80,9 @@ export const Terminal: React.FC<TerminalProps> = ({ children, title }) => {
 			nodeRef={terminalTitleRef}
 			handle=".terminal-handler"
 			cancel=".terminal-cancel"
-			offsetParent={document.body}
+			offsetParent={
+				typeof document !== 'undefined' ? document.body : undefined
+			}
 			positionOffset={{ x: 0, y: 0 }}
 			disabled={isMaximize || isMinimize}
 			position={{
@@ -80,7 +90,9 @@ export const Terminal: React.FC<TerminalProps> = ({ children, title }) => {
 				y: isMaximize ? 0 : dragPosition.y,
 			}}
 			allowAnyClick={true}
+			defaultClassName="absolute"
 			defaultClassNameDragging="z-50 relative"
+			defaultClassNameDragged="absolute"
 			onStop={handleStop}
 		>
 			<TerminalModal

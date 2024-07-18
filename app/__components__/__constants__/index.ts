@@ -9,8 +9,9 @@ const __visitors = {
 	footer: '',
 } satisfies Record<keyof Messages, string | null>;
 const __notes = {
-	header: '',
-	descriptions: '',
+	header: '__here//some\\notes__',
+	descriptions:
+		'Hey, here`s some notes. I`m currently developing this website as solo dev',
 	footer: '',
 } satisfies Record<keyof Messages, string | null>;
 export { __visitors, __notes };
