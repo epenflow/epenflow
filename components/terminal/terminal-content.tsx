@@ -4,11 +4,11 @@ import { cva, VariantProps } from 'class-variance-authority';
 import React from 'react';
 
 const TerminalContentVariants = cva(
-	'no-scrollbar terminal-cancel h-full overflow-x-hidden overflow-y-scroll px-2 pb-20 transition-all',
+	'no-scrollbar terminal-cancel h-full overflow-x-hidden overflow-y-scroll transition-all',
 	{
 		variants: {
 			variant: {
-				default: 'flex',
+				default: 'flex flex-col',
 				minimize: 'hidden',
 			},
 		},
@@ -30,6 +30,9 @@ export const TerminalContent: React.FC<TerminalContentProps> = ({
 		<div
 			{...rest}
 			className={cn(TerminalContentVariants({ className, variant }))}
+			style={{
+				height: `calc(100% - 37.6px)`,
+			}}
 		>
 			{children}
 		</div>

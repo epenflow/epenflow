@@ -26,22 +26,20 @@ interface TerminalCardProps
 		VariantProps<typeof TerminalCardVariants> {
 	state?: TerminalState;
 }
-export const TerminalCard: React.FC<TerminalCardProps> = ({
-	children,
-	className,
-	variant,
-	state,
-	...rest
-}) => {
-	return (
-		<div
-			{...rest}
-			className={cn(
-				'terminal-cancel overflow-hidden',
-				TerminalCardVariants({ className, variant }),
-			)}
-		>
-			{children}
-		</div>
-	);
-};
+export const TerminalCard = React.forwardRef<HTMLDivElement, TerminalCardProps>(
+	({ children, className, variant, state, ...rest }, ref) => {
+		return (
+			<div
+				{...rest}
+				ref={ref}
+				className={cn(
+					'terminal-cancel overflow-hidden',
+					TerminalCardVariants({ className, variant }),
+				)}
+			>
+				{children}
+			</div>
+		);
+	},
+);
+TerminalCard.displayName = 'TerminalCard';
