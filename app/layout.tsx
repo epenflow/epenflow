@@ -26,7 +26,7 @@ export default function RootLayout({
 				{children}
 				<div
 					id="terminal-portal"
-					className="fixed bottom-8 right-2 flex h-full flex-col-reverse gap-1 lg:bottom-10 lg:right-5"
+					className="fixed bottom-8 right-2 z-20 flex h-full flex-col-reverse items-center gap-1 lg:bottom-10 lg:right-5"
 				></div>
 			</body>
 		</html>

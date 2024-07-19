@@ -59,7 +59,16 @@ export const Window: React.FC<WindowProps> = ({
 	function handleStop(event: DraggableEvent, data: DraggableData) {
 		setDragPosition({ x: data.lastX, y: data.lastY });
 	}
+	const draggablePositions = {
+		x: isMaximize || isMinimize ? 0 : dragPosition.x,
+		y: isMaximize || isMinimize ? 0 : dragPosition.y,
+	};
+	const draggableDisabled = isMaximize || isMinimize;
+	const card = isMinimize ? 'minimize' : isMaximize ? 'maximize' : 'default';
+	const offsetParent =
+		typeof document !== 'undefined' ? document.body : undefined;
 	return (
+<<<<<<< HEAD
 		<Draggable
 			nodeRef={nodeRef}
 			cancel=".window-cancel"
@@ -81,17 +90,27 @@ export const Window: React.FC<WindowProps> = ({
 			<TerminalModal
 				variant={isMaximize ? 'maximize' : 'default'}
 				className="bg-[#ff0000]"
+=======
+		<TerminalPortal condition={isMinimize}>
+			<Draggable
+				nodeRef={nodeRef}
+				cancel=".window-cancel"
+				offsetParent={offsetParent}
+				positionOffset={{ x: 0, y: 0 }}
+				disabled={draggableDisabled}
+				position={draggablePositions}
+				allowAnyClick={true}
+				defaultClassName={`${isMinimize ? 'relative' : 'fixed'}`}
+				defaultClassNameDragging="z-50 relative"
+				defaultClassNameDragged={`${isMinimize ? 'relative' : 'fixed'}`}
+				onStop={handleStop}
+>>>>>>> 8d96a04 (__fix-draggable-issue__)
 			>
-				<TerminalPortal condition={isMinimize}>
-					<WindowCard
-						variant={
-							isMinimize
-								? 'minimize'
-								: isMaximize
-									? 'maximize'
-									: 'default'
-						}
-					>
+				<TerminalModal
+					variant={isMaximize ? 'maximize' : 'default'}
+					className="z-50 bg-[#ff0000]"
+				>
+					<WindowCard variant={card}>
 						<WindowHeader>
 							<WindowTitle
 								className="window-handler"
@@ -113,8 +132,8 @@ export const Window: React.FC<WindowProps> = ({
 							{children}
 						</WindowContent>
 					</WindowCard>
-				</TerminalPortal>
-			</TerminalModal>
-		</Draggable>
+				</TerminalModal>
+			</Draggable>
+		</TerminalPortal>
 	);
 };
