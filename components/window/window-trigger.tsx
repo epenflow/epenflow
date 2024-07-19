@@ -1,15 +1,13 @@
-'use client';
 import { WindowButton } from '@/components/window/window-button';
 import React from 'react';
 
-interface WindowTriggerProps extends React.HTMLAttributes<HTMLDivElement> {
+interface WindowTriggerProps {
 	fnClose?: () => void;
 	fnMinimize?: () => void;
 	fnMaximize?: () => void;
 	disabledMinimize?: boolean;
 }
 export const WindowTrigger: React.FC<WindowTriggerProps> = ({
-	children,
 	fnClose,
 	fnMaximize,
 	fnMinimize,

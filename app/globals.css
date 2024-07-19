@@ -80,3 +80,8 @@
 		scrollbar-width: none; /* Firefox */
 	}
 }
+.menu-bar {
+	background: rgba(83, 83, 83, 0.4);
+	backdrop-filter: blur(50px);
+	-webkit-backdrop-filter: blur(50px);
+}

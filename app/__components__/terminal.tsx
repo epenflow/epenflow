@@ -10,6 +10,7 @@ import React from 'react';
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 import { TerminalModal } from '@/components/terminal/terminal-modal';
 import { TerminalPortal } from '@/components/terminal/terminal-portal';
+import { cn } from '@/lib/utils';
 /**
  * Default values and types for DragPosition
  */
@@ -23,16 +24,17 @@ interface TerminalProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 export const Terminal: React.FC<TerminalProps> = ({
 	children,
-	title,
+	label,
 	position = {
 		x: 0,
 		y: 0,
 	},
+	className,
 }) => {
 	/**
 	 * useRef
 	 */
-	const terminalTitleRef = React.useRef<HTMLHeadingElement>(null);
+	const nodeRef = React.useRef<HTMLHeadingElement>(null);
 	/**
 	 * useState
 	 */
@@ -77,9 +79,7 @@ export const Terminal: React.FC<TerminalProps> = ({
 	///components
 	return (
 		<Draggable
-			nodeRef={terminalTitleRef}
-			handle=".terminal-handler"
-			cancel=".terminal-cancel"
+			nodeRef={nodeRef}
 			offsetParent={
 				typeof document !== 'undefined' ? document.body : undefined
 			}
@@ -90,9 +90,9 @@ export const Terminal: React.FC<TerminalProps> = ({
 				y: isMaximize ? 0 : dragPosition.y,
 			}}
 			allowAnyClick={true}
-			defaultClassName="absolute"
+			defaultClassName="fixed"
 			defaultClassNameDragging="z-50 relative"
-			defaultClassNameDragged="absolute"
+			defaultClassNameDragged="fixed"
 			onStop={handleStop}
 		>
 			<TerminalModal
@@ -110,13 +110,13 @@ export const Terminal: React.FC<TerminalProps> = ({
 								variant={isMinimize ? 'minimize' : 'default'}
 								isFullscreen={isMaximize}
 							/>
-							<TerminalTitle ref={terminalTitleRef}>
-								<span>{title}</span>
+							<TerminalTitle ref={nodeRef}>
+								<span>{label}</span>
 							</TerminalTitle>
 						</TerminalHeader>
 						<TerminalContent
 							variant={isMinimize ? 'minimize' : 'default'}
-							className="space-y-2.5 px-2.5 py-5 lg:space-y-5"
+							className={cn(className)}
 						>
 							{children}
 						</TerminalContent>

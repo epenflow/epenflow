@@ -1,10 +1,9 @@
-'use client';
 import { cn } from '@/lib/utils';
 import React from 'react';
 
 interface WindowTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {}
 export const WindowTitle = React.forwardRef<
-	HTMLHeadingElement,
+	React.ElementRef<'h1'>,
 	WindowTitleProps
 >(({ className, children, ...rest }, ref) => {
 	return (
@@ -12,7 +11,7 @@ export const WindowTitle = React.forwardRef<
 			ref={ref}
 			{...rest}
 			className={cn(
-				'line-clamp-1 flex-1 truncate font-mono text-white',
+				'line-clamp-1 flex-1 truncate font-mono text-white transition-all hover:cursor-grab',
 				className,
 			)}
 		>

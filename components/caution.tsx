@@ -1,6 +1,3 @@
-import React from 'react';
-
-interface CautionProps extends React.HTMLAttributes<HTMLDivElement> {}
 export const Caution = () => {
 	return (
 		<div className="m-2 flex w-fit flex-col justify-between space-y-1 bg-[#f7d417] p-2.5 font-bold">

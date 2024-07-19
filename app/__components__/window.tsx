@@ -7,30 +7,34 @@ import { WindowContent } from '@/components/window/window-content';
 import { WindowHeader } from '@/components/window/window-header';
 import { WindowTitle } from '@/components/window/window-title';
 import { WindowTrigger } from '@/components/window/window-trigger';
-import Image from 'next/image';
+import { cn } from '@/lib/utils';
 import React from 'react';
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 const DragPosition = {
 	x: 0,
 	y: 0,
 } satisfies Record<string, number>;
-interface WindowProps {
+interface WindowProps extends React.HTMLAttributes<HTMLDivElement> {
 	position?: typeof DragPosition;
+	label?: string;
 }
-export const __TestWindow: React.FC<WindowProps> = ({
+export const Window: React.FC<WindowProps> = ({
 	position = {
 		x: 0,
 		y: 0,
 	},
+	label,
+	children,
+	className,
 }) => {
-	const windowTitleRef = React.useRef<HTMLHeadingElement>(null);
+	const nodeRef = React.useRef<React.ElementRef<'h1'>>(null);
 	/**
 	 *
 	 */
 	const [isMinimize, setMinimize] = React.useState<boolean>(false);
 	const [isMaximize, setMaximize] = React.useState<boolean>(false);
 	const [dragPosition, setDragPosition] =
-		React.useState<typeof DragPosition>(DragPosition);
+		React.useState<typeof DragPosition>(position);
 	/**
 	 *
 	 */
@@ -57,9 +61,7 @@ export const __TestWindow: React.FC<WindowProps> = ({
 	}
 	return (
 		<Draggable
-			nodeRef={windowTitleRef}
-			handle=".window-handler"
-			cancel=".window-cancel"
+			nodeRef={nodeRef}
 			offsetParent={
 				typeof document !== 'undefined' ? document.body : undefined
 			}
@@ -70,9 +72,9 @@ export const __TestWindow: React.FC<WindowProps> = ({
 				y: isMaximize ? 0 : dragPosition.y,
 			}}
 			allowAnyClick={true}
-			defaultClassName="absolute"
+			defaultClassName="fixed"
 			defaultClassNameDragging="z-50 relative"
-			defaultClassNameDragged="absolute"
+			defaultClassNameDragged="fixed"
 			onStop={handleStop}
 		>
 			<TerminalModal
@@ -92,11 +94,9 @@ export const __TestWindow: React.FC<WindowProps> = ({
 						<WindowHeader>
 							<WindowTitle
 								className="window-handler"
-								ref={windowTitleRef}
+								ref={nodeRef}
 							>
-								<span>
-									<q>__caution__</q>
-								</span>
+								<span>{label}</span>
 							</WindowTitle>
 							<WindowTrigger
 								disabledMinimize={isMinimize}
@@ -107,19 +107,9 @@ export const __TestWindow: React.FC<WindowProps> = ({
 						</WindowHeader>
 						<WindowContent
 							variant={isMinimize ? 'minimize' : 'default'}
-							className="window-cancel relative flex-col items-center justify-center"
+							className={cn('flex-col', className)}
 						>
-							<Caution />
-							<div className="absolute -right-4 top-6 h-20 w-20 lg:top-24 lg:h-52 lg:w-52">
-								<Image
-									src="/palu.gif"
-									width={0}
-									height={0}
-									sizes="100vw"
-									style={{ width: '100%', height: 'auto' }}
-									alt="palu"
-								/>
-							</div>
+							{children}
 						</WindowContent>
 					</WindowCard>
 				</TerminalPortal>
