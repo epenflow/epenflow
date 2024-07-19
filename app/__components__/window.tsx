@@ -62,6 +62,7 @@ export const Window: React.FC<WindowProps> = ({
 	return (
 		<Draggable
 			nodeRef={nodeRef}
+			cancel=".window-cancel"
 			offsetParent={
 				typeof document !== 'undefined' ? document.body : undefined
 			}
@@ -107,7 +108,7 @@ export const Window: React.FC<WindowProps> = ({
 						</WindowHeader>
 						<WindowContent
 							variant={isMinimize ? 'minimize' : 'default'}
-							className={cn('flex-col', className)}
+							className={cn('window-cancel flex-col', className)}
 						>
 							{children}
 						</WindowContent>

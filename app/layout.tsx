@@ -9,6 +9,9 @@ export const metadata: Metadata = {
 	title: 'UNDER--Construction',
 	description:
 		'THIS NEW SITE IS UNDERGOING CONSTRUCTION, PLEASE BE CAREFUL IF THERE IS SUSPICIOUS ACTIVITY',
+	icons: {
+		icon: '/favicon.svg',
+	},
 };
 
 export default function RootLayout({

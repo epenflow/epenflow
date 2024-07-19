@@ -80,6 +80,7 @@ export const Terminal: React.FC<TerminalProps> = ({
 	return (
 		<Draggable
 			nodeRef={nodeRef}
+			cancel=".terminal-cancel"
 			offsetParent={
 				typeof document !== 'undefined' ? document.body : undefined
 			}
@@ -116,7 +117,7 @@ export const Terminal: React.FC<TerminalProps> = ({
 						</TerminalHeader>
 						<TerminalContent
 							variant={isMinimize ? 'minimize' : 'default'}
-							className={cn(className)}
+							className={cn('terminal-cancel', className)}
 						>
 							{children}
 						</TerminalContent>

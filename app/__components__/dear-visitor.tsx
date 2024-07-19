@@ -1,5 +1,6 @@
 import { __visitors } from '@/app/__components__/__constants__';
 import { Window } from '@/app/__components__/window';
+import Image from 'next/image';
 
 export const DearVisitor = () => {
 	return (
@@ -10,9 +11,17 @@ export const DearVisitor = () => {
 		>
 			<h1 className="w-full text-2xl font-bold">Dear visitor,</h1>
 			<p className="text-justify font-bold">{__visitors.descriptions}</p>
-			<h1 className="flex w-full flex-col text-end text-2xl font-bold">
-				<span>Warms regret,</span>
-				<span>EpenFlow@24</span>
+			<h1 className="flex w-full flex-row items-center justify-between text-end text-2xl font-bold">
+				<Image
+					src={'/favicon.svg'}
+					width={100}
+					height={100}
+					alt="under-construction"
+				/>
+				<div className="flex flex-col justify-between">
+					<span>Warms regret,</span>
+					<span>EpenFlow@24</span>
+				</div>
 			</h1>
 		</Window>
 	);
