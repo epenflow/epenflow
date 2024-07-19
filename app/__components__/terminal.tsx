@@ -85,29 +85,6 @@ export const Terminal: React.FC<TerminalProps> = ({
 		typeof document !== 'undefined' ? document.body : undefined;
 	///components
 	return (
-<<<<<<< HEAD
-		<Draggable
-			nodeRef={nodeRef}
-			cancel=".terminal-cancel"
-			offsetParent={
-				typeof document !== 'undefined' ? document.body : undefined
-			}
-			positionOffset={{ x: 0, y: 0 }}
-			disabled={isMaximize || isMinimize}
-			position={{
-				x: isMaximize ? 0 : dragPosition.x,
-				y: isMaximize ? 0 : dragPosition.y,
-			}}
-			allowAnyClick={true}
-			defaultClassName="fixed"
-			defaultClassNameDragging="z-50 relative"
-			defaultClassNameDragged="fixed"
-			onStop={handleStop}
-		>
-			<TerminalModal
-				variant={isMaximize ? 'maximize' : 'default'}
-				className={`bg-[#00ff0d]`}
-=======
 		<TerminalPortal condition={isMinimize}>
 			<Draggable
 				nodeRef={nodeRef}
@@ -121,7 +98,6 @@ export const Terminal: React.FC<TerminalProps> = ({
 				defaultClassNameDragging="z-50 relative"
 				defaultClassNameDragged={`${isMinimize ? 'relative' : 'fixed'}`}
 				onStop={handleStop}
->>>>>>> 8d96a04 (__fix-draggable-issue__)
 			>
 				<TerminalModal
 					variant={isMaximize ? 'maximize' : 'default'}
