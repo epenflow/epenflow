@@ -5,7 +5,7 @@ import React from 'react';
 const TerminalModalVariants = cva('transition-opacity', {
 	variants: {
 		variant: {
-			default: 'w-full h-fit bg-opacity-0',
+			default: 'w-full h-fit bg-opacity-0 z-30',
 			maximize:
 				'fixed top-0 left-0 h-screen w-screen flex items-center justify-center z-50 bg-opacity-100',
 		},
