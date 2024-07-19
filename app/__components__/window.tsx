@@ -84,7 +84,7 @@ export const Window: React.FC<WindowProps> = ({
 			>
 				<TerminalModal
 					variant={isMaximize ? 'maximize' : 'default'}
-					className="z-50 bg-[#ff0000]"
+					className="z-30 bg-[#ff0000]"
 				>
 					<WindowCard variant={card}>
 						<WindowHeader>

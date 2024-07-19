@@ -101,7 +101,7 @@ export const Terminal: React.FC<TerminalProps> = ({
 			>
 				<TerminalModal
 					variant={isMaximize ? 'maximize' : 'default'}
-					className={`z-50 bg-[#00ff0d]`}
+					className={`z-30 bg-[#00ff0d]`}
 				>
 					<TerminalCard variant={terminalCardState}>
 						<TerminalHeader
