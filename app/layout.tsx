@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/app/__components__/navbar';
+import { ReactQueryProvider } from '@/components/react-query-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,12 +23,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className} suppressHydrationWarning>
-				<Navbar />
-				{children}
-				<div
-					id="terminal-portal"
-					className="fixed bottom-8 right-2 z-20 flex h-full flex-col-reverse items-center gap-1 lg:bottom-10 lg:right-5"
-				></div>
+				<ReactQueryProvider>{children}</ReactQueryProvider>
 			</body>
 		</html>
 	);

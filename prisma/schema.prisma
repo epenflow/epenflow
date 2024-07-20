@@ -1,0 +1,34 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  projectId   String   @unique @default(cuid()) @map("project_id")
+  projectName String   @unique @map("project_name")
+  createdAt   DateTime @default(now()) @map("created_at")
+  modifiedAt  DateTime @updatedAt @map("modified_at")
+  Files       Files[]
+}
+
+model Files {
+  fileId     String   @unique @default(cuid()) @map("file_id")
+  projectId  String
+  fileName   String   @map("file_name")
+  fileSize   Int?     @map("file_size")
+  fileType   String?
+  fileUrls   String
+  createdAt  DateTime @map("created_at")
+  modifiedAt DateTime @updatedAt @map("modified_at")
+  Project    Project  @relation(fields: [projectId], references: [projectId], onDelete: Cascade, onUpdate: Cascade)
+}

@@ -8,7 +8,7 @@ const Navbar = () => {
 	return (
 		<header className="menu-bar fixed top-0 z-20 flex w-screen items-center overflow-hidden px-10 py-1 font-medium text-white">
 			<nav className="flex w-full items-center justify-between">
-				<h1>File</h1>
+				<div>File</div>
 				<div className="">{dates}</div>
 			</nav>
 		</header>
