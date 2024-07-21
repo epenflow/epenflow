@@ -20,7 +20,8 @@ export interface DraggableWrapperProps {
 	nodeRef: React.RefObject<HTMLElement> | undefined;
 	cancel?: string;
 }
-export interface ProgramsWrapperProps {
+export interface ProgramsWrapperProps
+	extends React.HTMLAttributes<HTMLDivElement> {
 	position?: typeof DragPositions;
 	label?: string;
 }

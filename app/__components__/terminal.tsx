@@ -18,11 +18,14 @@ import { useVariants } from '@/lib/hooks/use-variants';
 import { useProgramTrigger } from '@/lib/hooks/use-program-trigger';
 import { DraggableProps } from 'react-draggable';
 import { TaskbarPortal } from '@/components/programs/taskbar-portal';
+import { cn } from '@/lib/utils';
 
 interface TerminalProps extends ProgramsWrapperProps {}
 export const Terminal: React.FC<TerminalProps> = ({
 	position = DragPositions,
 	label,
+	children,
+	className,
 }) => {
 	const { fnClose, fnMaximize, fnMinimize, isClose, isMaximize, isMinimize } =
 		useProgramTrigger();
@@ -58,24 +61,30 @@ export const Terminal: React.FC<TerminalProps> = ({
 		disabled: draggableDisabled,
 		allowAnyClick: true,
 		defaultClassName: isMinimize ? 'relative' : 'fixed',
-		defaultClassNameDragging: 'z-50 fixed',
+		defaultClassNameDragging: 'fixed',
 		defaultClassNameDragged: isMinimize ? 'relative' : 'fixed',
 		onStop: handleStop,
 	};
 	return (
 		<TaskbarPortal condition={isMinimize}>
 			<DraggableWrapper {...draggableValues}>
-				<ProgramsModal variant={modalVariants}>
+				<ProgramsModal
+					variant={modalVariants}
+					className={cn(!isMinimize && 'bg-[#2bff00]')}
+				>
 					<TerminalCard variant={cardVariants}>
 						<TerminalHeader variant={headerVariants}>
 							<TerminalTrigger {...triggerValues} />
 							<TerminalTitle ref={nodeRef}>
-								<span>test</span>
+								<span>{label}</span>
 							</TerminalTitle>
 						</TerminalHeader>
 						<TerminalContent
 							variant={contentVariants}
-						></TerminalContent>
+							className={className}
+						>
+							{children}
+						</TerminalContent>
 					</TerminalCard>
 				</ProgramsModal>
 			</DraggableWrapper>

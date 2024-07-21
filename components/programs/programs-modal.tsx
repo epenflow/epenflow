@@ -15,10 +15,10 @@ const ProgramsModalVariants = cva('transition-opacity', {
 		variant: 'default',
 	},
 });
-interface ProgramsModal
+interface ProgramsModalProps
 	extends React.HTMLAttributes<HTMLDivElement>,
 		VariantProps<typeof ProgramsModalVariants> {}
-export const ProgramsModal: React.FC<ProgramsModal> = ({
+export const ProgramsModal: React.FC<ProgramsModalProps> = ({
 	children,
 	className,
 	variant,

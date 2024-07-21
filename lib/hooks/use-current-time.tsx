@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-export function useGetCurrentTime() {
+export function useCurrentTime() {
 	const [dates, setDates] = React.useState<Date>(new Date());
 	React.useEffect(() => {
 		const interval = setInterval(() => {

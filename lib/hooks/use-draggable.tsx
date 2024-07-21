@@ -10,17 +10,16 @@ interface DraggableProps {
 	isMinimize: boolean;
 	isMaximize: boolean;
 }
-export const useDraggable = ({
+export function useDraggable({
 	position,
 	isMinimize,
 	isMaximize,
-}: DraggableProps) => {
+}: DraggableProps) {
 	const [dragPosition, setDragPosition] =
 		React.useState<typeof DragPositions>(position);
 	const nodeRef = React.useRef<React.ElementRef<'h1'>>(null);
 
 	function handleStop(event: DraggableEvent, data: DraggableData) {
-		console.log(data);
 		setDragPosition({ x: data.lastX, y: data.lastY });
 	}
 	const draggablePositions: typeof DragPositions = {
@@ -34,4 +33,4 @@ export const useDraggable = ({
 		draggablePositions,
 		draggableDisabled,
 	};
-};
+}

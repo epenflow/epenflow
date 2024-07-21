@@ -19,11 +19,14 @@ import { useDraggable } from '@/lib/hooks/use-draggable';
 import { useVariants } from '@/lib/hooks/use-variants';
 import { useProgramTrigger } from '@/lib/hooks/use-program-trigger';
 import { DraggableProps } from 'react-draggable';
+import { cn } from '@/lib/utils';
 
 interface WindowProps extends ProgramsWrapperProps {}
 export const Window: React.FC<WindowProps> = ({
 	position = DragPositions,
 	label,
+	children,
+	className,
 }) => {
 	const { fnClose, fnMaximize, fnMinimize, isClose, isMaximize, isMinimize } =
 		useProgramTrigger();
@@ -55,24 +58,30 @@ export const Window: React.FC<WindowProps> = ({
 		disabled: draggableDisabled,
 		allowAnyClick: true,
 		defaultClassName: isMinimize ? 'relative' : 'fixed',
-		defaultClassNameDragging: 'z-50 fixed',
+		defaultClassNameDragging: 'fixed',
 		defaultClassNameDragged: isMinimize ? 'relative' : 'fixed',
 		onStop: handleStop,
 	};
 	return (
 		<TaskbarPortal condition={isMinimize}>
 			<DraggableWrapper {...draggableValues}>
-				<ProgramsModal variant={modalVariants}>
+				<ProgramsModal
+					variant={modalVariants}
+					className={cn(!isMinimize && 'bg-[#f00]')}
+				>
 					<WindowCard variant={cardVariants}>
 						<WindowHeader>
 							<WindowTitle ref={nodeRef}>
-								<span>test</span>
+								<span>{label}</span>
 							</WindowTitle>
 							<WindowTrigger {...triggerValues} />
 						</WindowHeader>
 						<WindowContent
 							variant={contentVariants}
-						></WindowContent>
+							className={className}
+						>
+							{children}
+						</WindowContent>
 					</WindowCard>
 				</ProgramsModal>
 			</DraggableWrapper>

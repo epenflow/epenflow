@@ -7,7 +7,7 @@ export const DearVisitor = () => {
 		<Window
 			label={__visitors.header}
 			position={{ x: 12, y: 100 }}
-			className="gap-2 px-5 lg:justify-center"
+			className="flex-col gap-2 px-5"
 		>
 			<h1 className="w-full text-2xl font-bold">Dear visitor,</h1>
 			<p className="text-justify font-bold">{__visitors.descriptions}</p>
