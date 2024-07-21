@@ -31,6 +31,7 @@ export const WindowCard: React.FC<WindowCardProps> = ({
 	return (
 		<div
 			{...rest}
+			id="window--card"
 			className={cn(WindowCardVariants({ className, variant }))}
 		>
 			{children}

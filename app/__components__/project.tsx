@@ -3,7 +3,6 @@ import { FinderFile } from '@/app/__components__/finder/finder-file';
 import { FinderFolder } from '@/app/__components__/finder/finder-folder';
 import { FinderImage } from '@/app/__components__/finder/finder-image';
 import { Terminal } from '@/app/__components__/terminal';
-import { _request } from '@/lib/utils';
 import { Files, Project as Projects } from '@prisma/client';
 import React from 'react';
 

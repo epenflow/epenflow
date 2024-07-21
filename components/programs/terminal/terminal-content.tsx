@@ -3,7 +3,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import React from 'react';
 
 const TerminalContentVariants = cva(
-	'no-scrollbar terminal-cancel h-full overflow-x-hidden overflow-y-scroll transition-all',
+	'terminal-cancel no-scrollbar h-full overflow-x-hidden overflow-y-scroll transition-all',
 	{
 		variants: {
 			variant: {

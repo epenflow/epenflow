@@ -1,11 +1,11 @@
 'use client';
 import React from 'react';
 import ReactDOM from 'react-dom';
-interface TerminalPortal {
+interface TaskbarPortalProps {
 	children: React.ReactNode;
 	condition: boolean;
 }
-export const TerminalPortal: React.FC<TerminalPortal> = ({
+export const TaskbarPortal: React.FC<TaskbarPortalProps> = ({
 	children,
 	condition,
 }) => {
@@ -15,7 +15,7 @@ export const TerminalPortal: React.FC<TerminalPortal> = ({
 	}, [mounted]);
 	if (mounted) {
 		const portalElement = document.querySelector(
-			'#terminal-portal',
+			'#taskbar--programs',
 		) as HTMLDivElement;
 		return condition
 			? ReactDOM.createPortal(children, portalElement)

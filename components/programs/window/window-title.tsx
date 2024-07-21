@@ -10,6 +10,7 @@ export const WindowTitle = React.forwardRef<
 		<h1
 			ref={ref}
 			{...rest}
+			id="window--title"
 			className={cn(
 				'line-clamp-1 flex-1 truncate font-mono text-white transition-all hover:cursor-grab',
 				className,

@@ -28,6 +28,7 @@ export const TerminalHeader: React.FC<TerminalHeaderProps> = ({
 	return (
 		<div
 			{...rest}
+			id="terminal--header"
 			className={cn(TerminalHeaderVariants({ className, variant }))}
 		>
 			{children}

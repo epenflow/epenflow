@@ -1,4 +1,4 @@
-import { WindowButton } from '@/components/window/window-button';
+import { WindowButton } from '@/components/programs/window/window-button';
 import React from 'react';
 
 interface WindowTriggerProps {
@@ -14,7 +14,7 @@ export const WindowTrigger: React.FC<WindowTriggerProps> = ({
 	disabledMinimize = false,
 }) => {
 	return (
-		<div className="flex gap-1">
+		<div id="window--trigger" className="flex gap-1">
 			<WindowButton
 				disabled={disabledMinimize}
 				onClick={fnMinimize}

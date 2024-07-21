@@ -10,6 +10,7 @@ export const WindowHeader: React.FC<WindowHeaderProps> = ({
 	return (
 		<div
 			{...rest}
+			id="window--header"
 			className={cn(
 				'flex w-full items-center gap-2 bg-window-header-gradient p-1',
 				className,

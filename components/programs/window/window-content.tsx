@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import { cva, VariantProps } from 'class-variance-authority';
 import React from 'react';
 const WindowContentVariants = cva(
-	'w-full overflow-x-hidden overflow-y-scroll transition-all',
+	'window-cancel w-full overflow-x-hidden overflow-y-scroll transition-all',
 	{
 		variants: {
 			variant: {

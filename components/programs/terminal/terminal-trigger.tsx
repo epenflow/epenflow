@@ -1,13 +1,13 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { cva, VariantProps } from 'class-variance-authority';
-import { TerminalButton } from '@/components/terminal/terminal-button';
+import { TerminalButton } from '@/components/programs/terminal/terminal-button';
 import {
 	Close,
 	Fullscreen,
 	Maximize,
 	Minimize,
-} from '@/components/terminal/icon';
+} from '@/components/programs/terminal/icon';
 
 const TerminalTriggerVariants = cva('flex gap-1 transition-all', {
 	variants: {
@@ -41,6 +41,7 @@ export const TerminalTrigger: React.FC<TerminalTriggerProps> = ({
 	return (
 		<div
 			{...rest}
+			id="terminal--trigger"
 			className={cn(TerminalTriggerVariants({ className, variant }))}
 		>
 			<TerminalButton onClick={fnClose} variant="close">

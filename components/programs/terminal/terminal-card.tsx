@@ -30,6 +30,7 @@ export const TerminalCard = React.forwardRef<HTMLDivElement, TerminalCardProps>(
 		return (
 			<div
 				{...rest}
+				id="terminal--card"
 				ref={ref}
 				className={cn(
 					'terminal-cancel overflow-hidden',
