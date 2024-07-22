@@ -1,8 +1,8 @@
 ## epenflow@24
 
-```
-const __the-world-is-over__ = false
-if(__the-world-is-over){
-    console.log(`Oh, Shit!!!`)
+```javascript
+const __the_world_is_over__ = false;
+if (__the_world_is_over__) {
+	console.log(`Oh, Shit!!!`);
 }
 ```
