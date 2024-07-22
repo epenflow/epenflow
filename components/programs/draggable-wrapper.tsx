@@ -11,15 +11,6 @@ export const DragPositions = {
 	y: 0,
 } satisfies Record<string, number>;
 
-export interface DraggableWrapperProps {
-	position?: typeof DragPositions;
-	children: React.ReactElement;
-	onStop?: (event: DraggableEvent, data: DraggableData) => void;
-	disabled?: boolean;
-	className?: string;
-	nodeRef: React.RefObject<HTMLElement> | undefined;
-	cancel?: string;
-}
 export interface ProgramsWrapperProps
 	extends React.HTMLAttributes<HTMLDivElement> {
 	position?: typeof DragPositions;

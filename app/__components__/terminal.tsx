@@ -13,9 +13,9 @@ import {
 	TerminalTitle,
 	TerminalTrigger,
 } from '@/components/programs/terminal';
-import { useDraggable } from '@/lib/hooks/use-draggable';
-import { useVariants } from '@/lib/hooks/use-variants';
-import { useProgramTrigger } from '@/lib/hooks/use-program-trigger';
+import { useDraggable } from '@/components/programs/hooks/use-draggable';
+import { useVariants } from '@/components/programs/hooks/use-variants';
+import { useProgramTrigger } from '@/components/programs/hooks/use-program-trigger';
 import { DraggableProps } from 'react-draggable';
 import { TaskbarPortal } from '@/components/programs/taskbar-portal';
 import { cn } from '@/lib/utils';

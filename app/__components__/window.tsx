@@ -15,9 +15,9 @@ import {
 	WindowTitle,
 	WindowTrigger,
 } from '@/components/programs/window';
-import { useDraggable } from '@/lib/hooks/use-draggable';
-import { useVariants } from '@/lib/hooks/use-variants';
-import { useProgramTrigger } from '@/lib/hooks/use-program-trigger';
+import { useDraggable } from '@/components/programs/hooks/use-draggable';
+import { useVariants } from '@/components/programs/hooks/use-variants';
+import { useProgramTrigger } from '@/components/programs/hooks/use-program-trigger';
 import { DraggableProps } from 'react-draggable';
 import { cn } from '@/lib/utils';
 

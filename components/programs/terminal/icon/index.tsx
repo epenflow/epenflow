@@ -5,12 +5,12 @@ declare module '*.svg' {
 		React.SVGProps<SVGSVGElement>
 	>;
 }
-export const __iconStyle__: Icons = {
+const __iconStyle__: Icons = {
 	viewBox: '0 0 10 10',
 	className:
 		'h-3 w-3 fill-foreground/50 scale-50 opacity-0 hover:opacity-100 hover:scale-100 transition-all rotate-45 hover:rotate-0',
 };
-export interface Icons extends React.SVGProps<SVGSVGElement> {}
+interface Icons extends React.SVGProps<SVGSVGElement> {}
 export const Maximize: React.FC<Icons> = ({ className, ...rest }) => {
 	return (
 		<svg {...rest} {...__iconStyle__}>
