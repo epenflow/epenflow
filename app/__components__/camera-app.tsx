@@ -1,6 +1,5 @@
 'use client';
 import { Window } from '@/app/__components__/window';
-import { ReorderPositions } from '@/components/programs/reorder-positions';
 import { Button } from '@/components/ui/button';
 import React from 'react';
 
@@ -45,27 +44,25 @@ export const CameraApp = () => {
 		setActive((prev) => !prev);
 	}
 	return (
-		<ReorderPositions id={1} label="test--camera">
-			<Window label="Camera--APP">
-				<div className="relative flex h-full w-full items-center justify-center bg-[#00ff0d] p-5">
-					<video
-						ref={videoContainer}
-						className="h-full w-full bg-black window-border"
-					></video>
-					{!isActive && (
-						<h1 className="absolute font-mono text-4xl text-white">
-							Camera/Off
-						</h1>
-					)}
-					<Button
-						onClick={handleClick}
-						variant={'window'}
-						className="absolute bottom-2.5 left-1/2 z-10 -translate-x-1/2"
-					>
-						{isActive ? 'Turn/Off--camera' : 'Open--camera'}
-					</Button>
-				</div>
-			</Window>
-		</ReorderPositions>
+		<Window label="Camera--APP">
+			<div className="relative flex h-full w-full items-center justify-center bg-[#00ff0d] p-5">
+				<video
+					ref={videoContainer}
+					className="h-full w-full bg-black window-border"
+				></video>
+				{!isActive && (
+					<h1 className="absolute font-mono text-4xl text-white">
+						Camera/Off
+					</h1>
+				)}
+				<Button
+					onClick={handleClick}
+					variant={'window'}
+					className="absolute bottom-2.5 left-1/2 z-10 -translate-x-1/2"
+				>
+					{isActive ? 'Turn/Off--camera' : 'Open--camera'}
+				</Button>
+			</div>
+		</Window>
 	);
 };

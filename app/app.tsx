@@ -1,4 +1,5 @@
 'use server';
+import { CameraApp } from '@/app/__components__/camera-app';
 import { DearVisitor } from '@/app/__components__/dear-visitor';
 import Navbar from '@/app/__components__/navbar';
 import { Notes } from '@/app/__components__/notes';
@@ -18,6 +19,9 @@ export default async function App() {
 				</ReorderPositions>
 				<ReorderPositions id={2} label="notes">
 					<Notes />
+				</ReorderPositions>
+				<ReorderPositions id={3} label="camera-app">
+					<CameraApp />
 				</ReorderPositions>
 				<div
 					className="flex h-screen w-screen items-center justify-center bg-cover bg-no-repeat"
