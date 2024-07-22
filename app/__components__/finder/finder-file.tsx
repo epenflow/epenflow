@@ -1,6 +1,5 @@
 import { FinderWrapper } from '@/app/__components__/finder/finder-wrapper';
 import { Mapping } from '@/components/Mapping';
-import { Arrow } from '@/components/terminal/icon';
 import { cn } from '@/lib/utils';
 import { Files } from '@prisma/client';
 import Image from 'next/image';
@@ -44,11 +43,6 @@ export const FinderFile = ({
 							<span className="inline-block basis-1/2 whitespace-nowrap">
 								{item.fileName}
 							</span>
-
-							{/* <Arrow
-								className="h-5 w-5 basis-1/4 fill-blue-800"
-								viewBox="0 0 1000 1000"
-							/> */}
 						</div>
 					)}
 				/>

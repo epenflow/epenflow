@@ -23,7 +23,6 @@ export const Project: React.FC<ProjectProps> = ({ files, projects }) => {
 	}
 	const _files = files.filter((file) => file.projectId === selectFolder);
 	const _getFiles = files.find((file) => file.fileId === selectFiles);
-	console.log(_getFiles);
 	return (
 		<Terminal
 			label="ALL--Project"

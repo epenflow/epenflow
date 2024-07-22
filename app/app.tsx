@@ -3,13 +3,17 @@ import { CameraApp } from '@/app/__components__/camera-app';
 import { DearVisitor } from '@/app/__components__/dear-visitor';
 import Navbar from '@/app/__components__/navbar';
 import { Notes } from '@/app/__components__/notes';
+import { Project } from '@/app/__components__/project';
 import { Caution } from '@/components/caution';
 import { ReorderPositions } from '@/components/programs/reorder-positions';
 import { Taskbar } from '@/components/programs/taskbar';
+import db from '@/lib/db';
 import Image from 'next/image';
 import React from 'react';
 
 export default async function App() {
+	const projects = await db.project.findMany();
+	const files = await db.files.findMany();
 	return (
 		<React.Fragment>
 			<Navbar />
@@ -22,6 +26,9 @@ export default async function App() {
 				</ReorderPositions>
 				<ReorderPositions id={3} label="camera-app">
 					<CameraApp />
+				</ReorderPositions>
+				<ReorderPositions id={4} label="project">
+					<Project projects={projects} files={files} />
 				</ReorderPositions>
 				<div
 					className="flex h-screen w-screen items-center justify-center bg-cover bg-no-repeat"
