@@ -1,13 +1,6 @@
-'use client';
+'use server';
+
 import { Mapping } from '@/components/Mapping';
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuGroup,
-	DropdownMenuItem,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import {
 	Table,
 	TableBody,
@@ -16,72 +9,32 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table';
-import {
-	DotsHorizontalIcon,
-	Pencil2Icon,
-	TrashIcon,
-} from '@radix-ui/react-icons';
+import db from '@/lib/db';
 import { formatDates } from '@/lib/format-dates';
-import { Project } from '@prisma/client';
-import { DropdownMenuLabel } from '@radix-ui/react-dropdown-menu';
-import { deleteProject } from '@/actions/project';
-import { Button } from '@/components/ui/button';
 
-interface ProjectTableProps {
-	project: Project[];
-}
-export const ProjectTable = ({ project }: ProjectTableProps) => {
-	function handleDelete(projectId: string) {
-		deleteProject(projectId);
-	}
+export const ProjectTable = async () => {
+	const projects = await db.project.findMany();
 	return (
 		<Table>
 			<TableHeader>
 				<TableRow>
-					<TableHead>Name</TableHead>
-					<TableHead>Created</TableHead>
-					<TableHead>Modified</TableHead>
-					<TableHead>Actions</TableHead>
+					<TableHead>Project--Name</TableHead>
+					<TableHead>Project--Created/AT</TableHead>
+					<TableHead>Project--Modified/AT</TableHead>
+					<TableHead>Project--Actions</TableHead>
 				</TableRow>
 			</TableHeader>
 			<TableBody>
 				<Mapping
-					items={project}
-					render={(item) => (
-						<TableRow key={item.projectId}>
-							<TableCell>{item.projectName}</TableCell>
-							<TableCell>{formatDates(item.createdAt)}</TableCell>
+					items={projects}
+					render={(project) => (
+						<TableRow key={project.projectId}>
+							<TableCell>{project.projectName}</TableCell>
 							<TableCell>
-								{formatDates(item.modifiedAt)}
+								{formatDates(project.createdAt)}
 							</TableCell>
 							<TableCell>
-								<DropdownMenu>
-									<DropdownMenuTrigger asChild>
-										<DotsHorizontalIcon className="h-5 w-5" />
-									</DropdownMenuTrigger>
-									<DropdownMenuContent align="end">
-										<DropdownMenuLabel>
-											Menu
-										</DropdownMenuLabel>
-										<DropdownMenuSeparator />
-										<DropdownMenuGroup>
-											<DropdownMenuItem>
-												<Pencil2Icon className="h-5 w-5" />
-												<span>Update</span>
-											</DropdownMenuItem>
-											<DropdownMenuItem
-												onClick={() => {
-													handleDelete(
-														item.projectId,
-													);
-												}}
-											>
-												<TrashIcon className="h-5 w-5" />
-												<span>Delete</span>
-											</DropdownMenuItem>
-										</DropdownMenuGroup>
-									</DropdownMenuContent>
-								</DropdownMenu>
+								{formatDates(project.modifiedAt)}
 							</TableCell>
 						</TableRow>
 					)}

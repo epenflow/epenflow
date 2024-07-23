@@ -60,7 +60,7 @@ export const CameraApp = () => {
 					variant={'window'}
 					className="absolute bottom-2.5 left-1/2 z-10 -translate-x-1/2"
 				>
-					{isActive ? 'Turn/Off--camera' : 'Open--camera'}
+					{isActive ? 'Turn/Off--camera' : 'Turn/On--camera'}
 				</Button>
 			</div>
 		</Window>
