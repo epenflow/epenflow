@@ -2,20 +2,18 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import React from 'react';
 
-interface WindowButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface WindowButtonProps
+	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	iconHref: string;
-	disabled?: boolean;
 }
 export const WindowButton: React.FC<WindowButtonProps> = ({
 	className,
 	iconHref,
-	disabled = false,
 	...rest
 }) => {
 	return (
 		<button
 			{...rest}
-			disabled={disabled}
 			className={cn('h-3.5 w-3.5 bg-white', className)}
 			style={{
 				border: '1px outset #dad7d2',

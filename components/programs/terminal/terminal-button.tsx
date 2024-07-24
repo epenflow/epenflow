@@ -21,20 +21,16 @@ const TerminalButtonVariants = cva(
 	},
 );
 interface TerminalButtonProps
-	extends React.HTMLAttributes<React.ElementRef<'button'>>,
-		VariantProps<typeof TerminalButtonVariants> {
-	disabled?: boolean | undefined;
-}
+	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+		VariantProps<typeof TerminalButtonVariants> {}
 export const TerminalButton: React.FC<TerminalButtonProps> = ({
 	children,
 	className,
 	variant,
-	disabled,
 	...rest
 }) => {
 	return (
 		<button
-			disabled={disabled}
 			{...rest}
 			className={cn(TerminalButtonVariants({ className, variant }))}
 		>
