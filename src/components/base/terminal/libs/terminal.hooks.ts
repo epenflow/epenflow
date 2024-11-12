@@ -3,7 +3,6 @@ import React from "react";
 import { create } from "zustand";
 import {
 	TerminalContext,
-	TerminalZIndexState,
 	TriggerState,
 } from "@/components/base/terminal/libs/terminal.props";
 
@@ -35,15 +34,3 @@ export function useVariants(isTrigger: TriggerState) {
 
 	return { sizeVariant, minimizeVariant };
 }
-
-export const useTerminalZIndex = create<TerminalZIndexState>((setter) => ({
-	activeZIndex: [],
-	handleClick: (index: number) => {
-		setter((state) => {
-			const current = state.activeZIndex.filter(
-				(prevIndex) => prevIndex !== index,
-			);
-			return { activeZIndex: [...current, index] };
-		});
-	},
-}));

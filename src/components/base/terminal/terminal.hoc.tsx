@@ -4,7 +4,6 @@ import {
 	TerminalHOCProps,
 	TerminalProps,
 	useTerminal,
-	useTerminalZIndex,
 } from "@/components/base/terminal/libs";
 import { TerminalProvider } from "@/components/base/terminal/terminal.provider";
 import { gsap } from "gsap";
@@ -22,34 +21,25 @@ export function TerminalHOC<T extends object & TerminalHOCProps>(
 
 	const Terminal = (props: T) => {
 		const containerRef = React.useRef<HTMLDivElement | null>(null);
+		const dragOptions = props.dragOptions;
 
 		const { isTrigger } = useTerminal();
-		const { activeZIndex, handleClick } = useTerminalZIndex();
 		const draggableRef = React.useRef<Array<Draggable>>();
 		const [dragPosition, setDragPosition] = React.useState<{
 			x: number;
 			y: number;
 		}>({ x: props.position?.x ?? 0, y: props.position?.y ?? 0 });
 
-		const newActiveZIndex = activeZIndex.findIndex(
-			(prevIndex) => prevIndex === props.index,
-		);
-
-		const zIndex =
-			newActiveZIndex > 0
-				? newActiveZIndex * (props.multiplyZIndex ?? 100)
-				: (props.defaultZIndex ?? 50);
-
-		function triggerZIndex() {
-			handleClick(props.index);
-		}
-
 		function initializeDraggable() {
 			draggableRef.current = Draggable.create(containerRef.current, {
-				type: "x,y",
-				edgeResistance: 1,
-				bounds: document.body,
-				inertia: true,
+				...dragOptions,
+				type: dragOptions?.type ?? "x,y",
+				edgeResistance: dragOptions?.edgeResistance ?? 1,
+				bounds: dragOptions?.bounds ?? window,
+				inertia: dragOptions?.inertia ?? true,
+				zIndexBoost: dragOptions?.zIndexBoost ?? true,
+				trigger: dragOptions?.trigger,
+				dragClickables: dragOptions?.dragClickables ?? false,
 			});
 		}
 
@@ -102,11 +92,7 @@ export function TerminalHOC<T extends object & TerminalHOCProps>(
 			}
 		}, [isTrigger.maximize, containerRef, draggableRef, setDragPosition]);
 
-		return (
-			<BaseComponent
-				{...{ ...props, containerRef, zIndex, triggerZIndex }}
-			/>
-		);
+		return <BaseComponent {...{ ...props, containerRef }} />;
 	};
 
 	return (props: T) => {

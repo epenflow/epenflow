@@ -19,8 +19,6 @@ import { TerminalPortal } from "@/components/base/terminal/terminal.portal";
 
 export const BaseTerminal: React.FC<TerminalProps> = ({
 	containerRef,
-	triggerZIndex,
-	zIndex,
 	children,
 	label,
 	classNameButtonList,
@@ -38,14 +36,14 @@ export const BaseTerminal: React.FC<TerminalProps> = ({
 			{...{
 				ref: containerRef,
 				size: sizeVariant,
-				style: { zIndex },
-				onMouseDown: triggerZIndex,
-				onTouchStart: triggerZIndex,
 				className: classNameModal,
 			}}>
 			<TerminalPortal condition={isTrigger.minimize}>
 				<TerminalCard
-					{...{ size: sizeVariant, className: classNameCard }}>
+					{...{
+						size: sizeVariant,
+						className: classNameCard,
+					}}>
 					<TerminalHeader
 						{...{
 							variant: minimizeVariant,

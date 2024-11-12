@@ -8,6 +8,7 @@ import {
 	terminalModalVariants,
 } from "@/components/base/terminal/libs/terminal.variants";
 import { type VariantProps } from "class-variance-authority";
+import { Draggable } from "gsap/Draggable";
 
 interface HTMLDivProps extends React.ComponentPropsWithRef<"div"> {}
 interface ClassName {
@@ -44,19 +45,15 @@ export interface TerminalLabelProps
 
 export interface TerminalProps extends Partial<ClassName> {
 	containerRef: React.RefObject<HTMLDivElement>;
-	zIndex: number;
-	triggerZIndex: () => void;
 	children: React.ReactNode;
 	label?: React.ReactNode;
 }
 
 export interface TerminalHOCProps extends Partial<ClassName> {
-	index: number;
-	multiplyZIndex?: number;
-	defaultZIndex?: number;
 	children: React.ReactNode;
 	label?: React.ReactNode;
 	position?: { x: number; y: number };
+	dragOptions?: Draggable.Vars;
 }
 
 export interface TriggerState {
@@ -77,14 +74,4 @@ export interface TerminalModalProps
 export interface TerminalPortalProps {
 	children: React.ReactNode;
 	condition: boolean;
-}
-export interface TerminalPositionProps extends HTMLDivProps {
-	index: number;
-	multiplyZIndex?: number;
-	defaultZIndex?: number;
-}
-
-export interface TerminalZIndexState {
-	activeZIndex: Array<number>;
-	handleClick: (index: number) => void;
 }
