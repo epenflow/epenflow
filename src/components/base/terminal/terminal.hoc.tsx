@@ -53,6 +53,16 @@ export function TerminalHOC<T extends object & TerminalHOCProps>(
 			});
 		}
 
+		useGSAP(
+			() => {
+				const header = document.getElementById("terminal-header");
+				gsap.set(".terminal-content", {
+					height: `calc(100% - ${header?.getBoundingClientRect().height}px)`,
+				});
+			},
+			{ scope: containerRef },
+		);
+
 		React.useEffect(() => {
 			if (containerRef.current) {
 				const ctx = gsap.context(() => {

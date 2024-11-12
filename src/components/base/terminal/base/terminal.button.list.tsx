@@ -17,9 +17,8 @@ export const TerminalButtonList = React.forwardRef<
 	TerminalButtonListProps
 >(({ className, variant, ...rest }, ref) => {
 	const ID = "terminal-button-list";
-	const { isTrigger, trigger } = useTerminal();
+	const { trigger } = useTerminal();
 
-	console.log(isTrigger);
 	return (
 		<div
 			{...{
