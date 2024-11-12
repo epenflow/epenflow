@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--terminal-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.9),
+		0 20px 30px 0 rgb(0 0 0 / 0%), 0 10px 50px 0 rgb(0 0 0 / 0%);
+	--terminal-header-background: linear-gradient(180deg, #e7e6e7, #d1d0d1);
+
+	--terminal-button-close-color-background: #fd5754;
+	--terminal-button-close-color-border: #df494a;
+	--terminal-button-close-color-hover: #b42e2e;
+
+	--terminal-button-minimize-color-background: #febb40;
+	--terminal-button-minimize-color-border: #e1a034;
+	--terminal-button-minimize-color-hover: #b4791a;
+
+	--terminal-button-maximize-color-background: #34c848;
+	--terminal-button-maximize-color-border: #30ab3b;
+	--terminal-button-maximize-color-hover: #1b8c24;
+
+	--terminal-icon-fill-color: 240 10% 3.9%;
+}
+@layer utilities {
+	/* Hide scrollbar for IE, Edge and Firefox */
+	.no-scrollbar {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+	/* Hide scrollbar for Chrome, Safari and Opera */
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+	.terminal-border {
+		box-shadow: var(--terminal-shadow);
+	}
+	.terminal-header-background {
+		background-image: var(--terminal-header-background);
+	}
+	.terminal-icon-fill {
+		fill: hsl(var(--terminal-icon-fill-color) / 0.5);
+	}
+}
+
+@layer components {
+	/* Terminal Card custom component Classes */
+	.terminal-card {
+		@apply terminal-border overflow-hidden rounded-lg bg-card transition-all delay-500 duration-500 ease-linear;
+	}
+	/* Terminal Card custom components size classes */
+	.terminal-size-default {
+		@apply h-[50vh] w-[90vw] sm:h-[50vh] sm:w-[60vw] md:h-[75vh] md:w-[75vw] lg:h-[50vh] lg:w-[65vw] xl:h-[70vh] xl:w-[50vw];
+	}
+	.terminal-size-maximize {
+		@apply h-[90vh] w-[90vw];
+	}
+	.terminal-size-minimize {
+		@apply h-fit w-full transition-none;
+	}
+
+	/* Terminal Header custom component classes */
+	.terminal-header {
+		@apply terminal-header-background relative flex items-center overflow-hidden p-1.5;
+	}
+	/* Terminal Header custom components variant classes */
+	.terminal-header-variant-default {
+		@apply terminal-border rounded-t-lg;
+	}
+	.terminal-header-variant-minimize {
+		@apply w-full gap-2 rounded-lg;
+	}
+
+	/* Terminal Content custom component classes */
+	.terminal-content {
+		@apply no-scrollbar h-full overflow-x-hidden overflow-y-scroll;
+	}
+	/* Terminal Content custom components variant classes */
+	.terminal-content-variant-default {
+		@apply flex flex-col;
+	}
+	.terminal-content-variant-minimize {
+		@apply hidden;
+	}
+
+	/* Terminal Button custom component classes */
+	.terminal-button {
+		@apply flex items-center justify-center rounded-full;
+	}
+	/* Terminal Button custom components variant classes */
+	.terminal-button-variant-close {
+		@apply border border-[var(--terminal-button-close-color-border)] bg-[var(--terminal-button-close-color-background)] hover:border-[var(--terminal-button-close-color-hover)];
+	}
+	.terminal-button-variant-minimize {
+		@apply border border-[var(--terminal-button-minimize-color-border)] bg-[var(--terminal-button-minimize-color-background)] hover:border-[var(--terminal-button-minimize-color-hover)];
+	}
+	.terminal-button-variant-maximize {
+		@apply border border-[var(--terminal-button-maximize-color-border)] bg-[var(--terminal-button-maximize-color-background)] hover:border-[var(--terminal-button-maximize-color-hover)];
+	}
+
+	/* Terminal Button List custom component classes */
+	.terminal-button-list {
+		@apply flex gap-1;
+	}
+	/* Terminal Button List custom components variant classes */
+	.terminal-button-list-variant-default {
+		@apply absolute;
+	}
+	.terminal-button-list-variant-minimize {
+		@apply relative;
+	}
+
+	/* Terminal Label custom component classes */
+	.terminal-label {
+		@apply line-clamp-1 flex w-full cursor-grab items-center justify-center truncate font-mono text-sm font-bold text-foreground/75;
+	}
+
+	/* Terminal Icon custom component classes */
+	.terminal-icon {
+		@apply terminal-icon-fill size-3 rotate-45 scale-50 opacity-0 transition-all hover:rotate-0 hover:scale-100 hover:opacity-100;
+	}
+
+	/* Terminal Modal custom components size classes */
+	.terminal-modal-size-default {
+		@apply z-30 h-fit w-fit bg-opacity-0;
+	}
+	.terminal-modal-size-maximize {
+		@apply fixed left-0 top-0 z-[9999] flex h-screen w-screen items-center justify-center bg-[var(--terminal-modal-background)] bg-opacity-100;
+	}
+	.terminal-modal-size-minimize {
+		@apply hidden;
+	}
+
+	.terminal-program {
+		@apply fixed bottom-8 right-5 z-20 flex h-full flex-col-reverse items-center gap-2 lg:bottom-10 lg:right-5;
+	}
+}
