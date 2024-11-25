@@ -48,12 +48,17 @@ export interface TerminalProps extends Partial<ClassName> {
 	children: React.ReactNode;
 	label?: React.ReactNode;
 }
-
+interface Positions {
+	x: number;
+	y: number;
+	xPercent: number;
+	yPercent: number;
+	top: number;
+	left: number;
+}
 export interface TerminalHOCProps extends Partial<ClassName> {
 	children: React.ReactNode;
 	label?: React.ReactNode;
-	position?: { x: number; y: number };
-	dragOptions?: Draggable.Vars;
 }
 
 export interface TriggerState {

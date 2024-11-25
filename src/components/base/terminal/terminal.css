@@ -7,6 +7,8 @@
 		0 20px 30px 0 rgb(0 0 0 / 0%), 0 10px 50px 0 rgb(0 0 0 / 0%);
 	--terminal-header-background: linear-gradient(180deg, #e7e6e7, #d1d0d1);
 
+	--terminal-button-border: 1px solid;
+
 	--terminal-button-close-color-background: #fd5754;
 	--terminal-button-close-color-border: #df494a;
 	--terminal-button-close-color-hover: #b42e2e;
@@ -20,6 +22,8 @@
 	--terminal-button-maximize-color-hover: #1b8c24;
 
 	--terminal-icon-fill-color: 240 10% 3.9%;
+
+	--terminal-header-height: 2rem;
 }
 @layer utilities {
 	/* Hide scrollbar for IE, Edge and Firefox */
@@ -45,7 +49,12 @@
 @layer components {
 	/* Terminal Card custom component Classes */
 	.terminal-card {
-		@apply terminal-border overflow-hidden rounded-lg bg-card transition-all delay-500 duration-500 ease-linear;
+		@apply terminal-border overflow-hidden rounded-lg bg-card;
+	}
+	.terminal-card[data-maximize="true"] {
+		@apply text-9xl;
+	}
+	.terminal-card[data-maximize="false"] {
 	}
 	/* Terminal Card custom components size classes */
 	.terminal-size-default {
@@ -55,12 +64,12 @@
 		@apply h-[90vh] w-[90vw];
 	}
 	.terminal-size-minimize {
-		@apply h-fit w-full transition-none;
+		@apply h-fit w-full;
 	}
 
 	/* Terminal Header custom component classes */
 	.terminal-header {
-		@apply terminal-header-background relative flex items-center overflow-hidden p-1.5;
+		@apply terminal-header-background relative flex h-[var(--terminal-header-height)] max-h-[var(--terminal-header-height)] items-center overflow-hidden p-1.5;
 	}
 	/* Terminal Header custom components variant classes */
 	.terminal-header-variant-default {
@@ -88,13 +97,30 @@
 	}
 	/* Terminal Button custom components variant classes */
 	.terminal-button-variant-close {
-		@apply border border-[var(--terminal-button-close-color-border)] bg-[var(--terminal-button-close-color-background)] hover:border-[var(--terminal-button-close-color-hover)];
+		border: var(--terminal-button-border)
+			var(--terminal-button-close-color-border);
+		background-color: var(--terminal-button-close-color-background);
 	}
+	.terminal-button-variant-close:hover {
+		border-color: var(--terminal-button-close-color-hover);
+	}
+
 	.terminal-button-variant-minimize {
-		@apply border border-[var(--terminal-button-minimize-color-border)] bg-[var(--terminal-button-minimize-color-background)] hover:border-[var(--terminal-button-minimize-color-hover)];
+		border: var(--terminal-button-border)
+			var(--terminal-button-minimize-color-border);
+		background-color: var(--terminal-button-minimize-color-background);
 	}
+	.terminal-button-variant-minimize:hover {
+		border-color: var(--terminal-button-minimize-color-hover);
+	}
+
 	.terminal-button-variant-maximize {
-		@apply border border-[var(--terminal-button-maximize-color-border)] bg-[var(--terminal-button-maximize-color-background)] hover:border-[var(--terminal-button-maximize-color-hover)];
+		border: var(--terminal-button-border)
+			var(--terminal-button-maximize-color-border);
+		background-color: var(--terminal-button-maximize-color-background);
+	}
+	.terminal-button-variant-maximize:hover {
+		border-color: var(--terminal-button-maximize-color-hover);
 	}
 
 	/* Terminal Button List custom component classes */
@@ -121,7 +147,7 @@
 
 	/* Terminal Modal custom components size classes */
 	.terminal-modal-size-default {
-		@apply z-30 h-fit w-fit bg-opacity-0;
+		@apply fixed z-30 h-fit w-fit bg-opacity-0;
 	}
 	.terminal-modal-size-maximize {
 		@apply fixed left-0 top-0 z-[9999] flex h-screen w-screen items-center justify-center bg-[var(--terminal-modal-background)] bg-opacity-100;

@@ -7,10 +7,20 @@ export const TerminalPortal: React.FC<TerminalPortalProps> = ({
 	children,
 	condition,
 }) => {
-	const container = document.getElementById("terminal-program");
+	const [isMounted, setMounted] = React.useState<boolean>(false);
 
-	return condition
-		? ReactDOM.createPortal(children, container as HTMLElement)
-		: children;
+	React.useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	if (isMounted) {
+		const container = document.getElementById("terminal-program");
+		if (condition && container) {
+			return ReactDOM.createPortal(children, container);
+		}
+		return children;
+	}
+
+	return children;
 };
 TerminalPortal.displayName = "TerminalPortal";

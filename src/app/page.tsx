@@ -1,10 +1,10 @@
-import { ContactForm } from "@/components/base/contact-form";
-import { Terminal } from "@/components/base/terminal/terminal";
+import { Contact } from "@/components/base/contact/contact.form";
+import { Window } from "@/components/base/window/window";
 
 export default function Home() {
 	return (
-		<main className="container flex h-screen items-center justify-center">
-			<ContactForm />
+		<main className="h-screen">
+			<Contact />
 		</main>
 	);
 }

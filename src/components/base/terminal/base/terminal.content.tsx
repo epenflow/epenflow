@@ -19,6 +19,9 @@ export const TerminalContent = React.forwardRef<
 				id: ID,
 				"aria-label": ID,
 				className: cn(terminalContentVariants({ variant, className })),
+				style: {
+					height: `calc(100% - var(--terminal-header-height))`,
+				},
 			}}
 		/>
 	);

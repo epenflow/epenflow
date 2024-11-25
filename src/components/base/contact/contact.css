@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--muted-primary: #dddddd;
+	--muted-secondary: #eeeeee;
+	--border-shadow: 1px 1px #fff-1px -1px #bbb;
+	--border-contact: 1px solid black;
+	--radius-contact: 2px;
+	--form-background: red;
+}
+
+@layer components {
+	.form-container {
+		@apply box-border grid h-full w-full grid-rows-12 font-mono text-xs font-bold;
+		background-color: var(--form-background);
+	}
+	.input-container,
+	.message-container {
+		@apply row-span-5 h-full;
+	}
+	.tab-container {
+		@apply row-span-2;
+	}
+	.tab-container,
+	.message-container {
+		background-color: var(--muted-secondary);
+	}
+	.input-container {
+		background-color: var(--muted-primary);
+	}
+
+	.tab-items-container {
+		@apply container flex h-full items-end space-x-1;
+	}
+	.tab-item {
+		@apply px-2 pt-1;
+		border-top-left-radius: var(--radius-contact);
+		border-top-right-radius: var(--radius-contact);
+		background-color: var(--muted-primary);
+	}
+
+	.input-content {
+		@apply container grid h-full grid-rows-3 gap-1.5 py-5;
+	}
+	.input-item-content {
+		@apply grid grid-cols-4 items-center;
+	}
+	.input-item {
+		@apply col-span-3 h-full;
+		border: var(--border-contact);
+		box-sizing: var(--border-shadow);
+		border-radius: var(--radius-contact);
+	}
+
+	.message-container {
+		@apply grid h-full items-center;
+	}
+	.message-content {
+		@apply container grid h-full grid-rows-3 gap-1.5 py-5;
+	}
+	.message-textarea {
+		@apply row-span-2 placeholder:p-2;
+		border: var(--border-contact);
+		border-radius: var(--radius-contact);
+		box-shadow: var(--border-shadow);
+	}
+	.message-button {
+		background-color: var(--muted-primary);
+		border: var(--border-contact);
+		border-radius: var(--radius-contact);
+		box-shadow: var(--border-shadow);
+	}
+}

@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import "./terminal.css";
+import "./globals.css";
+
 import {
 	TerminalButtonList,
 	TerminalCard,
