@@ -18,11 +18,17 @@ import {
 
 gsap.registerPlugin(useGSAP, Draggable);
 
-export interface BaseTerminalProps {
+export interface BaseTerminalProps
+	extends React.ComponentPropsWithoutRef<"div"> {
 	containerRef: React.RefObject<HTMLDivElement>;
+	header?: React.ReactNode | undefined;
 }
 
-export function TerminalHOC<T extends object>(
+interface TerminalHOCProps extends React.ComponentPropsWithoutRef<"div"> {
+	header?: React.ReactNode | undefined;
+}
+
+export function TerminalHOC<T extends object & TerminalHOCProps>(
 	BaseTerminal: React.ComponentType<T & BaseTerminalProps>,
 ) {
 	function Terminal(props: T) {

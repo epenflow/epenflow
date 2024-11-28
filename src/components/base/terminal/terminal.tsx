@@ -22,9 +22,12 @@ import {
 } from "@/components/base/terminal/base";
 import { useTerminal } from "@/components/base/terminal/helpers";
 
-const BaseTerminal: React.FC<BaseTerminalProps> = ({ containerRef: ref }) => {
+const BaseTerminal: React.FC<BaseTerminalProps> = ({
+	containerRef: ref,
+	header,
+	...rest
+}) => {
 	const { isTrigger, setTrigger } = useTerminal();
-	console.log(isTrigger);
 	return (
 		<div
 			{...{ ref }}
@@ -33,9 +36,9 @@ const BaseTerminal: React.FC<BaseTerminalProps> = ({ containerRef: ref }) => {
 				<TerminalContainer>
 					<TerminalHeader>
 						<TerminalAction />
-						<TerminalTitle>rets</TerminalTitle>
+						<TerminalTitle>{header}</TerminalTitle>
 					</TerminalHeader>
-					<TerminalContent>sds</TerminalContent>
+					<TerminalContent {...rest} />
 				</TerminalContainer>
 			</TerminalPortal>
 		</div>
