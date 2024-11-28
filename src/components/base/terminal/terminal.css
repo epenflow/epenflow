@@ -102,13 +102,15 @@
 		height: calc(100% - var(--terminal-header-height));
 		max-height: calc(100% - var(--terminal-header-height));
 		overflow-y: scroll;
-		-webkit-overflow-scrolling: touch;
 	}
 	.terminal-content-default {
 		@apply flex flex-col;
 	}
 	.terminal-content-minimize {
 		@apply hidden;
+	}
+	.terminal-content-maximize {
+		overflow-y: scroll;
 	}
 
 	.terminal-program {

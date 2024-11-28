@@ -36,26 +36,12 @@ export function TerminalHOC<T extends object & TerminalHOCProps>(
 		const draggableRef = React.useRef<Draggable[]>();
 		const { isTrigger } = useTerminal();
 
-		function handleTouchStart(event: React.TouchEvent) {
-			if (containerRef.current) {
-				containerRef.current.style.touchAction = "none";
-			}
-		}
-		function handleTouchEnd(event: React.TouchEvent) {
-			if (containerRef.current) {
-				containerRef.current.style.touchAction = "auto";
-			}
-		}
 		function draggable() {
 			draggableRef.current = Draggable.create(containerRef.current, {
 				bounds: window,
 				dragClickables: false,
 				zIndexBoost: true,
 				allowNativeTouchScrolling: false,
-				throwProps: true,
-				minimumMovement: 6,
-				onPress: handleTouchStart,
-				onRelease: handleTouchEnd,
 			});
 		}
 

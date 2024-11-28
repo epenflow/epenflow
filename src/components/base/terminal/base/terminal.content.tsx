@@ -8,6 +8,7 @@ const terminalContentVariants = cva("terminal-content", {
 		variant: {
 			default: "terminal-content-default",
 			minimize: "terminal-content-minimize",
+			maximize: "terminal-content-maximize",
 		},
 	},
 	defaultVariants: {
