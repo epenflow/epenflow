@@ -1,76 +1,44 @@
 "use client";
 import React from "react";
 import "./terminal.css";
-import "./globals.css";
-
 import {
-	TerminalButtonList,
-	TerminalCard,
-	TerminalContent,
+	BaseTerminalProps,
+	TerminalHOC,
+} from "@/components/base/terminal/terminal.hoc";
+/**
+ *
+ * ----------------------------------------------------------
+ * Base Terminal Components
+ * ----------------------------------------------------------
+ *
+ */
+import {
+	TerminalContainer,
 	TerminalHeader,
-	TerminalLabel,
-	TerminalModal,
+	TerminalContent,
+	TerminalAction,
+	TerminalTitle,
+	TerminalPortal,
 } from "@/components/base/terminal/base";
-import { TerminalHOC } from "@/components/base/terminal/terminal.hoc";
-import {
-	TerminalProps,
-	useTerminal,
-	useVariants,
-} from "@/components/base/terminal/libs";
-import { TerminalPortal } from "@/components/base/terminal/terminal.portal";
+import { useTerminal } from "@/components/base/terminal/helpers";
 
-export const BaseTerminal: React.FC<TerminalProps> = ({
-	containerRef,
-	children,
-	label,
-	classNameButtonList,
-	classNameCard,
-	classNameContent,
-	classNameHeader,
-	classNameLabel,
-	classNameModal,
-}) => {
-	const { isTrigger } = useTerminal();
-	const { sizeVariant, minimizeVariant } = useVariants(isTrigger);
-
+const BaseTerminal: React.FC<BaseTerminalProps> = ({ containerRef: ref }) => {
+	const { isTrigger, setTrigger } = useTerminal();
+	console.log(isTrigger);
 	return (
-		<TerminalModal
-			{...{
-				ref: containerRef,
-				size: sizeVariant,
-				className: classNameModal,
-			}}>
+		<div
+			{...{ ref }}
+			className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
 			<TerminalPortal condition={isTrigger.minimize}>
-				<TerminalCard
-					{...{
-						size: sizeVariant,
-						className: classNameCard,
-					}}>
-					<TerminalHeader
-						{...{
-							variant: minimizeVariant,
-							className: classNameHeader,
-						}}>
-						<TerminalButtonList
-							{...{
-								variant: minimizeVariant,
-								className: classNameButtonList,
-							}}
-						/>
-						<TerminalLabel className={classNameLabel}>
-							{label ? label : <span>Terminal</span>}
-						</TerminalLabel>
+				<TerminalContainer>
+					<TerminalHeader>
+						<TerminalAction />
+						<TerminalTitle>rets</TerminalTitle>
 					</TerminalHeader>
-					<TerminalContent
-						{...{
-							variant: minimizeVariant,
-							className: classNameContent,
-						}}>
-						{children}
-					</TerminalContent>
-				</TerminalCard>
+					<TerminalContent>sds</TerminalContent>
+				</TerminalContainer>
 			</TerminalPortal>
-		</TerminalModal>
+		</div>
 	);
 };
 

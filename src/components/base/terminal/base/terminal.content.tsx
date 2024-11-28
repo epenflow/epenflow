@@ -1,27 +1,45 @@
+"use client";
 import React from "react";
-import {
-	cn,
-	TerminalContentProps,
-	terminalContentVariants,
-} from "@/components/base/terminal/libs";
+import { cva, VariantProps } from "class-variance-authority";
+import { cn, useTerminal } from "@/components/base/terminal/helpers";
+
+const terminalContentVariants = cva("terminal-content", {
+	variants: {
+		variant: {
+			default: "terminal-content-default",
+			minimize: "terminal-content-minimize",
+		},
+	},
+	defaultVariants: {
+		variant: "default",
+	},
+});
+
+type TerminalContentVariants = typeof terminalContentVariants;
+interface TerminalContentProps
+	extends React.ComponentPropsWithoutRef<"div">,
+		VariantProps<TerminalContentVariants> {}
 
 export const TerminalContent = React.forwardRef<
 	HTMLDivElement,
 	TerminalContentProps
 >(({ className, variant, ...rest }, ref) => {
-	const ID = "terminal-content";
+	const randomId = React.useId();
+	const id = `terminal-content-${randomId}`;
+	const { isTrigger } = useTerminal();
 
 	return (
 		<div
 			{...{
 				...rest,
 				ref,
-				id: ID,
-				"aria-label": ID,
-				className: cn(terminalContentVariants({ variant, className })),
-				style: {
-					height: `calc(100% - var(--terminal-header-height))`,
-				},
+				id,
+				className: cn(
+					terminalContentVariants({
+						variant: isTrigger.minimize ? "minimize" : "default",
+						className,
+					}),
+				),
 			}}
 		/>
 	);

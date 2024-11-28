@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { MacNavbar } from "@/components/base/mac-navbar/mac.navbar";
 import { Wallpaper } from "@/components/base/wallpaper";
-import { TerminalProgram } from "@/components/base/terminal/terminal-program";
+import { TerminalProgram } from "@/components/base/terminal";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",

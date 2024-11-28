@@ -1,10 +1,9 @@
-import { Contact } from "@/components/base/contact/contact.form";
-import { Window } from "@/components/base/window/window";
+import { Terminal } from "@/components/base/terminal/terminal";
 
 export default function Home() {
 	return (
 		<main className="h-screen">
-			<Contact />
+			<Terminal />
 		</main>
 	);
 }

@@ -1,2 +1,2 @@
+export * from "./cn";
 export * from "./terminal";
-export * from "./base";

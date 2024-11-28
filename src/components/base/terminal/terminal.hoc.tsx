@@ -1,65 +1,59 @@
 "use client";
 import React from "react";
-import {
-	TerminalHOCProps,
-	TerminalProps,
-	useTerminal,
-} from "@/components/base/terminal/libs";
-import { TerminalProvider } from "@/components/base/terminal/terminal.provider";
+
+/**
+ *
+ * ----------------------------------------------------------
+ * GSAP
+ * ----------------------------------------------------------
+ *
+ */
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-
-import { Flip } from "gsap/Flip";
 import { Draggable } from "gsap/Draggable";
+import {
+	TerminalProvider,
+	useTerminal,
+} from "@/components/base/terminal/helpers";
 
-gsap.registerPlugin(useGSAP, Flip, Draggable);
+gsap.registerPlugin(useGSAP, Draggable);
 
-export function TerminalHOC<T extends object & TerminalHOCProps>(
-	BaseComponent: React.ComponentType<T & TerminalProps>,
+export interface BaseTerminalProps {
+	containerRef: React.RefObject<HTMLDivElement>;
+}
+
+export function TerminalHOC<T extends object>(
+	BaseTerminal: React.ComponentType<T & BaseTerminalProps>,
 ) {
-	BaseComponent.displayName = "BaseTerminal";
-
-	const Terminal = (props: T) => {
+	function Terminal(props: T) {
 		const containerRef = React.useRef<HTMLDivElement | null>(null);
-
+		const draggableRef = React.useRef<Draggable[]>();
 		const { isTrigger } = useTerminal();
-		const draggableRef = React.useRef<Array<Draggable>>();
 
-		function initializeDraggable() {
+		function draggable() {
 			draggableRef.current = Draggable.create(containerRef.current, {
 				bounds: window,
+				dragClickables: false,
+				zIndexBoost: true,
 			});
 		}
 
-		useGSAP(
-			() => {
-				gsap.set(containerRef.current, {
-					scale: 0,
-					immediateRender: true,
-				});
-				gsap.to(containerRef.current, {
-					scale: 1,
-					duration: 0.5,
-					ease: "power4",
-				});
-
-				initializeDraggable();
-			},
-			{ scope: containerRef, dependencies: [isTrigger] },
-		);
-
 		React.useEffect(() => {
-			if (draggableRef.current && isTrigger.maximize) {
-				draggableRef.current[0].disable();
-				gsap.to(containerRef.current, {
-					x: 0,
-					y: 0,
-				});
+			draggable();
+			if (draggableRef.current) {
+				const draggableInstance = draggableRef.current[0];
+				if (isTrigger.maximize) {
+					draggableInstance.disable();
+					const MAXIMIZE_POSITION = { x: 0, y: 0 };
+					gsap.set(containerRef.current, {
+						...MAXIMIZE_POSITION,
+					});
+				}
 			}
-		}, [isTrigger.maximize]);
+		}, [isTrigger]);
 
-		return <BaseComponent {...{ ...props, containerRef }} />;
-	};
+		return <BaseTerminal {...{ ...props, containerRef }} />;
+	}
 
 	return (props: T) => {
 		return (

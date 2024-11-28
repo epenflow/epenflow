@@ -1,25 +1,23 @@
 "use client";
 import React from "react";
-import "./terminal.css";
-import { cn } from "@/components/base/terminal/libs";
+import "../terminal.css";
+import { cn } from "@/components/base/terminal/helpers";
 
 export const TerminalProgram = React.forwardRef<
-	HTMLElement,
-	React.ComponentPropsWithoutRef<"section">
+	HTMLDivElement,
+	React.ComponentPropsWithoutRef<"div">
 >(({ className, ...rest }, ref) => {
-	const ID = "terminal-program";
+	const id = `terminal-program`;
 
 	return (
-		<section
+		<div
 			{...{
 				...rest,
 				ref,
-				id: ID,
-				"aria-label": ID,
+				id,
 				className: cn("terminal-program", className),
 			}}
 		/>
 	);
 });
-
 TerminalProgram.displayName = "TerminalProgram";

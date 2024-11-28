@@ -1,11 +1,13 @@
 "use client";
 import React from "react";
 import ReactDOM from "react-dom";
-import { TerminalPortalProps } from "@/components/base/terminal/libs";
 
+interface TerminalPortalProps extends React.PropsWithChildren {
+	condition: boolean;
+}
 export const TerminalPortal: React.FC<TerminalPortalProps> = ({
-	children,
 	condition,
+	children,
 }) => {
 	const [isMounted, setMounted] = React.useState<boolean>(false);
 
@@ -20,7 +22,5 @@ export const TerminalPortal: React.FC<TerminalPortalProps> = ({
 		}
 		return children;
 	}
-
 	return children;
 };
-TerminalPortal.displayName = "TerminalPortal";
