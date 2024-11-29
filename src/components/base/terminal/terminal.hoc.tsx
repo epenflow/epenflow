@@ -42,6 +42,7 @@ export function TerminalHOC<T extends object & TerminalHOCProps>(
 				dragClickables: false,
 				zIndexBoost: true,
 				allowNativeTouchScrolling: false,
+				allowContextMenu: true,
 			});
 		}
 
