@@ -5,6 +5,9 @@ import { useNavbar } from "@/hooks/use-navbar";
 export const Note = () => {
 	const { isNote } = useNavbar();
 	if (isNote) {
+		/**
+		 * @todo - expose click event terminal button actions to this component!
+		 */
 		return (
 			<Terminal className="p-2 text-2xl font-medium" header="Note">
 				<p>

@@ -6,7 +6,12 @@ interface TriggerState {
 	maximize: boolean;
 	minimize: boolean;
 }
-type Action = "CLOSE" | "MAXIMIZE" | "MINIMIZE";
+export type Action = "CLOSE" | "MAXIMIZE" | "MINIMIZE";
+interface TriggerAction {
+	fnClose: () => void;
+	fnMinimize: () => void;
+	fnMaximize: () => void;
+}
 interface TerminalContext {
 	isTrigger: TriggerState;
 	draggableTriggerRef: React.RefObject<HTMLDivElement>;
@@ -49,7 +54,11 @@ export const TerminalProvider = ({ children }: React.PropsWithChildren) => {
 
 	return (
 		<context.Provider
-			value={{ isTrigger, setTrigger, draggableTriggerRef }}>
+			value={{
+				isTrigger,
+				setTrigger,
+				draggableTriggerRef,
+			}}>
 			{children}
 		</context.Provider>
 	);

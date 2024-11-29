@@ -2,7 +2,7 @@
 import React from "react";
 import { cn } from "@/components/base/terminal/helpers";
 
-interface IconProps extends React.ComponentPropsWithoutRef<"svg"> {}
+export interface IconProps extends React.ComponentPropsWithoutRef<"svg"> {}
 
 const Maximize = React.forwardRef<SVGSVGElement, IconProps>(
 	({ className, ...rest }, ref) => {
