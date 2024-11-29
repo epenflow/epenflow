@@ -1,8 +1,9 @@
 :root {
 	--background: rgba(83, 83, 83, 0.4);
 	--backdrop: blur(50px);
+	--navbar-height: 1.5rem;
 }
-.mac-navbar {
+.navbar {
 	background: var(--background);
 	backdrop-filter: var(--backdrop);
 	padding: 0.25rem 0;

@@ -1,10 +1,11 @@
 import { Note, Profile } from "@/components/base";
+import { DesktopLayout } from "@/components/layouts";
 
 export default function Home() {
 	return (
-		<main id="desktop-container" className="h-[calc(100svh-1.5rem)]">
-			<Profile />
+		<DesktopLayout>
 			<Note />
-		</main>
+			<Profile />
+		</DesktopLayout>
 	);
 }
