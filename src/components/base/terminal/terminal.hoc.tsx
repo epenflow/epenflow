@@ -26,6 +26,7 @@ export interface BaseTerminalProps
 
 interface TerminalHOCProps extends React.ComponentPropsWithoutRef<"div"> {
 	header?: React.ReactNode | undefined;
+	container?: string | undefined;
 }
 
 export function TerminalHOC<T extends object & TerminalHOCProps>(
@@ -34,11 +35,15 @@ export function TerminalHOC<T extends object & TerminalHOCProps>(
 	function Terminal(props: T) {
 		const containerRef = React.useRef<HTMLDivElement | null>(null);
 		const draggableRef = React.useRef<Draggable[]>();
-		const { isTrigger } = useTerminal();
+		const { isTrigger, draggableTriggerRef } = useTerminal();
 
 		function draggable() {
+			const container = document.getElementById(
+				props.container || "desktop-container",
+			);
 			draggableRef.current = Draggable.create(containerRef.current, {
-				bounds: window,
+				bounds: container || window,
+				trigger: draggableTriggerRef.current,
 				dragClickables: false,
 				zIndexBoost: true,
 				allowNativeTouchScrolling: false,

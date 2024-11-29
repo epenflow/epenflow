@@ -9,6 +9,7 @@ interface TriggerState {
 type Action = "CLOSE" | "MAXIMIZE" | "MINIMIZE";
 interface TerminalContext {
 	isTrigger: TriggerState;
+	draggableTriggerRef: React.RefObject<HTMLDivElement>;
 	setTrigger: React.Dispatch<Action>;
 }
 
@@ -43,10 +44,12 @@ function reducer(state: TriggerState, action: Action) {
 }
 
 export const TerminalProvider = ({ children }: React.PropsWithChildren) => {
+	const draggableTriggerRef = React.useRef<HTMLDivElement | null>(null);
 	const [isTrigger, setTrigger] = React.useReducer(reducer, trigger);
 
 	return (
-		<context.Provider value={{ isTrigger, setTrigger }}>
+		<context.Provider
+			value={{ isTrigger, setTrigger, draggableTriggerRef }}>
 			{children}
 		</context.Provider>
 	);

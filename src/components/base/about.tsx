@@ -1,6 +1,6 @@
 "use client";
 import { Terminal } from "@/components/base/terminal";
-import Profile from "@/components/contents/profile.mdx";
+import ProfileContent from "@/contents/profile.content.mdx";
 import { useNavbar } from "@/hooks/use-navbar";
 import React from "react";
 
@@ -22,12 +22,12 @@ function P({ children }: React.PropsWithChildren) {
 function A({ children }: React.PropsWithChildren) {
 	return <a className="text-blue-500">{children}</a>;
 }
-export const About = () => {
+export const Profile = () => {
 	const { isProfile } = useNavbar();
 	if (isProfile) {
 		return (
 			<Terminal className="p-1" header="Profile">
-				<Profile
+				<ProfileContent
 					components={{
 						h3: H3,
 						ul: Ul,

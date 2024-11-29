@@ -38,7 +38,7 @@
 
 @layer components {
 	.terminal-container {
-		@apply rounded-lg bg-card;
+		@apply rounded-lg bg-card transition-[width,height] ease-linear;
 		box-shadow: var(--terminal-shadow);
 	}
 	.terminal-container-default {

@@ -27,14 +27,14 @@ const BaseTerminal: React.FC<BaseTerminalProps> = ({
 	header,
 	...rest
 }) => {
-	const { isTrigger, setTrigger } = useTerminal();
+	const { isTrigger, draggableTriggerRef } = useTerminal();
 	return (
 		<div
 			{...{ ref }}
 			className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
 			<TerminalPortal condition={isTrigger.minimize}>
 				<TerminalContainer>
-					<TerminalHeader>
+					<TerminalHeader ref={draggableTriggerRef}>
 						<TerminalAction />
 						<TerminalTitle>{header}</TerminalTitle>
 					</TerminalHeader>
