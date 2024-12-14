@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Context Factory Test should update the context state 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -2,11 +2,11 @@
+    <main>
+      <h1>
+        Home
+      </h1>
+      <h1>
+-       false
++       true
+      </h1>
+      <button
+        type="button"
+      >
+        toggle"
+`;
