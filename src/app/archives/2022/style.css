@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--lush-white: #f6f6f6;
+	--lush-blue: #0042bf;
+}
+
+@layer utilities {
+	@keyframes text-clip {
+		to {
+			background-position: 200% center;
+		}
+	}
+	body {
+		background-color: var(--lush-white);
+	}
+}
+@layer components {
+	.resume-heading {
+		@apply my-5 font-bold text-xl;
+	}
+	.resume-item {
+		@apply my-5 text-base font-semibold;
+	}
+	.resume-border {
+		@apply border-b border-solid border-black;
+	}
+
+	.header-cakra {
+		@apply animate-spin;
+	}
+	.header-heading {
+		@apply bg-clip-text text-transparent text-[30px] md:text-[66px] font-bold px-4 md:px-0;
+		background-image: linear-gradient(
+			-225deg,
+			var(--lush-white) 0%,
+			var(--lush-blue) 29%,
+			var(--lush-white) 67%,
+			var(--lush-blue) 100%
+		);
+		background-size: 200% auto;
+		animation: text-clip 2s linear infinite;
+	}
+	.header-menu {
+		@apply flex flex-row md:justify-end items-center;
+	}
+	.header-menu-item {
+		@apply md:mx-4 font-bold underline md:basis-0 basis-1/2 border border-[var(--lush-blue)] md:border-0 h-10 md:h-auto p-2 md:p-0 box-content flex items-center justify-center;
+	}
+}
