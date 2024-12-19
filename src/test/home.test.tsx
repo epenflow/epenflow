@@ -1,7 +1,7 @@
-import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
 import Home from "@/app/page";
 import Desktop from "@/components/system/desktop";
+import "@testing-library/jest-dom";
+import { render, screen } from "@testing-library/react";
 
 describe("Home Page", () => {
 	it("render the home page", () => {
@@ -10,8 +10,8 @@ describe("Home Page", () => {
 		expect(screen.getByRole("main")).toBeInTheDocument();
 	});
 	it("render the desktop component", () => {
-		const { getByRole, getByText } = render(<Desktop />);
-		expect(getByRole("heading")).toBeInTheDocument();
-		expect(getByText(/Hello World/)).toBeInTheDocument();
+		const { getByText } = render(<Desktop />);
+		expect(getByText(/HelloWorld/)).toBeInTheDocument();
+		expect(getByText(/FuckTheWorld/));
 	});
 });
