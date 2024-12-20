@@ -1,7 +1,7 @@
 ### Hi I'm Epen Flow👋
 Creative Website Developer
 <br />
-Portfolio - [epenflow.vercel](https://epenflow.vercel.app/)
+Portfolio - [epenflow.vercel](https://epenflow.vercel.app)
 
 
 ### Connect with me👀
@@ -11,6 +11,6 @@ Portfolio - [epenflow.vercel](https://epenflow.vercel.app/)
 
 <br />
 
-<!-- [website]: https://reksaandhika.com -->
+<!-- [website]: https://epenflow.vercel.app/ -->
 [linkedin]: www.linkedin.com/in/epenflow
-[instagram]: https://www.instagram.com/epenflow/
+[instagram]: https://www.instagram.com/epenflow
