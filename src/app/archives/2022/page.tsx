@@ -1,10 +1,10 @@
-import "./style.css";
 import {
 	CONTACT,
 	DESCRIPTIONS,
 	EDUCATION,
 	FEATURED,
 } from "@/app/archives/2022/constant";
+import "./style.css";
 
 import List from "@/utils/list";
 import dynamic from "next/dynamic";
@@ -20,7 +20,9 @@ function Page() {
 						<li className="header-heading">EF-STUDIO</li>
 						<li>
 							<Image
-								src={"/Cakra.png"}
+								src={
+									"https://ucarecdn.com/f4a22b93-b4f4-4d69-a773-7c688000d284/-/scale_crop/300x300/"
+								}
 								width={50}
 								height={50}
 								alt="cakra"
