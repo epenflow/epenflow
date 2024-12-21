@@ -1,10 +1,13 @@
 
 
 ### Hi I'm Epen Flow👋
-Creative Website Developer
-<br />
+Creative Website Developer👾
+<br/>
+Based in Bali🌴
+<br/>
 Portfolio - [epenflow.vercel](https://epenflow.vercel.app)
-
+<br/>
+>Explore the dynamic relationship between art and technology. Envision them as two halves of greater whole, driving a future where innovation and creativity streamline our lives.
 
 ### Connect with me👀
 
@@ -39,3 +42,5 @@ Portfolio - [epenflow.vercel](https://epenflow.vercel.app)
 <!-- [website]: https://epenflow.vercel.app/ -->
 [linkedin]: https://www.linkedin.com/in/epenflow/
 [instagram]: https://www.instagram.com/epenflow/
+
+
