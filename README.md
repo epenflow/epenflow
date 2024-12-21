@@ -5,7 +5,7 @@ Creative Website Developer👾
 <br/>
 Based in Bali🌴
 <br/>
-Portfolio - [epenflow.vercel](https://epenflow.vercel.app)
+Portfolio - [epenflow.vercel](https://epenflow.vercel.app)🌐
 <br/>
 >Explore the dynamic relationship between art and technology. Envision them as two halves of greater whole, driving a future where innovation and creativity streamline our lives.
 
@@ -16,7 +16,7 @@ Portfolio - [epenflow.vercel](https://epenflow.vercel.app)
 
 <br/>
 
-### Teach stack
+### Teach stack💾
 <img align="left" width="22px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg" /> 
 <img align="left" width="22px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg" />
 <img align="left" width="22px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/adonisjs/adonisjs-original.svg" />
