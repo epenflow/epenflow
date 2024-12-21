@@ -18,10 +18,10 @@ function contextFactory<T>(
 
 	const Provider = React.memo<FC>(({ children }) => {
 		return (
-			<Context.Provider value={useContextState()}>
+			<Context value={useContextState()}>
 				{children}
 				<RenderContextComponent />
-			</Context.Provider>
+			</Context>
 		);
 	});
 	Provider.displayName = "Provider";
