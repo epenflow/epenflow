@@ -8,15 +8,17 @@ const Desktop = () => {
 	return (
 		<>
 			<List list={Object.entries(directory)}>
-				{([id, { Component, hasWindow }]) =>
-					hasWindow ? (
-						<Window>
-							<Component key={id} id={id} />
-						</Window>
-					) : (
-						<Component key={id} id={id} />
-					)
-				}
+				{([id, { Component, hasWindow }]) => (
+					<React.Fragment key={id}>
+						{hasWindow ? (
+							<Window>
+								<Component id={id} />
+							</Window>
+						) : (
+							<Component id={id} />
+						)}
+					</React.Fragment>
+				)}
 			</List>
 		</>
 	);
