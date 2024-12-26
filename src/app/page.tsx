@@ -1,5 +1,14 @@
-import Desktop from "@/components/system/desktop";
+"use client";
+
+import { useProcess } from "@/contexts/process";
 
 export default function Home() {
-	return <Desktop />;
+	const { processes = {} } = useProcess();
+	return (
+		<main>
+			{Object.entries(processes).map(([id, { Component }]) => (
+				<Component id={id} key={id} />
+			))}
+		</main>
+	);
 }

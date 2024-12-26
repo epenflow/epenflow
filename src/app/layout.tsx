@@ -1,3 +1,4 @@
+import { ProcessProvider } from "@/contexts/process";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className="antialiased">{children}</body>
+			<body className="antialiased">
+				<ProcessProvider>{children}</ProcessProvider>
+			</body>
 		</html>
 	);
 }

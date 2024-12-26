@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 type FC<T = Record<string, unknown>> = (
