@@ -56,7 +56,7 @@ function RouteComponent() {
           <For each={socials}>
             {(social, key) => (
               <Paragraph
-                key={`${key}-${social}`}
+                key={`${key}-${social.label}`}
                 initial={{
                   opacity: 0,
                   y: key * 10,

@@ -20,7 +20,7 @@
     --virtual-content-height: unset;
   }
   .header--outer {
-    @apply bg-card/25 shadow-xs border border-muted backdrop-blur-xl text-primary/80;
+    @apply bg-card shadow-xs border border-muted text-primary/80;
     height: auto;
     position: fixed;
     top: var(--header-top);
@@ -42,7 +42,7 @@
   }
 
   .header--button {
-    @apply bg-radial-[at_50%_50%] from-indigo-600 to-card/50 outline outline-muted;
+    @apply bg-radial-[at_50%_50%] from-indigo-600 to-transparent outline outline-muted;
     position: relative;
     height: var(--header-radius);
     width: var(--header-radius);
@@ -73,7 +73,7 @@
     overflow-y: scroll;
   }
 
-  .gradient--after::after {
+  /* .gradient--after::after {
     @apply bg-radial-[50%_50%] from-indigo-600 via-purple-600  to-transparent size-56 rounded-full border border-muted shadow;
     position: fixed;
     content: "";
@@ -84,7 +84,7 @@
       calc(-1 * var(--header-axis))
     );
     z-index: -10;
-  }
+  } */
   .navigation--content .virtual--container {
     position: relative;
     height: var(--virtual-content-height);

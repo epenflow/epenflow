@@ -79,7 +79,7 @@ const FPSStats: React.FC<Partial<Props>> = ({
     <div
       suppressHydrationWarning
       style={cssProperties}
-      className="p-2 rounded-[0.5rem] border border-muted bg-card/25 backdrop-blur-xl space-y-2 pointer-events-none fixed z-50 shadow-xs">
+      className="p-2 rounded-[0.5rem] border border-muted bg-card space-y-2 pointer-events-none fixed z-50 shadow-xs">
       <p className="text-xs font-medium text-primary/80 space-x-0.5">
         <span suppressHydrationWarning>Fps {currentFps}</span>
         <span suppressHydrationWarning>(Avg {avgFps})</span>
