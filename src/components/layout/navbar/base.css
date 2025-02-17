@@ -1,0 +1,134 @@
+@import "../../../globals.css";
+
+@layer components {
+  :root {
+    --header-padding: 0.5rem;
+    --header-top: 25px;
+    --header-max-width: 20rem;
+    --header-width: 10rem;
+    --header-radius: 1rem;
+    --header-axis: 50%;
+    --header-zIndex: 99999;
+    --header-content-top: calc(var(--header-radius) + var(--header-padding));
+    --header-content-width: calc(100% - calc(var(--header-padding) * 2));
+    --header-content-height: calc(
+      100% - calc(var(--header-content-top) + calc(var(--header-padding) * 2))
+    );
+    --header-content-padding: 0rem calc(var(--header-padding) * 2);
+    --virtual-height: auto;
+    --virtual-y-axis: 0px;
+    --virtual-content-height: unset;
+  }
+  .header--outer {
+    @apply bg-card/25 shadow-xs border border-muted backdrop-blur-xl text-primary/80;
+    height: auto;
+    position: fixed;
+    top: var(--header-top);
+    left: var(--header-axis);
+    transform: translate(calc(-1 * var(--header-axis)), 0%);
+    padding: var(--header-padding);
+    border-radius: var(--header-radius);
+    overflow: hidden;
+    will-change: height;
+  }
+
+  .header--inner {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    width: var(--header-width);
+    max-width: var(--header-max-width);
+    will-change: var(--header-width);
+  }
+
+  .header--button {
+    @apply bg-radial-[at_50%_50%] from-indigo-600 to-card/50 outline outline-muted;
+    position: relative;
+    height: var(--header-radius);
+    width: var(--header-radius);
+    border-radius: var(--header-radius);
+    will-change: left;
+  }
+
+  .header--content {
+    position: absolute;
+    width: 100%;
+    max-height: var(--header-content-height);
+    left: var(--header-axis);
+    transform: translate(calc(-1 * var(--header-axis)), 0%);
+    margin: var(--header-padding) 0rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    z-index: 10;
+  }
+
+  .header--content .navigation--content {
+    height: 100%;
+    width: 100%;
+    max-width: var(--header-content-width);
+    padding: var(--header-content-padding);
+    overflow-y: scroll;
+  }
+
+  .gradient--after::after {
+    @apply bg-radial-[50%_50%] from-indigo-600 via-purple-600  to-transparent size-56 rounded-full border border-muted shadow;
+    position: fixed;
+    content: "";
+    top: var(--header-axis);
+    left: var(--header-axis);
+    transform: translate(
+      calc(-1 * var(--header-axis)),
+      calc(-1 * var(--header-axis))
+    );
+    z-index: -10;
+  }
+  .navigation--content .virtual--container {
+    position: relative;
+    height: var(--virtual-content-height);
+    width: 100%;
+  }
+  .navigation--content .virtual--container .virtual--item {
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    transform: translate(0px, var(--virtual-y-axis));
+    height: var(--virtual-height);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .navigation--content::-webkit-scrollbar {
+    @apply border border-muted;
+    width: var(--header-radius);
+    background-color: transparent;
+    border-radius: var(--header-radius);
+  }
+  .navigation--content::-webkit-scrollbar-thumb {
+    @apply bg-muted;
+    height: calc(var(--header-radius) * 4);
+    border-radius: var(--header-radius);
+    border: 4px solid transparent;
+    background-clip: content-box;
+  }
+
+  .header--content .separator {
+    @apply bg-muted;
+    display: block;
+    height: 1px;
+    min-height: 1px;
+    width: 100%;
+    margin: var(--header-padding) 0rem;
+  }
+  .header--content .navigation--footer {
+    width: var(--header-content-width);
+    padding: var(--header-content-padding);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+}
