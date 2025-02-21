@@ -19,6 +19,7 @@ const Navbar: React.FC = () => {
             <Button
               onPress={onPress}
               className={cn("header--button", "data-[hovered]:from-purple-600")}
+              aria-label="Toggle Navigation"
             />
           </section>
 
