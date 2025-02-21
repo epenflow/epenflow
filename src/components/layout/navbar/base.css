@@ -1,4 +1,4 @@
-@import "../../../globals.css";
+@reference "../../../globals.css";
 
 @layer components {
   :root {
