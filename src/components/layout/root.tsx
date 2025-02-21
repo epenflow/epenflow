@@ -1,6 +1,7 @@
 import { RouterProvider } from "@tanstack/react-router";
 import React from "react";
 import router from "~/lib/router";
+import { disableReactDevTools } from "~/lib/utils";
 
 const Root: React.FC = () => {
   const InnerRoot = () => {
@@ -14,6 +15,8 @@ const Root: React.FC = () => {
       </React.StrictMode>
     );
   }
+
+  disableReactDevTools();
 
   return <InnerRoot />;
 };
