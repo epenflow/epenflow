@@ -7,6 +7,7 @@ import "./base.css";
 /**
  * Issue: Lazy load animation glitching
  */
+import { useIsomorphicLayoutEffect } from "motion/react";
 import NavigationContent from "./navigation/navigation-content";
 import NavigationFooter from "./navigation/navigation-footer";
 
@@ -34,6 +35,7 @@ const Navbar: React.FC = () => {
     </NavbarWrapper>
   );
 };
+Navbar.displayName = "Navbar";
 export default Navbar;
 
 type NavbarWrapperProps<
@@ -43,23 +45,28 @@ type NavbarWrapperProps<
 > = Omit<React.ComponentProps<"header">, "children"> & {
   children?: ((props: TProps) => React.ReactNode) | React.ReactNode;
 };
+
 const NavbarWrapper: React.FC<NavbarWrapperProps> = ({
   children,
   className,
   ...props
-}) => {
+}): React.ReactNode => {
   const [isPress, setPress] = React.useState<boolean>(false);
   const scope = React.useRef<HTMLElement>(null);
   const timeline = React.useRef<GSAPTimeline>(null);
 
-  React.useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     timeline.current = new NavbarAnimationTimeline(
       scope.current!,
-      gsap.timeline({}),
+      gsap.timeline({
+        defaults: {
+          ease: "sine.inOut",
+        },
+      }),
     ).timeline;
   }, []);
 
-  React.useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (isPress) {
       timeline.current?.play();
     } else {
@@ -67,9 +74,9 @@ const NavbarWrapper: React.FC<NavbarWrapperProps> = ({
     }
   }, [isPress]);
 
-  const onPress = () => {
+  const onPress = React.useCallback(() => {
     setPress((prev) => !prev);
-  };
+  }, []);
 
   const jsxToDisplay =
     typeof children === "function" ? children({ onPress }) : children;
@@ -83,7 +90,7 @@ const NavbarWrapper: React.FC<NavbarWrapperProps> = ({
     </header>
   );
 };
-
+NavbarWrapper.displayName = "NavbarWrapper";
 class NavbarAnimationTimeline {
   constructor(
     private scope: HTMLElement,

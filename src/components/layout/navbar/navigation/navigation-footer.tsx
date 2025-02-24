@@ -3,21 +3,15 @@ import { motion } from "motion/react";
 import { useTheme } from "next-themes";
 import React from "react";
 import Button from "~/components/ui/button";
+import useDateAndTime from "~/hooks/use-date-and-time";
+import { withMemo } from "~/lib/utils";
 
 const Moon = motion.create(MoonIcon);
 const Sun = motion.create(SunIcon);
 
-const NavigationFooter: React.FC = () => {
-  const [date, setDate] = React.useState<Date>(new Date());
+const NavigationFooter: React.FC = withMemo((): React.ReactNode => {
+  const date = useDateAndTime();
   const { setTheme, resolvedTheme } = useTheme();
-
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setDate(() => new Date());
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [setDate]);
 
   const onPress = React.useCallback(() => {
     if (resolvedTheme === "dark") {
@@ -85,14 +79,20 @@ const NavigationFooter: React.FC = () => {
     [resolvedTheme],
   );
 
+  const dateToDisplay = React.useMemo(
+    () => <span suppressHydrationWarning>{date.toISOString()}</span>,
+    [date],
+  );
+
   return (
     <div className="navigation--footer inline-flex justify-between px-0">
       <div className="p-(--header-content-padding) text-xs inline-flex items-center justify-between w-full">
-        <span suppressHydrationWarning>{date.toISOString()}</span>
+        {dateToDisplay}
         {themeToDisplay}
       </div>
       {buttonToDisplay}
     </div>
   );
-};
+});
+NavigationFooter.displayName = "NavigationFooter";
 export default NavigationFooter;

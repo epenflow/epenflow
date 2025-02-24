@@ -12,54 +12,57 @@ type NavigationContentProps = {
 /**
  * Issue - Object references change with every scroll event
  */
-const NavigationContent = withMemo(({ onPress }: NavigationContentProps) => {
-  const { contents } = resources;
-  const scope = React.useRef<HTMLDivElement>(null);
+const NavigationContent: React.FC<NavigationContentProps> = withMemo(
+  ({ onPress }): React.ReactNode => {
+    const { contents } = resources;
+    const scope = React.useRef<HTMLDivElement>(null);
 
-  const { getTotalSize, getVirtualItems } = useVirtualizer({
-    count: contents.length,
-    getScrollElement: () => scope.current,
-    estimateSize: () => 35,
-  });
+    const { getTotalSize, getVirtualItems } = useVirtualizer({
+      count: contents.length,
+      getScrollElement: () => scope.current,
+      estimateSize: () => 35,
+    });
 
-  const cssProperties = React.useMemo(
-    () =>
-      ({
-        "--virtual-content-height": `${getTotalSize()}px`,
-      }) as React.CSSProperties,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  );
+    const cssProperties = React.useMemo(
+      () =>
+        ({
+          "--virtual-content-height": `${getTotalSize()}px`,
+        }) as React.CSSProperties,
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      [],
+    );
 
-  return (
-    <div ref={scope} style={cssProperties} className="navigation--content">
-      <div className="virtual--container">
-        <For each={getVirtualItems()}>
-          {(virtual) => (
-            <NavigationItem
-              onClick={onPress}
-              key={virtual.key}
-              virtual={virtual}
-              to={contents[virtual.index].to}>
-              <motion.p
-                className="w-full will-change-transform"
-                initial={{
-                  opacity: 0,
-                  x: virtual.index % 2 === 0 ? 100 : -100,
-                }}
-                animate={{ opacity: 1, y: 0, x: 0 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}>
-                <span className="line-clamp-1 will-change-contents">
-                  {contents[virtual.index].label}
-                </span>
-              </motion.p>
-            </NavigationItem>
-          )}
-        </For>
+    return (
+      <div ref={scope} style={cssProperties} className="navigation--content">
+        <div className="virtual--container">
+          <For each={getVirtualItems()}>
+            {(virtual) => (
+              <NavigationItem
+                onClick={onPress}
+                key={virtual.key}
+                virtual={virtual}
+                to={contents[virtual.index].to}>
+                <motion.p
+                  className="w-full will-change-transform"
+                  initial={{
+                    opacity: 0,
+                    x: virtual.index % 2 === 0 ? 100 : -100,
+                  }}
+                  animate={{ opacity: 1, y: 0, x: 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}>
+                  <span className="line-clamp-1 will-change-contents">
+                    {contents[virtual.index].label}
+                  </span>
+                </motion.p>
+              </NavigationItem>
+            )}
+          </For>
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  },
+);
+NavigationContent.displayName = "NavigationContent";
 
 export default NavigationContent;
 function getRandomContent() {

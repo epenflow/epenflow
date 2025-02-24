@@ -10,14 +10,8 @@ type NavigationItemProps = {
   children?: ((props: VirtualItem) => React.ReactNode) | React.ReactNode;
 } & Omit<LinkComponentProps, "children">;
 
-const NavigationItem = withMemo(
-  ({
-    virtual,
-    style,
-    children,
-    className,
-    ...props
-  }: NavigationItemProps): React.ReactNode => {
+const NavigationItem: React.FC<NavigationItemProps> = withMemo(
+  ({ virtual, style, children, className, ...props }): React.ReactNode => {
     const cssProperties = {
       "--virtual-height": `${virtual.size}px`,
       "--virtual-y-axis": `${virtual.start}px`,
@@ -36,4 +30,5 @@ const NavigationItem = withMemo(
     );
   },
 );
+NavigationItem.displayName = "NavigationItem";
 export default motion.create(NavigationItem);
