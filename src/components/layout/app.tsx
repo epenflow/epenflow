@@ -1,7 +1,7 @@
 import { Outlet } from "@tanstack/react-router";
 import { ThemeProvider } from "next-themes";
 import React from "react";
-import { withOptional } from "~/lib/utils";
+import { withLazy, withOptional } from "~/lib/utils";
 
 const App: React.FC = () => {
   const { TanstackDevTools, FPSStats, Navbar } = resources;
@@ -24,13 +24,13 @@ export default App;
 
 const resources = {
   TanstackDevTools: withOptional(
-    React.lazy(() =>
+    withLazy(() =>
       import("@tanstack/router-devtools").then((res) => ({
         default: res.TanStackRouterDevtools,
       })),
     ),
     import.meta.env.DEV,
   ),
-  Navbar: React.lazy(() => import("~/components/layout/navbar")),
-  FPSStats: React.lazy(() => import("~/components/base/fps-stats")),
+  Navbar: withLazy(() => import("~/components/layout/navbar")),
+  FPSStats: withLazy(() => import("~/components/base/fps-stats")),
 };

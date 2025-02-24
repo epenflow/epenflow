@@ -25,3 +25,10 @@ export const disableReactDevTools = () => {
     }
   }
 };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const withLazy = <T extends React.ComponentType<any>>(
+  load: () => Promise<{ default: T }>,
+) => {
+  return React.lazy(load);
+};
