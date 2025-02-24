@@ -1,10 +1,13 @@
 import { createRouter } from "@tanstack/react-router";
 
+import Loader from "~/components/layout/loader";
 import { routeTree } from "~/routeTree.gen";
 
 function router() {
   return createRouter({
     routeTree,
+    defaultPreload: "intent",
+    defaultPendingComponent: Loader,
   });
 }
 
