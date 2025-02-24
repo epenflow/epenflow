@@ -2,6 +2,7 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import React from "react";
 import For from "~/components/utility/for";
+import { withLazy } from "~/lib/utils";
 
 export const Route = createLazyFileRoute("/")({
   component: RouteComponent,
@@ -88,17 +89,17 @@ function RouteComponent() {
 }
 
 const resources = {
-  BlockSection: React.lazy(() =>
+  BlockSection: withLazy(
     import("~/components/ui/typography").then((res) => ({
       default: res.BlockSection,
     })),
   ),
-  Paragraph: React.lazy(() =>
+  Paragraph: withLazy(
     import("~/components/ui/typography").then((res) => ({
       default: res.Paragraph,
     })),
   ),
-  Heading: React.lazy(() =>
+  Heading: withLazy(
     import("~/components/ui/typography").then((res) => ({
       default: res.Heading,
     })),
