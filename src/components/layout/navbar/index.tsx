@@ -1,4 +1,5 @@
 import gsap from "gsap";
+import { useIsomorphicLayoutEffect } from "motion/react";
 import React from "react";
 import { Button } from "react-aria-components";
 import { cn } from "~/lib/utils";
@@ -7,7 +8,6 @@ import "./base.css";
 /**
  * Issue: Lazy load animation glitching
  */
-import { useIsomorphicLayoutEffect } from "motion/react";
 import NavigationContent from "./navigation/navigation-content";
 import NavigationFooter from "./navigation/navigation-footer";
 

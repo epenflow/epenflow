@@ -1,7 +1,7 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import React from "react";
-import For from "~/components/layout/for";
+import For from "~/components/utility/for";
 
 export const Route = createLazyFileRoute("/")({
   component: RouteComponent,

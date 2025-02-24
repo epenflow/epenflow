@@ -24,13 +24,13 @@ export default App;
 
 const resources = {
   TanstackDevTools: withOptional(
-    withLazy(() =>
+    withLazy(
       import("@tanstack/router-devtools").then((res) => ({
         default: res.TanStackRouterDevtools,
       })),
     ),
     import.meta.env.DEV,
   ),
-  Navbar: withLazy(() => import("~/components/layout/navbar")),
-  FPSStats: withLazy(() => import("~/components/base/fps-stats")),
+  Navbar: withLazy(import("~/components/layout/navbar")),
+  FPSStats: withLazy(import("~/components/base/fps-stats")),
 };

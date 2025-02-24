@@ -1,7 +1,7 @@
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { motion } from "motion/react";
 import React from "react";
-import For from "~/components/layout/for";
+import For from "~/components/utility/for";
 import { withMemo } from "~/lib/utils";
 import * as RouteTypeGen from "~/routeTree.gen";
 import NavigationItem from "./navigation-item";
