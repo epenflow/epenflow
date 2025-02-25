@@ -110,23 +110,23 @@ const resources = {
   ],
   socials: [
     {
-      href: "#",
+      href: import.meta.env.VITE_INSTAGRAM || "#",
       label: "Instagram",
     },
     {
-      href: "#",
+      href: import.meta.env.VITE_FACEBOOK || "#",
       label: "Facebook",
     },
     {
-      href: "#",
+      href: import.meta.env.VITE_TWITTER || "#",
       label: "Twitter",
     },
     {
-      href: "#",
+      href: import.meta.env.VITE_THREADS || "#",
       label: "Threads",
     },
     {
-      href: "#",
+      href: import.meta.env.VITE_LINKEDIN || "#",
       label: "Linkedin",
     },
   ] satisfies Array<{ label: string; href: string }>,
