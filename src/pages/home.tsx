@@ -1,15 +1,11 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import React from "react";
 import For from "~/components/utility/for";
 import { withLazy } from "~/lib/utils";
 
-export const Route = createLazyFileRoute("/")({
-  component: RouteComponent,
-});
-
-function RouteComponent() {
+const Home = () => {
   const { socials, texts, BlockSection, Heading, Paragraph } = resources;
+
   return (
     <React.Suspense>
       <div className="w-full min-h-dvh h-full overflow-hidden">
@@ -86,8 +82,8 @@ function RouteComponent() {
       </div>
     </React.Suspense>
   );
-}
-
+};
+export default Home;
 const resources = {
   BlockSection: withLazy(
     import("~/components/ui/typography").then((res) => ({
