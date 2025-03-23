@@ -5,12 +5,12 @@ import { motion } from "motion/react";
 import React from "react";
 import { cn, withMemo } from "~/lib/utils";
 
-type NavigationItemProps = {
+type NavItemProps = {
   virtual: VirtualItem;
   children?: ((props: VirtualItem) => React.ReactNode) | React.ReactNode;
 } & Omit<LinkComponentProps, "children">;
 
-const NavigationItem: React.FC<NavigationItemProps> = withMemo(
+const NavItem: React.FC<NavItemProps> = withMemo(
   ({ virtual, style, children, className, ...props }): React.ReactNode => {
     const cssProperties = {
       "--virtual-height": `${virtual.size}px`,
@@ -30,5 +30,5 @@ const NavigationItem: React.FC<NavigationItemProps> = withMemo(
     );
   },
 );
-NavigationItem.displayName = "NavigationItem";
-export default motion.create(NavigationItem);
+NavItem.displayName = "NavItem";
+export default motion.create(NavItem);

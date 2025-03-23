@@ -4,7 +4,7 @@ import React from "react";
 import { withLazy, withOptional } from "~/lib/utils";
 
 const App: React.FC = () => {
-  const { TanstackDevTools, FPSStats, Navbar } = resources;
+  const { TanstackDevTools, FPSStats, AppHeader } = resources;
   return (
     <React.Suspense>
       <ThemeProvider
@@ -12,7 +12,7 @@ const App: React.FC = () => {
         defaultTheme="system"
         enableSystem
         disableTransitionOnChange>
-        <Navbar />
+        <AppHeader />
         <Outlet />
         <FPSStats width={160} bottom={32} right={32} />
         <TanstackDevTools />
@@ -31,6 +31,6 @@ const resources = {
     ),
     import.meta.env.DEV,
   ),
-  Navbar: withLazy(import("~/components/layout/navbar")),
+  AppHeader: withLazy(import("~/layouts/app/app-header")),
   FPSStats: withLazy(import("~/components/base/fps-stats")),
 };

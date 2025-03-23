@@ -4,15 +4,15 @@ import React from "react";
 import For from "~/components/utility/for";
 import { withMemo } from "~/lib/utils";
 import * as RouteTypeGen from "~/routeTree.gen";
-import NavigationItem from "./navigation-item";
+import NavItem from "./nav-item";
 
-type NavigationContentProps = {
+type NavContentProps = {
   onPress: () => void;
 };
 /**
  * Issue - Object references change with every scroll event
  */
-const NavigationContent: React.FC<NavigationContentProps> = withMemo(
+const NavContent: React.FC<NavContentProps> = withMemo(
   ({ onPress }): React.ReactNode => {
     const { contents } = resources;
     const scope = React.useRef<HTMLDivElement>(null);
@@ -37,7 +37,7 @@ const NavigationContent: React.FC<NavigationContentProps> = withMemo(
         <div className="virtual--container">
           <For each={getVirtualItems()}>
             {(virtual) => (
-              <NavigationItem
+              <NavItem
                 onClick={onPress}
                 key={virtual.key}
                 virtual={virtual}
@@ -54,7 +54,7 @@ const NavigationContent: React.FC<NavigationContentProps> = withMemo(
                     {contents[virtual.index].label}
                   </span>
                 </motion.p>
-              </NavigationItem>
+              </NavItem>
             )}
           </For>
         </div>
@@ -62,9 +62,9 @@ const NavigationContent: React.FC<NavigationContentProps> = withMemo(
     );
   },
 );
-NavigationContent.displayName = "NavigationContent";
+NavContent.displayName = "NavContent";
 
-export default NavigationContent;
+export default NavContent;
 function getRandomContent() {
   return Array.from({ length: 10000 }).map(() => {
     const data: {

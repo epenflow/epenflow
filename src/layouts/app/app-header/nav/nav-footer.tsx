@@ -9,7 +9,7 @@ import { withMemo } from "~/lib/utils";
 const Moon = motion.create(MoonIcon);
 const Sun = motion.create(SunIcon);
 
-const NavigationFooter: React.FC = withMemo((): React.ReactNode => {
+const NavFooter: React.FC = withMemo((): React.ReactNode => {
   const date = useDateAndTime();
   const { setTheme, resolvedTheme } = useTheme();
 
@@ -94,5 +94,5 @@ const NavigationFooter: React.FC = withMemo((): React.ReactNode => {
     </div>
   );
 });
-NavigationFooter.displayName = "NavigationFooter";
-export default NavigationFooter;
+NavFooter.displayName = "NavFooter";
+export default NavFooter;

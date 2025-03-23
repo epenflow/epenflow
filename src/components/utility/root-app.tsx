@@ -3,7 +3,7 @@ import React from "react";
 import router from "~/lib/router";
 import { disableReactDevTools } from "~/lib/utils";
 
-const Root: React.FC = () => {
+const RootApp: React.FC = () => {
   const InnerRoot = () => {
     return <RouterProvider router={router()} />;
   };
@@ -21,4 +21,4 @@ const Root: React.FC = () => {
   return <InnerRoot />;
 };
 
-export default Root;
+export default RootApp;
