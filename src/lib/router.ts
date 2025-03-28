@@ -3,15 +3,13 @@ import RoutePending from "~/components/routes/route-pending";
 
 import { routeTree } from "~/routeTree.gen";
 
-function router() {
+export default function router() {
   return createRouter({
     routeTree,
     defaultPreload: "intent",
     defaultPendingComponent: RoutePending,
   });
 }
-
-export default router;
 
 declare module "@tanstack/react-router" {
   interface Register {

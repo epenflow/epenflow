@@ -1,6 +1,6 @@
 import { createRootRoute } from "@tanstack/react-router";
-import App from "~/layouts/app";
+import RootPage from "~/pages/root-page";
 
 export const Route = createRootRoute({
-  component: App,
+  component: RootPage,
 });

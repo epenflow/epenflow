@@ -3,8 +3,8 @@ import { ThemeProvider } from "next-themes";
 import React from "react";
 import { withLazy, withOptional } from "~/lib/utils";
 
-const App: React.FC = () => {
-  const { TanstackDevTools, FPSStats, AppHeader } = resources;
+const RootPage: React.FC = () => {
+  const { TanstackDevTools, FPSStats } = resources;
   return (
     <React.Suspense>
       <ThemeProvider
@@ -12,7 +12,6 @@ const App: React.FC = () => {
         defaultTheme="system"
         enableSystem
         disableTransitionOnChange>
-        <AppHeader />
         <Outlet />
         <FPSStats width={160} bottom={32} right={32} />
         <TanstackDevTools />
@@ -20,7 +19,7 @@ const App: React.FC = () => {
     </React.Suspense>
   );
 };
-export default App;
+export default RootPage;
 
 const resources = {
   TanstackDevTools: withOptional(
@@ -31,6 +30,5 @@ const resources = {
     ),
     import.meta.env.DEV,
   ),
-  AppHeader: withLazy(import("~/layouts/app/app-header")),
   FPSStats: withLazy(import("~/components/base/fps-stats")),
 };

@@ -1,13 +1,13 @@
 import { motion } from "motion/react";
-import React from "react";
 import For from "~/components/utility/for";
+import AppLayout from "~/layouts/app-layout";
 import { withLazy } from "~/lib/utils";
 
 const Home = () => {
   const { socials, texts, BlockSection, Heading, Paragraph } = resources;
 
   return (
-    <React.Suspense>
+    <AppLayout>
       <div className="w-full min-h-dvh h-full overflow-hidden">
         <BlockSection
           className="mt-40"
@@ -80,7 +80,7 @@ const Home = () => {
           </motion.q>
         </BlockSection>
       </div>
-    </React.Suspense>
+    </AppLayout>
   );
 };
 export default Home;
