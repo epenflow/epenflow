@@ -1,7 +1,10 @@
-import { useIsomorphicLayoutEffect } from "motion/react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap/all";
 import React from "react";
 import { cn } from "~/lib/utils";
 import AppHeaderAnimation from "./app-header-animation";
+
+gsap.registerPlugin(useGSAP);
 
 type AppHeaderOuterProps<
   TProps = {
@@ -20,11 +23,11 @@ const AppHeaderOuter: React.FC<AppHeaderOuterProps> = ({
   const scope = React.useRef<HTMLElement>(null);
   const timeline = React.useRef<GSAPTimeline>(null);
 
-  useIsomorphicLayoutEffect(() => {
+  useGSAP(() => {
     timeline.current = new AppHeaderAnimation(scope.current!).timeline;
-  }, []);
+  });
 
-  useIsomorphicLayoutEffect(() => {
+  React.useEffect(() => {
     if (isPress) {
       timeline.current?.play();
     } else {
