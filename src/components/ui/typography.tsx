@@ -1,17 +1,14 @@
 import { cva } from "class-variance-authority";
-import { motion } from "motion/react";
 import React from "react";
-import { Heading as AriaHeading } from "react-aria-components";
 import { cn } from "~/lib/utils";
 
-const MotionHeading = motion.create(AriaHeading);
-type ParagraphProps = React.ComponentProps<typeof motion.p>;
+type ParagraphProps = React.ComponentProps<"p">;
 export const Paragraph: React.FC<ParagraphProps> = ({
   className,
   ...props
 }) => {
   return (
-    <motion.p
+    <p
       className={cn("text-primary/80 text-xs font-medium", className)}
       {...props}
     />
@@ -32,7 +29,7 @@ const headingVariance = cva(cn("text-muted-foreground"), {
     level: 6,
   },
 });
-type HeadingProps = React.ComponentProps<typeof MotionHeading> & {
+type HeadingProps = React.ComponentProps<"h1"> & {
   level?: 1 | 2 | 3 | 4 | 5 | 6;
 };
 export const Heading: React.FC<HeadingProps> = ({
@@ -41,22 +38,19 @@ export const Heading: React.FC<HeadingProps> = ({
   ...props
 }) => {
   return (
-    <MotionHeading
-      className={cn(headingVariance({ level, className }))}
-      {...props}
-    />
+    <h1 className={cn(headingVariance({ level, className }))} {...props} />
   );
 };
 
-type BlockSectionProps = React.ComponentProps<typeof motion.section>;
+type BlockSectionProps = React.ComponentProps<"section">;
 export const BlockSection: React.FC<BlockSectionProps> = ({
   className,
   ...props
 }) => {
   return (
-    <motion.section
+    <section
       className={cn(
-        "text-sm font-medium space-y-2.5 text-pretty container max-w-xl mt-20",
+        "max-w-xl space-y-2.5 mt-20 container overflow-hidden",
         className,
       )}
       {...props}
