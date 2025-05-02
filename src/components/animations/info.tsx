@@ -3,19 +3,19 @@ import gsap, { SplitText } from "gsap/all";
 import React from "react";
 import { BlockSection, Heading, Paragraph } from "../ui/typography";
 
-gsap.registerPlugin(useGSAP, SplitText);
+gsap.registerPlugin(SplitText);
 
 type Info = {
   tl: React.RefObject<gsap.core.Timeline | null>;
 };
-const Info: React.FC<Info> = ({ tl: globalTl }) => {
+const Info: React.FC<Info> = ({ tl }) => {
   const scope = React.useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
-      const tl = gsap.timeline();
+      tl.current = gsap.timeline();
 
-      tl.from("[data-href]", {
+      tl.current.from("[data-href]", {
         xPercent: -100,
         yPercent: 100,
         duration: 1,
@@ -24,7 +24,7 @@ const Info: React.FC<Info> = ({ tl: globalTl }) => {
       });
 
       const pRef = SplitText.create("[data-pref]", { type: "words, chars" });
-      tl.from(
+      tl.current.from(
         pRef.chars,
         {
           yPercent: 100,
@@ -38,8 +38,6 @@ const Info: React.FC<Info> = ({ tl: globalTl }) => {
         },
         "+=0.025",
       );
-
-      globalTl.current?.add(tl);
     },
     { scope },
   );

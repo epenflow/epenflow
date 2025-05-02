@@ -9,6 +9,8 @@ gsap.registerPlugin(useGSAP);
 
 const Home = () => {
   const tl = React.useRef<GSAPTimeline>(null);
+  const infoTl = React.useRef<GSAPTimeline>(null);
+  const socialTl = React.useRef<GSAPTimeline>(null);
 
   useGSAP(() => {
     tl.current = gsap.timeline({
@@ -17,13 +19,18 @@ const Home = () => {
         ease: "sine.inOut",
       },
     });
+
+    if (infoTl.current && socialTl.current && tl.current) {
+      tl.current.add(infoTl.current);
+      tl.current.add(socialTl.current);
+    }
   });
 
   return (
     <AppLayout>
       <div className="w-full min-h-dvh h-full overflow-hidden">
-        <Info tl={tl} />
-        <Social tl={tl} />
+        <Info tl={infoTl} />
+        <Social tl={socialTl} />
       </div>
     </AppLayout>
   );

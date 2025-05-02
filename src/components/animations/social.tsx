@@ -4,20 +4,18 @@ import React from "react";
 import { BlockSection, Heading, Paragraph } from "../ui/typography";
 import For from "../utility/for";
 
-gsap.registerPlugin(useGSAP);
-
 type SocialProps = {
   tl: React.RefObject<gsap.core.Timeline | null>;
 };
-const Social: React.FC<SocialProps> = ({ tl: globalTl }) => {
+const Social: React.FC<SocialProps> = ({ tl }) => {
   const { socials } = resources;
   const scope = React.useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
-      const tl = gsap.timeline();
+      tl.current = gsap.timeline();
 
-      tl.from("[data-href]", {
+      tl.current.from("[data-href]", {
         xPercent: -100,
         yPercent: 100,
         duration: 1,
@@ -25,15 +23,13 @@ const Social: React.FC<SocialProps> = ({ tl: globalTl }) => {
         ease: "sine.inOut",
       });
 
-      tl.from("[data-pref]", {
+      tl.current.from("[data-pref]", {
         y: 50,
         x: (i) => (i % 2 === 0 ? 50 : -50),
         stagger: 0.25,
         autoAlpha: 0,
         ease: "sine.inOut",
       });
-
-      globalTl.current?.add(tl);
     },
     { scope },
   );
