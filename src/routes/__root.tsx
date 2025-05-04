@@ -25,7 +25,7 @@ export const Route = createRootRoute({
           enableSystem
           disableTransitionOnChange>
           <Outlet />
-          <resources.FPSStats />
+          <resources.FPSStats width={160} bottom={32} right={32} />
           <resources.TanstackDevTools />
         </ThemeProvider>
       </React.Suspense>
