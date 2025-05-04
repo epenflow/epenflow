@@ -2,7 +2,7 @@ import { Moon as MoonIcon, Sun as SunIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useTheme } from "next-themes";
 import React from "react";
-import Button from "~/components/ui/button";
+import { Button } from "~/components/ui/button";
 import useDateAndTime from "~/hooks/use-date-and-time";
 import { withMemo } from "~/lib/utils";
 
@@ -24,33 +24,39 @@ const NavFooter: React.FC = withMemo((): React.ReactNode => {
   const buttonToDisplay = React.useMemo(() => {
     return (
       <Button
-        onPress={onPress}
+        onClick={onPress}
         variant="ghost"
         size="icon"
-        className="data-[hovered]:bg-transparent overflow-hidden">
-        {({ isPressed }) => (
-          <div className="grid [&_svg]:[grid-area:1/1]">
-            <Moon
-              animate={{
-                opacity: resolvedTheme === "dark" ? 1 : 0,
-                y: isPressed ? 100 : 0,
-                x: isPressed ? 100 : 0,
-              }}
-              transition={{ duration: 0.75 }}
-              className="size-4"
-            />
-            <Sun
-              animate={{
-                opacity: resolvedTheme === "light" ? 1 : 0,
-                y: isPressed ? -100 : 0,
-                x: isPressed ? -100 : 0,
-              }}
-              transition={{ duration: 0.75 }}
-              className="size-4"
-            />
-            <span className="sr-only">Toggle theme</span>
-          </div>
-        )}
+        className="overflow-hidden">
+        <div className="grid [&_svg]:[grid-area:1/1]">
+          <Moon
+            animate={{
+              opacity: resolvedTheme === "dark" ? 1 : 0,
+              y: resolvedTheme === "dark" ? "0%" : "100%",
+              x: resolvedTheme === "dark" ? "0%" : "100%",
+            }}
+            transition={{
+              duration: 0.75,
+              type: "spring",
+              stiffness: 200,
+              damping: 20,
+            }}
+          />
+          <Sun
+            animate={{
+              opacity: resolvedTheme === "light" ? 1 : 0,
+              y: resolvedTheme === "light" ? "0%" : "-100%",
+              x: resolvedTheme === "light" ? "0%" : "-100%",
+            }}
+            transition={{
+              duration: 0.75,
+              type: "spring",
+              stiffness: 200,
+              damping: 20,
+            }}
+          />
+          <span className="sr-only">Toggle theme</span>
+        </div>
       </Button>
     );
   }, [resolvedTheme, onPress]);
@@ -63,7 +69,12 @@ const NavFooter: React.FC = withMemo((): React.ReactNode => {
             opacity: resolvedTheme === "dark" ? 0 : 1,
             y: resolvedTheme === "dark" ? "-100%" : "0%",
           }}
-          transition={{ duration: 0.5 }}>
+          transition={{
+            duration: 0.5,
+            type: "spring",
+            stiffness: 200,
+            damping: 20,
+          }}>
           Light
         </motion.span>
         <motion.span
@@ -71,7 +82,12 @@ const NavFooter: React.FC = withMemo((): React.ReactNode => {
             opacity: resolvedTheme === "dark" ? 1 : 0,
             y: resolvedTheme === "dark" ? "0%" : "100%",
           }}
-          transition={{ duration: 0.5 }}>
+          transition={{
+            duration: 0.5,
+            type: "spring",
+            stiffness: 200,
+            damping: 20,
+          }}>
           Dark
         </motion.span>
       </span>

@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../ui/button";
+import Button from "../ui/button-react-aria";
 import { BlockSection, Heading, Paragraph } from "../ui/typography";
 
 const ExpensiveTest: React.FC<{

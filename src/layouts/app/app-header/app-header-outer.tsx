@@ -11,7 +11,7 @@ type AppHeaderOuterProps<
     onPress: () => void;
   },
 > = Omit<React.ComponentProps<"header">, "children"> & {
-  children?: ((props: TProps) => React.ReactNode) | React.ReactNode;
+  children?: (props: TProps) => React.ReactNode;
 };
 
 const AppHeaderOuter: React.FC<AppHeaderOuterProps> = ({
@@ -23,9 +23,14 @@ const AppHeaderOuter: React.FC<AppHeaderOuterProps> = ({
   const scope = React.useRef<HTMLElement>(null);
   const timeline = React.useRef<GSAPTimeline>(null);
 
-  useGSAP(() => {
-    timeline.current = new AppHeaderAnimation(scope.current!).timeline;
-  });
+  useGSAP(
+    () => {
+      if (scope.current) {
+        timeline.current = new AppHeaderAnimation(scope.current).timeline;
+      }
+    },
+    { scope },
+  );
 
   React.useEffect(() => {
     if (isPress) {
@@ -33,25 +38,18 @@ const AppHeaderOuter: React.FC<AppHeaderOuterProps> = ({
     } else {
       timeline.current?.reverse();
     }
-
-    return () => {
-      timeline.current?.kill();
-    };
   }, [isPress]);
 
   const onPress = React.useCallback(() => {
     setPress((prev) => !prev);
   }, []);
 
-  const jsxToDisplay =
-    typeof children === "function" ? children({ onPress }) : children;
-
   return (
     <header
       ref={scope}
       className={cn("header--outer font-medium text-xs", className)}
       {...props}>
-      {jsxToDisplay}
+      {children?.({ onPress })}
     </header>
   );
 };

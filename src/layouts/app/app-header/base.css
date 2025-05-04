@@ -49,6 +49,8 @@
     width: var(--header-radius);
     border-radius: var(--header-radius);
     will-change: left;
+    touch-action: pan-x pan-y pinch-zoom;
+    z-index: 20;
   }
 
   .header--content {

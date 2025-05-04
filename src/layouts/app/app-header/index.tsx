@@ -1,6 +1,4 @@
 import React from "react";
-import { Button } from "react-aria-components";
-import { cn } from "~/lib/utils";
 import "./base.css";
 
 /**
@@ -16,9 +14,9 @@ const AppHeader: React.FC = () => {
       {({ onPress }) => (
         <>
           <section className="header--inner">
-            <Button
-              onPress={onPress}
-              className={cn("header--button", "data-[hovered]:from-purple-600")}
+            <button
+              onClick={onPress}
+              className="header--button"
               aria-label="Toggle Navigation"
             />
           </section>

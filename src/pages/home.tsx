@@ -24,7 +24,7 @@ const Home = () => {
     if (infoTl.current && socialTl.current && globalTl.current) {
       globalTl.current.add(infoTl.current);
       globalTl.current.add(socialTl.current);
-      GSDevTools.create({ animation: globalTl.current });
+      // GSDevTools.create({ animation: globalTl.current });
     }
   });
 
