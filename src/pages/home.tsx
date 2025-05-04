@@ -1,28 +1,30 @@
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import gsap, { GSDevTools } from "gsap/all";
 import React from "react";
 import Info from "~/components/animations/info";
 import Social from "~/components/animations/social";
 import AppLayout from "~/layouts/app-layout";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, GSDevTools);
 
 const Home = () => {
-  const tl = React.useRef<GSAPTimeline>(null);
+  const globalTl = React.useRef<GSAPTimeline>(null);
   const infoTl = React.useRef<GSAPTimeline>(null);
   const socialTl = React.useRef<GSAPTimeline>(null);
 
   useGSAP(() => {
-    tl.current = gsap.timeline({
+    globalTl.current = gsap.timeline({
       defaults: {
         delay: 0.001,
         ease: "sine.inOut",
       },
+      id: "homeTl",
     });
 
-    if (infoTl.current && socialTl.current && tl.current) {
-      tl.current.add(infoTl.current);
-      tl.current.add(socialTl.current);
+    if (infoTl.current && socialTl.current && globalTl.current) {
+      globalTl.current.add(infoTl.current);
+      globalTl.current.add(socialTl.current);
+      GSDevTools.create({ animation: globalTl.current });
     }
   });
 
