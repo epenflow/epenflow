@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../ui/button-react-aria";
+import { Button } from "../ui/button";
 import { BlockSection, Heading, Paragraph } from "../ui/typography";
 
 const ExpensiveTest: React.FC<{
@@ -10,7 +10,7 @@ const ExpensiveTest: React.FC<{
     <BlockSection>
       <Heading>Expensive component</Heading>
       <Paragraph>Count : {count}</Paragraph>
-      <Button onPress={onPress} variant={"outline"} className="text-xs">
+      <Button onClick={onPress} variant={"outline"} className="text-xs">
         count++
       </Button>
     </BlockSection>
