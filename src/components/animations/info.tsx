@@ -3,43 +3,48 @@ import gsap, { SplitText } from "gsap/all";
 import React from "react";
 import { BlockSection, Heading, Paragraph } from "../ui/typography";
 
-gsap.registerPlugin(SplitText);
-
 type Info = {
-  tl: React.RefObject<gsap.core.Timeline | null>;
+  tl: GSAPTimeline | null;
 };
-const Info: React.FC<Info> = ({ tl }) => {
+const Info: React.FC<Info> = ({ tl: globalTl }) => {
   const scope = React.useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
-      tl.current = gsap.timeline();
+      if (globalTl) {
+        const tl = gsap.timeline({
+          id: "infoTL",
+          defaults: {
+            ease: "sine.inOut",
+          },
+        });
 
-      tl.current.from("[data-href]", {
-        xPercent: -100,
-        yPercent: 100,
-        duration: 1,
-        autoAlpha: 0,
-        ease: "sine.inOut",
-      });
-
-      const pRef = SplitText.create("[data-pref]", { type: "words, chars" });
-      tl.current.from(
-        pRef.chars,
-        {
+        tl.from("[data-href]", {
+          xPercent: -100,
           yPercent: 100,
+          duration: 1,
           autoAlpha: 0,
-          stagger: 0.025,
-          scaleY: 0.1,
-          scaleX: 1.8,
-          ease: "sine.inOut",
-          filter: "blur(10px) brightness(50%)",
-          willChange: "filter, transform",
-        },
-        "+=0.025",
-      );
+        });
+
+        const pRef = SplitText.create("[data-pref]", { type: "words, chars" });
+        tl.from(
+          pRef.chars,
+          {
+            yPercent: 100,
+            autoAlpha: 0,
+            stagger: 0.025,
+            scaleY: 0.1,
+            scaleX: 1.8,
+            filter: "blur(10px) brightness(50%)",
+            willChange: "filter, transform",
+          },
+          "-=0.25",
+        );
+
+        globalTl.add(["info", tl], 0);
+      }
     },
-    { scope },
+    { scope, dependencies: [globalTl] },
   );
 
   return (

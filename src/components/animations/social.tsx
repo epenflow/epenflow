@@ -5,33 +5,39 @@ import { BlockSection, Heading, Paragraph } from "../ui/typography";
 import For from "../utility/for";
 
 type SocialProps = {
-  tl: React.RefObject<gsap.core.Timeline | null>;
+  tl: GSAPTimeline | null;
 };
-const Social: React.FC<SocialProps> = ({ tl }) => {
+const Social: React.FC<SocialProps> = ({ tl: globalTl }) => {
   const { socials } = resources;
   const scope = React.useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
-      tl.current = gsap.timeline();
+      if (globalTl) {
+        const tl = gsap.timeline({
+          id: "socialTL",
+        });
 
-      tl.current.from("[data-href]", {
-        xPercent: -100,
-        yPercent: 100,
-        duration: 1,
-        autoAlpha: 0,
-        ease: "sine.inOut",
-      });
+        tl.from("[data-href]", {
+          xPercent: -100,
+          yPercent: 100,
+          duration: 1,
+          autoAlpha: 0,
+          ease: "sine.inOut",
+        });
 
-      tl.current.from("[data-pref]", {
-        y: 50,
-        x: (i) => (i % 2 === 0 ? 50 : -50),
-        stagger: 0.25,
-        autoAlpha: 0,
-        ease: "sine.inOut",
-      });
+        tl.from("[data-pref]", {
+          y: 50,
+          x: (i) => (i % 2 === 0 ? 50 : -50),
+          stagger: 0.25,
+          autoAlpha: 0,
+          ease: "sine.inOut",
+        });
+
+        globalTl.add(["social", tl], "social-=0.5");
+      }
     },
-    { scope },
+    { scope, dependencies: [globalTl] },
   );
 
   return (

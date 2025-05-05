@@ -1,40 +1,53 @@
 import { useGSAP } from "@gsap/react";
-import gsap, { GSDevTools } from "gsap/all";
+import gsap, { GSDevTools, ScrambleTextPlugin, SplitText } from "gsap/all";
 import React from "react";
+import Demo from "~/components/animations/demo";
 import Info from "~/components/animations/info";
 import Social from "~/components/animations/social";
+import { BlockSection, Paragraph } from "~/components/ui/typography";
 import AppLayout from "~/layouts/app-layout";
 
-gsap.registerPlugin(useGSAP, GSDevTools);
+gsap.registerPlugin(useGSAP, GSDevTools, ScrambleTextPlugin, SplitText);
 
 const Home = () => {
-  const globalTl = React.useRef<GSAPTimeline>(null);
-  const infoTl = React.useRef<GSAPTimeline>(null);
-  const socialTl = React.useRef<GSAPTimeline>(null);
+  const [globalTl, setGlobalTL] = React.useState<gsap.core.Timeline | null>(
+    null,
+  );
 
   useGSAP(() => {
-    globalTl.current = gsap.timeline({
-      defaults: {
-        delay: 0.001,
-        ease: "sine.inOut",
-      },
-      id: "homeTl",
-    });
+    setGlobalTL(
+      gsap.timeline({
+        defaults: {
+          delay: 0.001,
+          ease: "sine.inOut",
+        },
+        id: "homeTl",
+      }),
+    );
+  }, [setGlobalTL]);
 
-    if (infoTl.current && socialTl.current && globalTl.current) {
-      globalTl.current.add(infoTl.current);
-      globalTl.current.add(socialTl.current);
-      // GSDevTools.create({ animation: globalTl.current });
-    }
-  });
+  // React.useEffect(() => {
+  //   if (globalTl) {
+  //     GSDevTools.create({ animation: globalTl });
+  //     console.log(globalTl.labels);
+  //   }
+  // }, [globalTl]);
 
   return (
     <AppLayout>
       <div className="w-full min-h-dvh h-full overflow-hidden">
-        <Info tl={infoTl} />
-        <Social tl={socialTl} />
+        <Info tl={globalTl} />
+        <Demo tl={globalTl} />
+        <Social tl={globalTl} />
+
+        <BlockSection className="mb-5">
+          <Paragraph className="font-medium text-center">
+            Epen Flow©{new Date().getFullYear()}
+          </Paragraph>
+        </BlockSection>
       </div>
     </AppLayout>
   );
 };
+
 export default Home;
