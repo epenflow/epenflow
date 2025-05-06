@@ -42,14 +42,18 @@ const Demo: React.FC<DemoProps> = ({ tl: globalTl }) => {
   );
 
   return (
-    <BlockSection ref={scope}>
+    <BlockSection ref={scope} aria-label="Demo">
       <Heading data-href className="font-medium">
         Demo
       </Heading>
       <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
         <For each={demos}>
           {(demo, key) => (
-            <Paragraph data-demo key={key} className="line-clamp-1">
+            <Paragraph
+              data-demo
+              key={key}
+              aria-label={demo.label}
+              className="line-clamp-1">
               <a href={demo.to}>{demo.label}</a>
             </Paragraph>
           )}

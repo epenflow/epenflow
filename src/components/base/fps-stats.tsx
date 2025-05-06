@@ -93,10 +93,13 @@ const FPSStats: React.FC<Partial<FPSStatsProps>> = withMemo(
 
     return (
       <div
+        aria-label="FPS Meter"
         suppressHydrationWarning
         style={cssProperties}
         className="p-2 rounded-[0.5rem] border border-muted bg-card space-y-2 pointer-events-none fixed z-50 shadow-xs">
-        <p className="text-xs font-medium text-primary/80 space-x-0.5">
+        <p
+          aria-label={`Fps ${currentFps}(Avg ${avgFps})`}
+          className="text-xs font-medium text-primary/80 space-x-0.5">
           <span suppressHydrationWarning>Fps {currentFps}</span>
           <span suppressHydrationWarning>(Avg {avgFps})</span>
         </p>

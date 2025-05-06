@@ -40,8 +40,10 @@ const Home = () => {
         <Demo tl={globalTl} />
         <Social tl={globalTl} />
 
-        <BlockSection className="mb-5">
-          <Paragraph className="font-medium text-center">
+        <BlockSection className="mb-5" aria-label="Footer">
+          <Paragraph
+            aria-label={`Epen Flow©${new Date().getFullYear()}`}
+            className="font-medium text-center">
             Epen Flow©{new Date().getFullYear()}
           </Paragraph>
         </BlockSection>

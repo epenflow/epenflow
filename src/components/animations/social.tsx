@@ -26,7 +26,7 @@ const Social: React.FC<SocialProps> = ({ tl: globalTl }) => {
           ease: "sine.inOut",
         });
 
-        tl.from("[data-pref]", {
+        tl.from("[data-social]", {
           y: 50,
           x: (i) => (i % 2 === 0 ? 50 : -50),
           stagger: 0.25,
@@ -41,13 +41,16 @@ const Social: React.FC<SocialProps> = ({ tl: globalTl }) => {
   );
 
   return (
-    <BlockSection ref={scope}>
+    <BlockSection ref={scope} aria-label="Social">
       <Heading className="font-medium" data-href>
         More
       </Heading>
       <For each={socials}>
         {(social, key) => (
-          <Paragraph key={key} data-pref>
+          <Paragraph
+            key={key}
+            data-social={social.href}
+            aria-label={social.label}>
             <a href={social.href}>{social.label}</a>
           </Paragraph>
         )}

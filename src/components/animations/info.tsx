@@ -48,7 +48,7 @@ const Info: React.FC<Info> = ({ tl: globalTl }) => {
   );
 
   return (
-    <BlockSection ref={scope}>
+    <BlockSection ref={scope} aria-label="Info">
       <Heading data-href className="font-medium">
         Info
       </Heading>
