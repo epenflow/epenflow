@@ -1,20 +1,17 @@
-import { cva } from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
 import { cn } from "~/lib/utils";
 
-type ParagraphProps = React.ComponentProps<"p">;
+export const paragraphVariants = cva("text-primary/80 text-xs font-medium");
+type ParagraphProps = React.ComponentProps<"p"> &
+  VariantProps<typeof paragraphVariants>;
 export const Paragraph: React.FC<ParagraphProps> = ({
   className,
   ...props
 }) => {
-  return (
-    <p
-      className={cn("text-primary/80 text-xs font-medium", className)}
-      {...props}
-    />
-  );
+  return <p className={cn(paragraphVariants({ className }))} {...props} />;
 };
-const headingVariance = cva(cn("text-muted-foreground"), {
+export const headingVariance = cva(cn("text-muted-foreground"), {
   variants: {
     level: {
       1: "text-4xl mb-8",
@@ -29,9 +26,8 @@ const headingVariance = cva(cn("text-muted-foreground"), {
     level: 6,
   },
 });
-type HeadingProps = React.ComponentProps<"h1"> & {
-  level?: 1 | 2 | 3 | 4 | 5 | 6;
-};
+type HeadingProps = React.ComponentProps<"h1"> &
+  VariantProps<typeof headingVariance>;
 export const Heading: React.FC<HeadingProps> = ({
   className,
   level,

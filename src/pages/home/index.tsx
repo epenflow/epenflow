@@ -1,9 +1,10 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap/all";
 import React from "react";
-import { BlockSection, Paragraph } from "~/components/ui/typography";
-import Info from "~/pages/home/animations/info";
+import { BlockSection } from "~/components/ui/typography";
 import Social from "~/pages/home/animations/social";
+import HoverText from "./animations/hover-text";
+import Info from "./animations/info";
 
 const Home = () => {
   const [globalTl, setGlobalTL] = React.useState<gsap.core.Timeline | null>(
@@ -28,11 +29,11 @@ const Home = () => {
       <Social tl={globalTl} />
 
       <BlockSection className="mb-5" aria-label="Footer">
-        <Paragraph
-          aria-label={`Epen Flow©${new Date().getFullYear()}`}
-          className="font-medium text-center">
+        <HoverText
+          className="mx-auto"
+          aria-label={`Epen Flow©${new Date().getFullYear()}`}>
           Epen Flow©{new Date().getFullYear()}
-        </Paragraph>
+        </HoverText>
       </BlockSection>
     </main>
   );

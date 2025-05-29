@@ -1,8 +1,14 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap/all";
 import React from "react";
-import { BlockSection, Heading, Paragraph } from "~/components/ui/typography";
+import {
+  BlockSection,
+  Heading,
+  paragraphVariants,
+} from "~/components/ui/typography";
 import For from "~/components/utility/for";
+import { cn } from "~/lib/utils";
+import HoverText from "./hover-text";
 
 type SocialProps = {
   tl: GSAPTimeline | null;
@@ -47,12 +53,15 @@ const Social: React.FC<SocialProps> = ({ tl: globalTl }) => {
       </Heading>
       <For each={socials}>
         {(social, key) => (
-          <Paragraph
+          <div
+            className={cn(paragraphVariants())}
             key={key}
             data-social={social.href}
             aria-label={social.label}>
-            <a href={social.href}>{social.label}</a>
-          </Paragraph>
+            <a href={social.href} aria-label={social.label}>
+              <HoverText aria-label={social.label}>{social.label}</HoverText>
+            </a>
+          </div>
         )}
       </For>
     </BlockSection>
