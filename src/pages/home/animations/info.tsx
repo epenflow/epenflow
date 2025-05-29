@@ -1,11 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap, { SplitText } from "gsap/all";
 import React from "react";
-import {
-  BlockSection,
-  Heading,
-  Paragraph,
-} from "../../../components/ui/typography";
+import { BlockSection, Heading, Paragraph } from "~/components/ui/typography";
 
 type Info = {
   tl: GSAPTimeline | null;
