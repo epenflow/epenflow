@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import React from "react";
 import For from "~/components/utility/for";
 import { withMemo } from "~/lib/utils";
-import * as RouteTypeGen from "~/routeTree.gen";
+import contents from "./contents";
 import NavItem from "./nav-item";
 
 type NavContentProps = {
@@ -14,7 +14,6 @@ type NavContentProps = {
  */
 const NavContent: React.FC<NavContentProps> = withMemo(
   ({ onPress }): React.ReactNode => {
-    const { contents } = resources;
     const scope = React.useRef<HTMLDivElement>(null);
 
     const { getTotalSize, getVirtualItems } = useVirtualizer({
@@ -65,28 +64,3 @@ const NavContent: React.FC<NavContentProps> = withMemo(
 NavContent.displayName = "NavContent";
 
 export default NavContent;
-function getRandomContent() {
-  return Array.from({ length: 10000 }).map(() => {
-    const data: {
-      label: string;
-      to: RouteTypeGen.FileRouteTypes["to"];
-    } = {
-      label:
-        "Lorem ip sum dolor sit amet cons ectetu radipis icing elit Esse labore accusamus voluptate praesentium sapiente mollitia aut commodi placeat obcaecati facilis, ipsum voluptates quaerat, laborum, aspernatur optio dolor non itaque et.",
-      to: "/",
-    };
-    return data;
-  });
-}
-const resources = {
-  contents: [
-    {
-      label: "test",
-      to: "/test",
-    },
-    ...getRandomContent(),
-  ] satisfies Array<{
-    label: string;
-    to: RouteTypeGen.FileRouteTypes["to"];
-  }>,
-};

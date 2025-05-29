@@ -1,6 +1,8 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { ThemeProvider } from "next-themes";
 import React from "react";
+import AppHeader from "~/components/base/app-header";
+import GSAPRegister from "~/components/utility/gsap";
 import { withLazy, withOptional } from "~/lib/utils";
 
 const resources = {
@@ -18,17 +20,21 @@ const resources = {
 export const Route = createRootRoute({
   component: () => {
     return (
-      <React.Suspense>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange>
-          <Outlet />
-          <resources.FPSStats width={160} bottom={32} right={32} />
-          <resources.TanstackDevTools />
-        </ThemeProvider>
-      </React.Suspense>
+      <>
+        <React.Suspense>
+          <GSAPRegister />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange>
+            <AppHeader />
+            <Outlet />
+            <resources.FPSStats width={160} bottom={32} right={32} />
+            <resources.TanstackDevTools />
+          </ThemeProvider>
+        </React.Suspense>
+      </>
     );
   },
 });

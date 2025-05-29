@@ -1,8 +1,12 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap/all";
 import React from "react";
-import { BlockSection, Heading, Paragraph } from "../ui/typography";
-import For from "../utility/for";
+import {
+  BlockSection,
+  Heading,
+  Paragraph,
+} from "../../../components/ui/typography";
+import For from "../../../components/utility/for";
 
 type DemoProps = {
   tl: GSAPTimeline | null;
