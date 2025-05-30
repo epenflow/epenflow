@@ -2,6 +2,7 @@ import { useGSAP } from "@gsap/react";
 import gsap, {
   GSDevTools,
   ScrambleTextPlugin,
+  ScrollTrigger,
   SplitText,
   TextPlugin,
 } from "gsap/all";
@@ -15,6 +16,7 @@ const GSAPRegister = () => {
       ScrambleTextPlugin,
       SplitText,
       TextPlugin,
+      ScrollTrigger,
     );
   }, []);
 

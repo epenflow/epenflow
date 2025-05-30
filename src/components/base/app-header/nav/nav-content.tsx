@@ -33,7 +33,7 @@ const NavContent: React.FC<NavContentProps> = withMemo(
 
     return (
       <div ref={scope} style={cssProperties} className="navigation--content">
-        <div className="virtual--container">
+        <div className="virtual--container" data-lenis-prevent>
           <For each={getVirtualItems()}>
             {(virtual) => (
               <NavItem

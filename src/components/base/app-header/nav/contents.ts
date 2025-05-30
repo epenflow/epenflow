@@ -15,6 +15,14 @@ export default [
     to: "/hello",
   },
   {
+    label: "Test",
+    to: "/test",
+  },
+  {
+    label: "Lenis Scale & Pin",
+    to: "/lenis-scale-and-pin",
+  },
+  {
     label: "On-Scroll 3D Carousel",
     to: "/on-scroll-3d-carousel",
   },

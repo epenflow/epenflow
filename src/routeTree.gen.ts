@@ -17,12 +17,14 @@ import { Route as IndexImport } from './routes/index'
 
 // Create Virtual Routes
 
+const TestLazyImport = createFileRoute('/test')()
 const SomeOnScrollTextHighlightAnimationsLazyImport = createFileRoute(
   '/some-on-scroll-text-highlight-animations',
 )()
 const OnScrollExpandingImageAnimationWithinTypographyLazyImport =
   createFileRoute('/on-scroll-expanding-image-animation-within-typography')()
 const OnScroll3dCarouselLazyImport = createFileRoute('/on-scroll-3d-carousel')()
+const LenisScaleAndPinLazyImport = createFileRoute('/lenis-scale-and-pin')()
 const HelloLazyImport = createFileRoute('/hello')()
 const ConsecutiveScrollAnimationsWithOneElementLazyImport = createFileRoute(
   '/consecutive-scroll-animations-with-one-element',
@@ -32,6 +34,12 @@ const BlurryTextRevealOnScrollLazyImport = createFileRoute(
 )()
 
 // Create/Update Routes
+
+const TestLazyRoute = TestLazyImport.update({
+  id: '/test',
+  path: '/test',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/test.lazy').then((d) => d.Route))
 
 const SomeOnScrollTextHighlightAnimationsLazyRoute =
   SomeOnScrollTextHighlightAnimationsLazyImport.update({
@@ -61,6 +69,14 @@ const OnScroll3dCarouselLazyRoute = OnScroll3dCarouselLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
   import('./routes/on-scroll-3d-carousel.lazy').then((d) => d.Route),
+)
+
+const LenisScaleAndPinLazyRoute = LenisScaleAndPinLazyImport.update({
+  id: '/lenis-scale-and-pin',
+  path: '/lenis-scale-and-pin',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/lenis-scale-and-pin.lazy').then((d) => d.Route),
 )
 
 const HelloLazyRoute = HelloLazyImport.update({
@@ -127,6 +143,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HelloLazyImport
       parentRoute: typeof rootRoute
     }
+    '/lenis-scale-and-pin': {
+      id: '/lenis-scale-and-pin'
+      path: '/lenis-scale-and-pin'
+      fullPath: '/lenis-scale-and-pin'
+      preLoaderRoute: typeof LenisScaleAndPinLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/on-scroll-3d-carousel': {
       id: '/on-scroll-3d-carousel'
       path: '/on-scroll-3d-carousel'
@@ -148,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SomeOnScrollTextHighlightAnimationsLazyImport
       parentRoute: typeof rootRoute
     }
+    '/test': {
+      id: '/test'
+      path: '/test'
+      fullPath: '/test'
+      preLoaderRoute: typeof TestLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -158,9 +188,11 @@ export interface FileRoutesByFullPath {
   '/blurry-text-reveal-on-scroll': typeof BlurryTextRevealOnScrollLazyRoute
   '/consecutive-scroll-animations-with-one-element': typeof ConsecutiveScrollAnimationsWithOneElementLazyRoute
   '/hello': typeof HelloLazyRoute
+  '/lenis-scale-and-pin': typeof LenisScaleAndPinLazyRoute
   '/on-scroll-3d-carousel': typeof OnScroll3dCarouselLazyRoute
   '/on-scroll-expanding-image-animation-within-typography': typeof OnScrollExpandingImageAnimationWithinTypographyLazyRoute
   '/some-on-scroll-text-highlight-animations': typeof SomeOnScrollTextHighlightAnimationsLazyRoute
+  '/test': typeof TestLazyRoute
 }
 
 export interface FileRoutesByTo {
@@ -168,9 +200,11 @@ export interface FileRoutesByTo {
   '/blurry-text-reveal-on-scroll': typeof BlurryTextRevealOnScrollLazyRoute
   '/consecutive-scroll-animations-with-one-element': typeof ConsecutiveScrollAnimationsWithOneElementLazyRoute
   '/hello': typeof HelloLazyRoute
+  '/lenis-scale-and-pin': typeof LenisScaleAndPinLazyRoute
   '/on-scroll-3d-carousel': typeof OnScroll3dCarouselLazyRoute
   '/on-scroll-expanding-image-animation-within-typography': typeof OnScrollExpandingImageAnimationWithinTypographyLazyRoute
   '/some-on-scroll-text-highlight-animations': typeof SomeOnScrollTextHighlightAnimationsLazyRoute
+  '/test': typeof TestLazyRoute
 }
 
 export interface FileRoutesById {
@@ -179,9 +213,11 @@ export interface FileRoutesById {
   '/blurry-text-reveal-on-scroll': typeof BlurryTextRevealOnScrollLazyRoute
   '/consecutive-scroll-animations-with-one-element': typeof ConsecutiveScrollAnimationsWithOneElementLazyRoute
   '/hello': typeof HelloLazyRoute
+  '/lenis-scale-and-pin': typeof LenisScaleAndPinLazyRoute
   '/on-scroll-3d-carousel': typeof OnScroll3dCarouselLazyRoute
   '/on-scroll-expanding-image-animation-within-typography': typeof OnScrollExpandingImageAnimationWithinTypographyLazyRoute
   '/some-on-scroll-text-highlight-animations': typeof SomeOnScrollTextHighlightAnimationsLazyRoute
+  '/test': typeof TestLazyRoute
 }
 
 export interface FileRouteTypes {
@@ -191,27 +227,33 @@ export interface FileRouteTypes {
     | '/blurry-text-reveal-on-scroll'
     | '/consecutive-scroll-animations-with-one-element'
     | '/hello'
+    | '/lenis-scale-and-pin'
     | '/on-scroll-3d-carousel'
     | '/on-scroll-expanding-image-animation-within-typography'
     | '/some-on-scroll-text-highlight-animations'
+    | '/test'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/blurry-text-reveal-on-scroll'
     | '/consecutive-scroll-animations-with-one-element'
     | '/hello'
+    | '/lenis-scale-and-pin'
     | '/on-scroll-3d-carousel'
     | '/on-scroll-expanding-image-animation-within-typography'
     | '/some-on-scroll-text-highlight-animations'
+    | '/test'
   id:
     | '__root__'
     | '/'
     | '/blurry-text-reveal-on-scroll'
     | '/consecutive-scroll-animations-with-one-element'
     | '/hello'
+    | '/lenis-scale-and-pin'
     | '/on-scroll-3d-carousel'
     | '/on-scroll-expanding-image-animation-within-typography'
     | '/some-on-scroll-text-highlight-animations'
+    | '/test'
   fileRoutesById: FileRoutesById
 }
 
@@ -220,9 +262,11 @@ export interface RootRouteChildren {
   BlurryTextRevealOnScrollLazyRoute: typeof BlurryTextRevealOnScrollLazyRoute
   ConsecutiveScrollAnimationsWithOneElementLazyRoute: typeof ConsecutiveScrollAnimationsWithOneElementLazyRoute
   HelloLazyRoute: typeof HelloLazyRoute
+  LenisScaleAndPinLazyRoute: typeof LenisScaleAndPinLazyRoute
   OnScroll3dCarouselLazyRoute: typeof OnScroll3dCarouselLazyRoute
   OnScrollExpandingImageAnimationWithinTypographyLazyRoute: typeof OnScrollExpandingImageAnimationWithinTypographyLazyRoute
   SomeOnScrollTextHighlightAnimationsLazyRoute: typeof SomeOnScrollTextHighlightAnimationsLazyRoute
+  TestLazyRoute: typeof TestLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -231,11 +275,13 @@ const rootRouteChildren: RootRouteChildren = {
   ConsecutiveScrollAnimationsWithOneElementLazyRoute:
     ConsecutiveScrollAnimationsWithOneElementLazyRoute,
   HelloLazyRoute: HelloLazyRoute,
+  LenisScaleAndPinLazyRoute: LenisScaleAndPinLazyRoute,
   OnScroll3dCarouselLazyRoute: OnScroll3dCarouselLazyRoute,
   OnScrollExpandingImageAnimationWithinTypographyLazyRoute:
     OnScrollExpandingImageAnimationWithinTypographyLazyRoute,
   SomeOnScrollTextHighlightAnimationsLazyRoute:
     SomeOnScrollTextHighlightAnimationsLazyRoute,
+  TestLazyRoute: TestLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -252,9 +298,11 @@ export const routeTree = rootRoute
         "/blurry-text-reveal-on-scroll",
         "/consecutive-scroll-animations-with-one-element",
         "/hello",
+        "/lenis-scale-and-pin",
         "/on-scroll-3d-carousel",
         "/on-scroll-expanding-image-animation-within-typography",
-        "/some-on-scroll-text-highlight-animations"
+        "/some-on-scroll-text-highlight-animations",
+        "/test"
       ]
     },
     "/": {
@@ -269,6 +317,9 @@ export const routeTree = rootRoute
     "/hello": {
       "filePath": "hello.lazy.tsx"
     },
+    "/lenis-scale-and-pin": {
+      "filePath": "lenis-scale-and-pin.lazy.tsx"
+    },
     "/on-scroll-3d-carousel": {
       "filePath": "on-scroll-3d-carousel.lazy.tsx"
     },
@@ -277,6 +328,9 @@ export const routeTree = rootRoute
     },
     "/some-on-scroll-text-highlight-animations": {
       "filePath": "some-on-scroll-text-highlight-animations.lazy.tsx"
+    },
+    "/test": {
+      "filePath": "test.lazy.tsx"
     }
   }
 }

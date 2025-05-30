@@ -60,6 +60,10 @@ export default defineConfig({
             return "ui-vendor";
           }
 
+          if (id.includes("lenis") || id.includes("hamo")) {
+            return "lenis-vendor";
+          }
+
           if (id.includes("node_modules")) {
             return "vendor";
           }
