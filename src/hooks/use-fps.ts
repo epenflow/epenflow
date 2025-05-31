@@ -1,4 +1,3 @@
-import { useIsomorphicLayoutEffect } from "motion/react";
 import React from "react";
 
 const useFps = (width: number) => {
@@ -37,7 +36,7 @@ const useFps = (width: number) => {
     animRef.current = requestAnimationFrame(calcFps);
   }, [width]);
 
-  useIsomorphicLayoutEffect(() => {
+  React.useEffect(() => {
     animRef.current = requestAnimationFrame(calcFps);
 
     return () => cancelAnimationFrame(animRef.current);

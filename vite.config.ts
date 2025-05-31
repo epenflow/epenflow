@@ -32,10 +32,6 @@ export default defineConfig({
             return "gsap-vendor";
           }
 
-          if (id.includes("motion")) {
-            return "motion-vendor";
-          }
-
           if (
             id.includes("@tailwindcss/vite") ||
             id.includes("tailwindcss") ||

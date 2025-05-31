@@ -1,14 +1,13 @@
-import { useIsomorphicLayoutEffect } from "motion/react";
 import React from "react";
 
 const useDateAndTime = (interval?: number) => {
   const [date, setDate] = React.useState<Date>(new Date());
 
-  useIsomorphicLayoutEffect(() => {
+  React.useEffect(() => {
     const timer = setInterval(() => setDate(new Date()), interval || 1000);
 
     return () => clearInterval(timer);
-  }, [setDate]);
+  }, [setDate, interval]);
   return date;
 };
 

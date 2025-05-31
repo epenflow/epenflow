@@ -1,17 +1,36 @@
-import { Moon as MoonIcon, Sun as SunIcon } from "lucide-react";
-import { motion } from "motion/react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap/all";
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import React from "react";
 import { Button } from "~/components/ui/button";
 import useDateAndTime from "~/hooks/use-date-and-time";
 import { withMemo } from "~/lib/utils";
 
-const Moon = motion.create(MoonIcon);
-const Sun = motion.create(SunIcon);
-
-const NavFooter: React.FC = withMemo((): React.ReactNode => {
-  const date = useDateAndTime();
+const NavTheme = () => {
+  const scope = React.useRef<HTMLDivElement>(null);
   const { setTheme, resolvedTheme } = useTheme();
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        defaults: { duration: 0.75, ease: "power2.out" },
+      });
+
+      if (resolvedTheme === "dark") {
+        tl.to("[data-icon-dark]", { opacity: 1, x: "0%", y: "0%" }, 0)
+          .to("[data-icon-light]", { opacity: 0, x: "100%", y: "100%" }, 0)
+          .to("[data-span-dark]", { opacity: 1, y: "0%" }, 0)
+          .to("[data-span-light]", { opacity: 0, y: "-100%" }, 0);
+      } else {
+        tl.to("[data-icon-dark]", { opacity: 0, x: "100%", y: "100%" }, 0)
+          .to("[data-icon-light]", { opacity: 1, x: "0%", y: "0%" }, 0)
+          .to("[data-span-dark]", { opacity: 0, y: "100%" }, 0)
+          .to("[data-span-light]", { opacity: 1, y: "0%" }, 0);
+      }
+    },
+    { scope, dependencies: [resolvedTheme] },
+  );
 
   const onPress = React.useCallback(() => {
     if (resolvedTheme === "dark") {
@@ -21,92 +40,45 @@ const NavFooter: React.FC = withMemo((): React.ReactNode => {
     }
   }, [setTheme, resolvedTheme]);
 
-  const buttonToDisplay = React.useMemo(() => {
-    return (
+  return (
+    <div
+      ref={scope}
+      className="space-x-[calc(var(--header-padding)_*_2)] inline-flex items-center">
+      <div className="grid [&_span]:[grid-area:1/1] h-fit overflow-hidden">
+        <span data-span-light>Light</span>
+        <span data-span-dark>Dark</span>
+      </div>
+
       <Button
         onClick={onPress}
         variant="ghost"
         size="icon"
         className="overflow-hidden">
         <div className="grid [&_svg]:[grid-area:1/1]">
-          <Moon
-            animate={{
-              opacity: resolvedTheme === "dark" ? 1 : 0,
-              y: resolvedTheme === "dark" ? "0%" : "100%",
-              x: resolvedTheme === "dark" ? "0%" : "100%",
-            }}
-            transition={{
-              duration: 0.75,
-              type: "spring",
-              stiffness: 200,
-              damping: 20,
-            }}
-          />
-          <Sun
-            animate={{
-              opacity: resolvedTheme === "light" ? 1 : 0,
-              y: resolvedTheme === "light" ? "0%" : "-100%",
-              x: resolvedTheme === "light" ? "0%" : "-100%",
-            }}
-            transition={{
-              duration: 0.75,
-              type: "spring",
-              stiffness: 200,
-              damping: 20,
-            }}
-          />
+          <Moon data-icon-dark />
+          <Sun data-icon-light />
           <span className="sr-only">Toggle theme</span>
         </div>
       </Button>
-    );
-  }, [resolvedTheme, onPress]);
-
-  const themeToDisplay = React.useMemo(
-    () => (
-      <span className="grid [&_span]:[grid-area:1/1] h-fit overflow-hidden">
-        <motion.span
-          animate={{
-            opacity: resolvedTheme === "dark" ? 0 : 1,
-            y: resolvedTheme === "dark" ? "-100%" : "0%",
-          }}
-          transition={{
-            duration: 0.5,
-            type: "spring",
-            stiffness: 200,
-            damping: 20,
-          }}>
-          Light
-        </motion.span>
-        <motion.span
-          animate={{
-            opacity: resolvedTheme === "dark" ? 1 : 0,
-            y: resolvedTheme === "dark" ? "0%" : "100%",
-          }}
-          transition={{
-            duration: 0.5,
-            type: "spring",
-            stiffness: 200,
-            damping: 20,
-          }}>
-          Dark
-        </motion.span>
-      </span>
-    ),
-    [resolvedTheme],
+    </div>
   );
+};
 
-  const dateToDisplay = React.useMemo(
-    () => <span suppressHydrationWarning>{date.toISOString()}</span>,
-    [date],
-  );
+const NavDateNTime = () => {
+  const date = useDateAndTime();
 
   return (
+    <div className="pl-[calc(var(--header-padding)_*_2)] text-xs items-center justify-center w-full">
+      <span suppressHydrationWarning>{date.toISOString()}</span>
+    </div>
+  );
+};
+
+const NavFooter: React.FC = withMemo((): React.ReactNode => {
+  return (
     <div className="navigation--footer inline-flex justify-between px-0">
-      <div className="p-(--header-content-padding) text-xs inline-flex items-center justify-between w-full">
-        {dateToDisplay}
-        {themeToDisplay}
-      </div>
-      {buttonToDisplay}
+      <NavDateNTime />
+      <NavTheme />
     </div>
   );
 });
