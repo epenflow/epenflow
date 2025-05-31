@@ -15,7 +15,7 @@ const HoverText: React.FC<HoverText> = ({ className, children, ...props }) => {
       const underline = scope.current.querySelector(
         "[data-underline]",
       ) as HTMLSpanElement;
-      const grid: HTMLSpanElement[] = gsap.utils.toArray("[data-grid]");
+      const grid: HTMLSpanElement[] = gsap.utils.toArray("[data-grid-span]");
       const duration = 0.5;
 
       gsap.set(underline, {
@@ -88,8 +88,9 @@ const HoverText: React.FC<HoverText> = ({ className, children, ...props }) => {
   );
 
   return (
-    <div ref={scope} className={cn("w-fit block", className)} {...props}>
+    <div ref={scope} className={cn("w-fit block group", className)} {...props}>
       <span
+        data-grid-container
         className={cn(
           "grid [&_span]:[grid-area:1/1] leading-normal overflow-y-hidden perspective-dramatic space-y-0",
           paragraphVariants(),
@@ -97,7 +98,7 @@ const HoverText: React.FC<HoverText> = ({ className, children, ...props }) => {
         <For
           each={Array.from({ length: 2 })}
           children={(_, key) => (
-            <span key={key} data-grid>
+            <span key={key} data-grid-span>
               {children}
             </span>
           )}

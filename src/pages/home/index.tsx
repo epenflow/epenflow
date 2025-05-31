@@ -1,9 +1,9 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap/all";
 import React from "react";
+import HoverText from "~/components/animations/hover-text";
 import { BlockSection } from "~/components/ui/typography";
 import Social from "~/pages/home/animations/social";
-import HoverText from "./animations/hover-text";
 import Info from "./animations/info";
 
 const Home = () => {

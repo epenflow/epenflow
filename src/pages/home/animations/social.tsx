@@ -1,6 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap/all";
 import React from "react";
+import HoverText from "~/components/animations/hover-text";
 import {
   BlockSection,
   Heading,
@@ -8,7 +9,6 @@ import {
 } from "~/components/ui/typography";
 import For from "~/components/utility/for";
 import { cn } from "~/lib/utils";
-import HoverText from "./hover-text";
 
 type SocialProps = {
   tl: GSAPTimeline | null;

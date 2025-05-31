@@ -1,10 +1,62 @@
-import { useVirtualizer } from "@tanstack/react-virtual";
-import { motion } from "motion/react";
+import { useGSAP } from "@gsap/react";
+import { Link } from "@tanstack/react-router";
+import { useVirtualizer, type VirtualItem } from "@tanstack/react-virtual";
+import gsap from "gsap/all";
 import React from "react";
+import HoverText from "~/components/animations/hover-text";
 import For from "~/components/utility/for";
-import { withMemo } from "~/lib/utils";
-import contents from "./contents";
-import NavItem from "./nav-item";
+import { cn, withMemo } from "~/lib/utils";
+import NAV_ITEM_CONTENTS from "./contents";
+
+type NavItemProps = {
+  virtual: VirtualItem;
+  onClick: VoidFunction;
+};
+const NavItem: React.FC<NavItemProps> = ({ virtual, ...props }) => {
+  const scope = React.useRef<HTMLAnchorElement>(null);
+  const cssProperties = React.useMemo<React.CSSProperties>(
+    () =>
+      ({
+        "--virtual-height": `${virtual.size}px`,
+        "--virtual-y-axis": `${virtual.start}px`,
+      }) as React.CSSProperties,
+    [virtual.size, virtual.start],
+  );
+
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        "[data-anim]",
+        {
+          autoAlpha: 0,
+          xPercent: virtual.index % 2 === 0 ? -100 : 100,
+        },
+        {
+          autoAlpha: 1,
+          xPercent: 0,
+          ease: "sine.inOut",
+        },
+      );
+    },
+    { scope },
+  );
+
+  return (
+    <Link
+      ref={scope}
+      style={{ ...cssProperties }}
+      className={cn("virtual--item overflow-clip flex flex-col items-start")}
+      to={NAV_ITEM_CONTENTS[virtual.index].to}
+      {...props}>
+      <HoverText
+        data-anim
+        aria-label={NAV_ITEM_CONTENTS[virtual.index].label}
+        className="[&_[data-grid-span]]:line-clamp-1">
+        {NAV_ITEM_CONTENTS[virtual.index].label}
+      </HoverText>
+    </Link>
+  );
+};
 
 type NavContentProps = {
   onPress: () => void;
@@ -17,7 +69,7 @@ const NavContent: React.FC<NavContentProps> = withMemo(
     const scope = React.useRef<HTMLDivElement>(null);
 
     const { getTotalSize, getVirtualItems } = useVirtualizer({
-      count: contents.length,
+      count: NAV_ITEM_CONTENTS.length,
       getScrollElement: () => scope.current,
       estimateSize: () => 35,
     });
@@ -33,27 +85,10 @@ const NavContent: React.FC<NavContentProps> = withMemo(
 
     return (
       <div ref={scope} style={cssProperties} className="navigation--content">
-        <div className="virtual--container" data-lenis-prevent>
+        <div className="virtual--container overflow-x-clip" data-lenis-prevent>
           <For each={getVirtualItems()}>
             {(virtual) => (
-              <NavItem
-                onClick={onPress}
-                key={virtual.key}
-                virtual={virtual}
-                to={contents[virtual.index].to}>
-                <motion.p
-                  className="w-full will-change-transform"
-                  initial={{
-                    opacity: 0,
-                    x: virtual.index % 2 === 0 ? 100 : -100,
-                  }}
-                  animate={{ opacity: 1, y: 0, x: 0 }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}>
-                  <span className="line-clamp-1 will-change-contents">
-                    {contents[virtual.index].label}
-                  </span>
-                </motion.p>
-              </NavItem>
+              <NavItem onClick={onPress} key={virtual.key} virtual={virtual} />
             )}
           </For>
         </div>
