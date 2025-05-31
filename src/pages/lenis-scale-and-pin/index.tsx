@@ -1,6 +1,7 @@
 import { useRect, useWindowSize } from "hamo";
 import { ReactLenis, useLenis } from "lenis/react";
 import React from "react";
+import { BlockSection, Heading, Paragraph } from "~/components/ui/typography";
 import { clamp, mapRange } from "~/lib/math";
 import "./base.css";
 
@@ -31,11 +32,17 @@ const Page = () => {
     const center = 0.6;
     const progress1 = clamp(0, mapRange(0, center, progress, 0, 1), 1);
     const progress2 = clamp(0, mapRange(center - 0.055, 1, progress, 0, 1), 1);
-    const positionX = mapRange(0, 1, clamp(0, progress * 2, 1), -54.2, -85);
+    const positionX = mapRange(0, 1, clamp(0, progress * 2, 1), -54.2, -76);
 
     zoomRef.current?.style.setProperty("--progress1", String(progress1));
     zoomRef.current?.style.setProperty("--progress2", String(progress2));
     zoomRef.current?.style.setProperty("--positionX", `${positionX}%`);
+
+    if (progress === 1) {
+      zoomRef.current?.style.setProperty("background-color", "currentColor");
+    } else {
+      zoomRef.current?.style.removeProperty("background-color");
+    }
   });
 
   return (
@@ -64,7 +71,27 @@ const Page = () => {
             </div>
           </div>
         </section>
-        <section className="home__spacer" />
+        <section className="home__spacer bg-foreground">
+          <div className="pt-20" data-lenis-scroll-snap-align="start">
+            <BlockSection className="my-0">
+              <Heading className="font-medium text-muted">
+                EF//{new Date().getFullYear()}
+              </Heading>
+              <Paragraph className="text-primary-foreground/80">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Voluptates hic impedit dolore quos sapiente fugit cum sequi
+                distinctio. Amet enim, maxime similique commodi id labore quos
+                numquam ipsam tempora ullam!
+              </Paragraph>
+              <Paragraph className="text-primary-foreground/80">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
+                pariatur debitis nihil nostrum cum molestiae explicabo dolorum
+                ipsa reiciendis eum provident reprehenderit, vero officiis
+                repudiandae, atque aliquam nobis, enim maiores.
+              </Paragraph>
+            </BlockSection>
+          </div>
+        </section>
       </main>
     </>
   );

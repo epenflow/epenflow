@@ -37,7 +37,7 @@
     align-self: flex-start;
     justify-content: space-between;
     height: 100%;
-    transform: scale(calc(1 + var(--progress1, 0)) * 3);
+    transform: scale(calc(1 + (var(--progress1)) * 3));
     padding: 2.4615384615vh;
   }
   .home__hero .home__first {
