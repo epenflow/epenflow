@@ -1,5 +1,5 @@
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap/all";
+import gsap, { SplitText } from "gsap/all";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import React from "react";
@@ -64,12 +64,83 @@ const NavTheme = () => {
   );
 };
 
-const NavDateNTime = () => {
+const NavTime = () => {
+  const scope = React.useRef<HTMLDivElement>(null);
   const date = useDateAndTime();
+  const charsRef = React.useRef<SplitText | null>(null);
+  const prevTimeRef = React.useRef<string>("");
+
+  const fTime = React.useCallback(
+    (d: Date) =>
+      new Intl.DateTimeFormat("id-ID", {
+        hourCycle: "h12",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      })
+        .format(d)
+        .replace(/\./g, "__"),
+    [],
+  );
+
+  const currentTime = React.useMemo(() => fTime(date), [date, fTime]);
+  React.useEffect(() => {
+    if (!scope.current) return;
+
+    scope.current.textContent = currentTime;
+    prevTimeRef.current = currentTime;
+    charsRef.current = new SplitText(scope.current, {
+      type: "chars",
+      charsClass: "time__char perspective-normal",
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useGSAP(
+    () => {
+      if (!prevTimeRef || !charsRef.current || !scope.current) return;
+
+      const tl = gsap.timeline();
+      const currentChars = charsRef.current.chars;
+      const prevTime = prevTimeRef.current;
+
+      if (prevTime === currentTime) return;
+
+      const a_prevTime = prevTime.split("");
+      const a_currentTime = currentTime.split("");
+
+      a_currentTime.forEach((n, i) => {
+        console.log("a_currentTime");
+        if (currentChars[i] && n !== a_prevTime[i]) {
+          const char = currentChars[i];
+
+          tl.to(char, {
+            yPercent: -100,
+            autoAlpha: 0,
+            ease: "power1.in",
+          })
+            .set(char, {
+              text: n,
+              yPercent: 100,
+              autoAlpha: 0,
+            })
+            .to(char, {
+              yPercent: 0,
+              autoAlpha: 1,
+              ease: "power1.out",
+            });
+        }
+      });
+
+      prevTimeRef.current = currentTime;
+    },
+    { scope, dependencies: [currentTime] },
+  );
 
   return (
     <div className="pl-[calc(var(--header-padding)_*_2)] text-xs items-center justify-center w-full">
-      <span suppressHydrationWarning>{date.toISOString()}</span>
+      <div ref={scope} className="overflow-clip" />
     </div>
   );
 };
@@ -77,7 +148,7 @@ const NavDateNTime = () => {
 const NavFooter: React.FC = withMemo((): React.ReactNode => {
   return (
     <div className="navigation--footer inline-flex justify-between px-0">
-      <NavDateNTime />
+      <NavTime />
       <NavTheme />
     </div>
   );
