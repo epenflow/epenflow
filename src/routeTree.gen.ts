@@ -18,20 +18,9 @@ import { Route as IndexImport } from './routes/index'
 // Create Virtual Routes
 
 const TestLazyImport = createFileRoute('/test')()
-const SomeOnScrollTextHighlightAnimationsLazyImport = createFileRoute(
-  '/some-on-scroll-text-highlight-animations',
-)()
-const OnScrollExpandingImageAnimationWithinTypographyLazyImport =
-  createFileRoute('/on-scroll-expanding-image-animation-within-typography')()
-const OnScroll3dCarouselLazyImport = createFileRoute('/on-scroll-3d-carousel')()
 const LenisScaleAndPinLazyImport = createFileRoute('/lenis-scale-and-pin')()
 const HelloLazyImport = createFileRoute('/hello')()
-const ConsecutiveScrollAnimationsWithOneElementLazyImport = createFileRoute(
-  '/consecutive-scroll-animations-with-one-element',
-)()
-const BlurryTextRevealOnScrollLazyImport = createFileRoute(
-  '/blurry-text-reveal-on-scroll',
-)()
+const CircleAnimationLazyImport = createFileRoute('/circle-animation')()
 
 // Create/Update Routes
 
@@ -40,36 +29,6 @@ const TestLazyRoute = TestLazyImport.update({
   path: '/test',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/test.lazy').then((d) => d.Route))
-
-const SomeOnScrollTextHighlightAnimationsLazyRoute =
-  SomeOnScrollTextHighlightAnimationsLazyImport.update({
-    id: '/some-on-scroll-text-highlight-animations',
-    path: '/some-on-scroll-text-highlight-animations',
-    getParentRoute: () => rootRoute,
-  } as any).lazy(() =>
-    import('./routes/some-on-scroll-text-highlight-animations.lazy').then(
-      (d) => d.Route,
-    ),
-  )
-
-const OnScrollExpandingImageAnimationWithinTypographyLazyRoute =
-  OnScrollExpandingImageAnimationWithinTypographyLazyImport.update({
-    id: '/on-scroll-expanding-image-animation-within-typography',
-    path: '/on-scroll-expanding-image-animation-within-typography',
-    getParentRoute: () => rootRoute,
-  } as any).lazy(() =>
-    import(
-      './routes/on-scroll-expanding-image-animation-within-typography.lazy'
-    ).then((d) => d.Route),
-  )
-
-const OnScroll3dCarouselLazyRoute = OnScroll3dCarouselLazyImport.update({
-  id: '/on-scroll-3d-carousel',
-  path: '/on-scroll-3d-carousel',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/on-scroll-3d-carousel.lazy').then((d) => d.Route),
-)
 
 const LenisScaleAndPinLazyRoute = LenisScaleAndPinLazyImport.update({
   id: '/lenis-scale-and-pin',
@@ -85,25 +44,13 @@ const HelloLazyRoute = HelloLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/hello.lazy').then((d) => d.Route))
 
-const ConsecutiveScrollAnimationsWithOneElementLazyRoute =
-  ConsecutiveScrollAnimationsWithOneElementLazyImport.update({
-    id: '/consecutive-scroll-animations-with-one-element',
-    path: '/consecutive-scroll-animations-with-one-element',
-    getParentRoute: () => rootRoute,
-  } as any).lazy(() =>
-    import('./routes/consecutive-scroll-animations-with-one-element.lazy').then(
-      (d) => d.Route,
-    ),
-  )
-
-const BlurryTextRevealOnScrollLazyRoute =
-  BlurryTextRevealOnScrollLazyImport.update({
-    id: '/blurry-text-reveal-on-scroll',
-    path: '/blurry-text-reveal-on-scroll',
-    getParentRoute: () => rootRoute,
-  } as any).lazy(() =>
-    import('./routes/blurry-text-reveal-on-scroll.lazy').then((d) => d.Route),
-  )
+const CircleAnimationLazyRoute = CircleAnimationLazyImport.update({
+  id: '/circle-animation',
+  path: '/circle-animation',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/circle-animation.lazy').then((d) => d.Route),
+)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -122,18 +69,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/blurry-text-reveal-on-scroll': {
-      id: '/blurry-text-reveal-on-scroll'
-      path: '/blurry-text-reveal-on-scroll'
-      fullPath: '/blurry-text-reveal-on-scroll'
-      preLoaderRoute: typeof BlurryTextRevealOnScrollLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/consecutive-scroll-animations-with-one-element': {
-      id: '/consecutive-scroll-animations-with-one-element'
-      path: '/consecutive-scroll-animations-with-one-element'
-      fullPath: '/consecutive-scroll-animations-with-one-element'
-      preLoaderRoute: typeof ConsecutiveScrollAnimationsWithOneElementLazyImport
+    '/circle-animation': {
+      id: '/circle-animation'
+      path: '/circle-animation'
+      fullPath: '/circle-animation'
+      preLoaderRoute: typeof CircleAnimationLazyImport
       parentRoute: typeof rootRoute
     }
     '/hello': {
@@ -150,27 +90,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LenisScaleAndPinLazyImport
       parentRoute: typeof rootRoute
     }
-    '/on-scroll-3d-carousel': {
-      id: '/on-scroll-3d-carousel'
-      path: '/on-scroll-3d-carousel'
-      fullPath: '/on-scroll-3d-carousel'
-      preLoaderRoute: typeof OnScroll3dCarouselLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/on-scroll-expanding-image-animation-within-typography': {
-      id: '/on-scroll-expanding-image-animation-within-typography'
-      path: '/on-scroll-expanding-image-animation-within-typography'
-      fullPath: '/on-scroll-expanding-image-animation-within-typography'
-      preLoaderRoute: typeof OnScrollExpandingImageAnimationWithinTypographyLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/some-on-scroll-text-highlight-animations': {
-      id: '/some-on-scroll-text-highlight-animations'
-      path: '/some-on-scroll-text-highlight-animations'
-      fullPath: '/some-on-scroll-text-highlight-animations'
-      preLoaderRoute: typeof SomeOnScrollTextHighlightAnimationsLazyImport
-      parentRoute: typeof rootRoute
-    }
     '/test': {
       id: '/test'
       path: '/test'
@@ -185,38 +104,26 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/blurry-text-reveal-on-scroll': typeof BlurryTextRevealOnScrollLazyRoute
-  '/consecutive-scroll-animations-with-one-element': typeof ConsecutiveScrollAnimationsWithOneElementLazyRoute
+  '/circle-animation': typeof CircleAnimationLazyRoute
   '/hello': typeof HelloLazyRoute
   '/lenis-scale-and-pin': typeof LenisScaleAndPinLazyRoute
-  '/on-scroll-3d-carousel': typeof OnScroll3dCarouselLazyRoute
-  '/on-scroll-expanding-image-animation-within-typography': typeof OnScrollExpandingImageAnimationWithinTypographyLazyRoute
-  '/some-on-scroll-text-highlight-animations': typeof SomeOnScrollTextHighlightAnimationsLazyRoute
   '/test': typeof TestLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/blurry-text-reveal-on-scroll': typeof BlurryTextRevealOnScrollLazyRoute
-  '/consecutive-scroll-animations-with-one-element': typeof ConsecutiveScrollAnimationsWithOneElementLazyRoute
+  '/circle-animation': typeof CircleAnimationLazyRoute
   '/hello': typeof HelloLazyRoute
   '/lenis-scale-and-pin': typeof LenisScaleAndPinLazyRoute
-  '/on-scroll-3d-carousel': typeof OnScroll3dCarouselLazyRoute
-  '/on-scroll-expanding-image-animation-within-typography': typeof OnScrollExpandingImageAnimationWithinTypographyLazyRoute
-  '/some-on-scroll-text-highlight-animations': typeof SomeOnScrollTextHighlightAnimationsLazyRoute
   '/test': typeof TestLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/blurry-text-reveal-on-scroll': typeof BlurryTextRevealOnScrollLazyRoute
-  '/consecutive-scroll-animations-with-one-element': typeof ConsecutiveScrollAnimationsWithOneElementLazyRoute
+  '/circle-animation': typeof CircleAnimationLazyRoute
   '/hello': typeof HelloLazyRoute
   '/lenis-scale-and-pin': typeof LenisScaleAndPinLazyRoute
-  '/on-scroll-3d-carousel': typeof OnScroll3dCarouselLazyRoute
-  '/on-scroll-expanding-image-animation-within-typography': typeof OnScrollExpandingImageAnimationWithinTypographyLazyRoute
-  '/some-on-scroll-text-highlight-animations': typeof SomeOnScrollTextHighlightAnimationsLazyRoute
   '/test': typeof TestLazyRoute
 }
 
@@ -224,63 +131,35 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/blurry-text-reveal-on-scroll'
-    | '/consecutive-scroll-animations-with-one-element'
+    | '/circle-animation'
     | '/hello'
     | '/lenis-scale-and-pin'
-    | '/on-scroll-3d-carousel'
-    | '/on-scroll-expanding-image-animation-within-typography'
-    | '/some-on-scroll-text-highlight-animations'
     | '/test'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/blurry-text-reveal-on-scroll'
-    | '/consecutive-scroll-animations-with-one-element'
-    | '/hello'
-    | '/lenis-scale-and-pin'
-    | '/on-scroll-3d-carousel'
-    | '/on-scroll-expanding-image-animation-within-typography'
-    | '/some-on-scroll-text-highlight-animations'
-    | '/test'
+  to: '/' | '/circle-animation' | '/hello' | '/lenis-scale-and-pin' | '/test'
   id:
     | '__root__'
     | '/'
-    | '/blurry-text-reveal-on-scroll'
-    | '/consecutive-scroll-animations-with-one-element'
+    | '/circle-animation'
     | '/hello'
     | '/lenis-scale-and-pin'
-    | '/on-scroll-3d-carousel'
-    | '/on-scroll-expanding-image-animation-within-typography'
-    | '/some-on-scroll-text-highlight-animations'
     | '/test'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  BlurryTextRevealOnScrollLazyRoute: typeof BlurryTextRevealOnScrollLazyRoute
-  ConsecutiveScrollAnimationsWithOneElementLazyRoute: typeof ConsecutiveScrollAnimationsWithOneElementLazyRoute
+  CircleAnimationLazyRoute: typeof CircleAnimationLazyRoute
   HelloLazyRoute: typeof HelloLazyRoute
   LenisScaleAndPinLazyRoute: typeof LenisScaleAndPinLazyRoute
-  OnScroll3dCarouselLazyRoute: typeof OnScroll3dCarouselLazyRoute
-  OnScrollExpandingImageAnimationWithinTypographyLazyRoute: typeof OnScrollExpandingImageAnimationWithinTypographyLazyRoute
-  SomeOnScrollTextHighlightAnimationsLazyRoute: typeof SomeOnScrollTextHighlightAnimationsLazyRoute
   TestLazyRoute: typeof TestLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  BlurryTextRevealOnScrollLazyRoute: BlurryTextRevealOnScrollLazyRoute,
-  ConsecutiveScrollAnimationsWithOneElementLazyRoute:
-    ConsecutiveScrollAnimationsWithOneElementLazyRoute,
+  CircleAnimationLazyRoute: CircleAnimationLazyRoute,
   HelloLazyRoute: HelloLazyRoute,
   LenisScaleAndPinLazyRoute: LenisScaleAndPinLazyRoute,
-  OnScroll3dCarouselLazyRoute: OnScroll3dCarouselLazyRoute,
-  OnScrollExpandingImageAnimationWithinTypographyLazyRoute:
-    OnScrollExpandingImageAnimationWithinTypographyLazyRoute,
-  SomeOnScrollTextHighlightAnimationsLazyRoute:
-    SomeOnScrollTextHighlightAnimationsLazyRoute,
   TestLazyRoute: TestLazyRoute,
 }
 
@@ -295,39 +174,23 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/blurry-text-reveal-on-scroll",
-        "/consecutive-scroll-animations-with-one-element",
+        "/circle-animation",
         "/hello",
         "/lenis-scale-and-pin",
-        "/on-scroll-3d-carousel",
-        "/on-scroll-expanding-image-animation-within-typography",
-        "/some-on-scroll-text-highlight-animations",
         "/test"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/blurry-text-reveal-on-scroll": {
-      "filePath": "blurry-text-reveal-on-scroll.lazy.tsx"
-    },
-    "/consecutive-scroll-animations-with-one-element": {
-      "filePath": "consecutive-scroll-animations-with-one-element.lazy.tsx"
+    "/circle-animation": {
+      "filePath": "circle-animation.lazy.tsx"
     },
     "/hello": {
       "filePath": "hello.lazy.tsx"
     },
     "/lenis-scale-and-pin": {
       "filePath": "lenis-scale-and-pin.lazy.tsx"
-    },
-    "/on-scroll-3d-carousel": {
-      "filePath": "on-scroll-3d-carousel.lazy.tsx"
-    },
-    "/on-scroll-expanding-image-animation-within-typography": {
-      "filePath": "on-scroll-expanding-image-animation-within-typography.lazy.tsx"
-    },
-    "/some-on-scroll-text-highlight-animations": {
-      "filePath": "some-on-scroll-text-highlight-animations.lazy.tsx"
     },
     "/test": {
       "filePath": "test.lazy.tsx"

@@ -111,7 +111,6 @@ const NavTime = () => {
       const a_currentTime = currentTime.split("");
 
       a_currentTime.forEach((n, i) => {
-        console.log("a_currentTime");
         if (currentChars[i] && n !== a_prevTime[i]) {
           const char = currentChars[i];
 
