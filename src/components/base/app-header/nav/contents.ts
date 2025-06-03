@@ -26,4 +26,8 @@ export default [
     label: "Circle Animation",
     to: "/circle-animation",
   },
+  {
+    label: "Scroll Blur Text",
+    to: "/scroll-blur-text",
+  },
 ] satisfies Array<Content>;

@@ -18,6 +18,7 @@ import { Route as IndexImport } from './routes/index'
 // Create Virtual Routes
 
 const TestLazyImport = createFileRoute('/test')()
+const ScrollBlurTextLazyImport = createFileRoute('/scroll-blur-text')()
 const LenisScaleAndPinLazyImport = createFileRoute('/lenis-scale-and-pin')()
 const HelloLazyImport = createFileRoute('/hello')()
 const CircleAnimationLazyImport = createFileRoute('/circle-animation')()
@@ -29,6 +30,14 @@ const TestLazyRoute = TestLazyImport.update({
   path: '/test',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/test.lazy').then((d) => d.Route))
+
+const ScrollBlurTextLazyRoute = ScrollBlurTextLazyImport.update({
+  id: '/scroll-blur-text',
+  path: '/scroll-blur-text',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/scroll-blur-text.lazy').then((d) => d.Route),
+)
 
 const LenisScaleAndPinLazyRoute = LenisScaleAndPinLazyImport.update({
   id: '/lenis-scale-and-pin',
@@ -90,6 +99,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LenisScaleAndPinLazyImport
       parentRoute: typeof rootRoute
     }
+    '/scroll-blur-text': {
+      id: '/scroll-blur-text'
+      path: '/scroll-blur-text'
+      fullPath: '/scroll-blur-text'
+      preLoaderRoute: typeof ScrollBlurTextLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/test': {
       id: '/test'
       path: '/test'
@@ -107,6 +123,7 @@ export interface FileRoutesByFullPath {
   '/circle-animation': typeof CircleAnimationLazyRoute
   '/hello': typeof HelloLazyRoute
   '/lenis-scale-and-pin': typeof LenisScaleAndPinLazyRoute
+  '/scroll-blur-text': typeof ScrollBlurTextLazyRoute
   '/test': typeof TestLazyRoute
 }
 
@@ -115,6 +132,7 @@ export interface FileRoutesByTo {
   '/circle-animation': typeof CircleAnimationLazyRoute
   '/hello': typeof HelloLazyRoute
   '/lenis-scale-and-pin': typeof LenisScaleAndPinLazyRoute
+  '/scroll-blur-text': typeof ScrollBlurTextLazyRoute
   '/test': typeof TestLazyRoute
 }
 
@@ -124,6 +142,7 @@ export interface FileRoutesById {
   '/circle-animation': typeof CircleAnimationLazyRoute
   '/hello': typeof HelloLazyRoute
   '/lenis-scale-and-pin': typeof LenisScaleAndPinLazyRoute
+  '/scroll-blur-text': typeof ScrollBlurTextLazyRoute
   '/test': typeof TestLazyRoute
 }
 
@@ -134,15 +153,23 @@ export interface FileRouteTypes {
     | '/circle-animation'
     | '/hello'
     | '/lenis-scale-and-pin'
+    | '/scroll-blur-text'
     | '/test'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/circle-animation' | '/hello' | '/lenis-scale-and-pin' | '/test'
+  to:
+    | '/'
+    | '/circle-animation'
+    | '/hello'
+    | '/lenis-scale-and-pin'
+    | '/scroll-blur-text'
+    | '/test'
   id:
     | '__root__'
     | '/'
     | '/circle-animation'
     | '/hello'
     | '/lenis-scale-and-pin'
+    | '/scroll-blur-text'
     | '/test'
   fileRoutesById: FileRoutesById
 }
@@ -152,6 +179,7 @@ export interface RootRouteChildren {
   CircleAnimationLazyRoute: typeof CircleAnimationLazyRoute
   HelloLazyRoute: typeof HelloLazyRoute
   LenisScaleAndPinLazyRoute: typeof LenisScaleAndPinLazyRoute
+  ScrollBlurTextLazyRoute: typeof ScrollBlurTextLazyRoute
   TestLazyRoute: typeof TestLazyRoute
 }
 
@@ -160,6 +188,7 @@ const rootRouteChildren: RootRouteChildren = {
   CircleAnimationLazyRoute: CircleAnimationLazyRoute,
   HelloLazyRoute: HelloLazyRoute,
   LenisScaleAndPinLazyRoute: LenisScaleAndPinLazyRoute,
+  ScrollBlurTextLazyRoute: ScrollBlurTextLazyRoute,
   TestLazyRoute: TestLazyRoute,
 }
 
@@ -177,6 +206,7 @@ export const routeTree = rootRoute
         "/circle-animation",
         "/hello",
         "/lenis-scale-and-pin",
+        "/scroll-blur-text",
         "/test"
       ]
     },
@@ -191,6 +221,9 @@ export const routeTree = rootRoute
     },
     "/lenis-scale-and-pin": {
       "filePath": "lenis-scale-and-pin.lazy.tsx"
+    },
+    "/scroll-blur-text": {
+      "filePath": "scroll-blur-text.lazy.tsx"
     },
     "/test": {
       "filePath": "test.lazy.tsx"
