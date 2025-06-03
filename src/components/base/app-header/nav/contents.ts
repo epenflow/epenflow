@@ -30,4 +30,8 @@ export default [
     label: "Scroll Blur Text",
     to: "/scroll-blur-text",
   },
+  {
+    label: "Loader FX1",
+    to: "/loader-fx1",
+  },
 ] satisfies Array<Content>;

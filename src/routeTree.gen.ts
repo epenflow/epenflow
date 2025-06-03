@@ -19,6 +19,7 @@ import { Route as IndexImport } from './routes/index'
 
 const TestLazyImport = createFileRoute('/test')()
 const ScrollBlurTextLazyImport = createFileRoute('/scroll-blur-text')()
+const LoaderFx1LazyImport = createFileRoute('/loader-fx1')()
 const LenisScaleAndPinLazyImport = createFileRoute('/lenis-scale-and-pin')()
 const HelloLazyImport = createFileRoute('/hello')()
 const CircleAnimationLazyImport = createFileRoute('/circle-animation')()
@@ -38,6 +39,12 @@ const ScrollBlurTextLazyRoute = ScrollBlurTextLazyImport.update({
 } as any).lazy(() =>
   import('./routes/scroll-blur-text.lazy').then((d) => d.Route),
 )
+
+const LoaderFx1LazyRoute = LoaderFx1LazyImport.update({
+  id: '/loader-fx1',
+  path: '/loader-fx1',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/loader-fx1.lazy').then((d) => d.Route))
 
 const LenisScaleAndPinLazyRoute = LenisScaleAndPinLazyImport.update({
   id: '/lenis-scale-and-pin',
@@ -99,6 +106,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LenisScaleAndPinLazyImport
       parentRoute: typeof rootRoute
     }
+    '/loader-fx1': {
+      id: '/loader-fx1'
+      path: '/loader-fx1'
+      fullPath: '/loader-fx1'
+      preLoaderRoute: typeof LoaderFx1LazyImport
+      parentRoute: typeof rootRoute
+    }
     '/scroll-blur-text': {
       id: '/scroll-blur-text'
       path: '/scroll-blur-text'
@@ -123,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/circle-animation': typeof CircleAnimationLazyRoute
   '/hello': typeof HelloLazyRoute
   '/lenis-scale-and-pin': typeof LenisScaleAndPinLazyRoute
+  '/loader-fx1': typeof LoaderFx1LazyRoute
   '/scroll-blur-text': typeof ScrollBlurTextLazyRoute
   '/test': typeof TestLazyRoute
 }
@@ -132,6 +147,7 @@ export interface FileRoutesByTo {
   '/circle-animation': typeof CircleAnimationLazyRoute
   '/hello': typeof HelloLazyRoute
   '/lenis-scale-and-pin': typeof LenisScaleAndPinLazyRoute
+  '/loader-fx1': typeof LoaderFx1LazyRoute
   '/scroll-blur-text': typeof ScrollBlurTextLazyRoute
   '/test': typeof TestLazyRoute
 }
@@ -142,6 +158,7 @@ export interface FileRoutesById {
   '/circle-animation': typeof CircleAnimationLazyRoute
   '/hello': typeof HelloLazyRoute
   '/lenis-scale-and-pin': typeof LenisScaleAndPinLazyRoute
+  '/loader-fx1': typeof LoaderFx1LazyRoute
   '/scroll-blur-text': typeof ScrollBlurTextLazyRoute
   '/test': typeof TestLazyRoute
 }
@@ -153,6 +170,7 @@ export interface FileRouteTypes {
     | '/circle-animation'
     | '/hello'
     | '/lenis-scale-and-pin'
+    | '/loader-fx1'
     | '/scroll-blur-text'
     | '/test'
   fileRoutesByTo: FileRoutesByTo
@@ -161,6 +179,7 @@ export interface FileRouteTypes {
     | '/circle-animation'
     | '/hello'
     | '/lenis-scale-and-pin'
+    | '/loader-fx1'
     | '/scroll-blur-text'
     | '/test'
   id:
@@ -169,6 +188,7 @@ export interface FileRouteTypes {
     | '/circle-animation'
     | '/hello'
     | '/lenis-scale-and-pin'
+    | '/loader-fx1'
     | '/scroll-blur-text'
     | '/test'
   fileRoutesById: FileRoutesById
@@ -179,6 +199,7 @@ export interface RootRouteChildren {
   CircleAnimationLazyRoute: typeof CircleAnimationLazyRoute
   HelloLazyRoute: typeof HelloLazyRoute
   LenisScaleAndPinLazyRoute: typeof LenisScaleAndPinLazyRoute
+  LoaderFx1LazyRoute: typeof LoaderFx1LazyRoute
   ScrollBlurTextLazyRoute: typeof ScrollBlurTextLazyRoute
   TestLazyRoute: typeof TestLazyRoute
 }
@@ -188,6 +209,7 @@ const rootRouteChildren: RootRouteChildren = {
   CircleAnimationLazyRoute: CircleAnimationLazyRoute,
   HelloLazyRoute: HelloLazyRoute,
   LenisScaleAndPinLazyRoute: LenisScaleAndPinLazyRoute,
+  LoaderFx1LazyRoute: LoaderFx1LazyRoute,
   ScrollBlurTextLazyRoute: ScrollBlurTextLazyRoute,
   TestLazyRoute: TestLazyRoute,
 }
@@ -206,6 +228,7 @@ export const routeTree = rootRoute
         "/circle-animation",
         "/hello",
         "/lenis-scale-and-pin",
+        "/loader-fx1",
         "/scroll-blur-text",
         "/test"
       ]
@@ -221,6 +244,9 @@ export const routeTree = rootRoute
     },
     "/lenis-scale-and-pin": {
       "filePath": "lenis-scale-and-pin.lazy.tsx"
+    },
+    "/loader-fx1": {
+      "filePath": "loader-fx1.lazy.tsx"
     },
     "/scroll-blur-text": {
       "filePath": "scroll-blur-text.lazy.tsx"
