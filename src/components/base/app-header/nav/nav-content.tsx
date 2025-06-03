@@ -6,14 +6,15 @@ import React from "react";
 import HoverText from "~/components/animations/hover-text";
 import For from "~/components/utility/for";
 import { cn, withMemo } from "~/lib/utils";
+import { AppHeaderContextValue } from "..";
 import NAV_ITEM_CONTENTS from "./contents";
 
 type NavItemProps = {
   virtual: VirtualItem;
-  onClick: VoidFunction;
 };
-const NavItem: React.FC<NavItemProps> = ({ virtual, ...props }) => {
+const NavItem: React.FC<NavItemProps> = ({ virtual }) => {
   const scope = React.useRef<HTMLAnchorElement>(null);
+  const appHeaderContext = React.useContext(AppHeaderContextValue);
   const cssProperties = React.useMemo<React.CSSProperties>(
     () =>
       ({
@@ -45,9 +46,9 @@ const NavItem: React.FC<NavItemProps> = ({ virtual, ...props }) => {
     <Link
       ref={scope}
       style={{ ...cssProperties }}
+      onClick={() => appHeaderContext?.toggleAppHeaderFX()}
       className={cn("virtual--item overflow-clip flex flex-col items-start")}
-      to={NAV_ITEM_CONTENTS[virtual.index].to}
-      {...props}>
+      to={NAV_ITEM_CONTENTS[virtual.index].to}>
       <HoverText
         data-anim
         aria-label={NAV_ITEM_CONTENTS[virtual.index].label}
@@ -58,44 +59,37 @@ const NavItem: React.FC<NavItemProps> = ({ virtual, ...props }) => {
   );
 };
 
-type NavContentProps = {
-  onPress: () => void;
-};
 /**
  * Issue - Object references change with every scroll event
  */
-const NavContent: React.FC<NavContentProps> = withMemo(
-  ({ onPress }): React.ReactNode => {
-    const scope = React.useRef<HTMLDivElement>(null);
+const NavContent: React.FC = withMemo((): React.ReactNode => {
+  const scope = React.useRef<HTMLDivElement>(null);
 
-    const { getTotalSize, getVirtualItems } = useVirtualizer({
-      count: NAV_ITEM_CONTENTS.length,
-      getScrollElement: () => scope.current,
-      estimateSize: () => 35,
-    });
+  const { getTotalSize, getVirtualItems } = useVirtualizer({
+    count: NAV_ITEM_CONTENTS.length,
+    getScrollElement: () => scope.current,
+    estimateSize: () => 35,
+  });
 
-    const cssProperties = React.useMemo(
-      () =>
-        ({
-          "--virtual-content-height": `${getTotalSize()}px`,
-        }) as React.CSSProperties,
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      [],
-    );
+  const cssProperties = React.useMemo(
+    () =>
+      ({
+        "--virtual-content-height": `${getTotalSize()}px`,
+      }) as React.CSSProperties,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
 
-    return (
-      <div ref={scope} style={cssProperties} className="navigation--content">
-        <div className="virtual--container overflow-x-clip" data-lenis-prevent>
-          <For each={getVirtualItems()}>
-            {(virtual) => (
-              <NavItem onClick={onPress} key={virtual.key} virtual={virtual} />
-            )}
-          </For>
-        </div>
+  return (
+    <div ref={scope} style={cssProperties} className="navigation--content">
+      <div className="virtual--container overflow-x-clip" data-lenis-prevent>
+        <For each={getVirtualItems()}>
+          {(virtual) => <NavItem key={virtual.key} virtual={virtual} />}
+        </For>
       </div>
-    );
-  },
-);
+    </div>
+  );
+});
 NavContent.displayName = "NavContent";
 
 export default NavContent;

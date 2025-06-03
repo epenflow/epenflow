@@ -39,7 +39,6 @@
     align-items: center;
     width: var(--header-width);
     max-width: var(--header-max-width);
-    will-change: var(--header-width);
   }
 
   .header--button {
