@@ -1,7 +1,7 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { ThemeProvider } from "next-themes";
 import React from "react";
-import AppHeader from "~/components/base/app-header";
+import Navbar from "~/components/base/navbar";
 import GSAPRegister from "~/components/utility/gsap";
 import { withLazy, withOptional } from "~/lib/utils";
 
@@ -28,7 +28,7 @@ export const Route = createRootRoute({
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange>
-            <AppHeader />
+            <Navbar />
             <Outlet />
             <resources.FPSStats width={160} bottom={32} right={32} />
             <resources.TanstackDevTools />
