@@ -3,11 +3,11 @@ import React from "react";
 import router from "~/lib/router";
 import { disableReactDevTools } from "~/lib/utils";
 
-const RootApp: React.FC = () => {
-  const InnerRoot = () => {
-    return <RouterProvider router={router()} />;
-  };
+const InnerRoot = () => {
+  return <RouterProvider router={router()} />;
+};
 
+const RootApp: React.FC = () => {
   if (import.meta.env.DEV) {
     return (
       <React.StrictMode>

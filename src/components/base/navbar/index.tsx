@@ -14,7 +14,8 @@ const Navbar = () => {
     () => {
       if (!scope.current) return;
 
-      navbarFX.current = new NavbarFX(false, scope.current);
+      navbarFX.current = new NavbarFX(scope.current);
+
       return () => {
         navbarFX.current?.revert();
         navbarFX.current = null;
@@ -29,7 +30,7 @@ const Navbar = () => {
   });
 
   return (
-    <header ref={scope} className="header">
+    <header ref={scope} className="header antialiased">
       <section onClick={onToggle} className="header__toggle-wrap">
         <button onClick={onToggle} className="header__toggle">
           <div className="header__toggle-outer animate-pulse" />
@@ -40,7 +41,7 @@ const Navbar = () => {
       </section>
       <section className="header__content-wrap">
         <div className="header__content-first">
-          <NavbarList />
+          <NavbarList onToggle={onToggle} />
         </div>
         <div className="header__content-separator" />
         <div className="header__content-last">

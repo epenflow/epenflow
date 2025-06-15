@@ -2,7 +2,7 @@ import gsap, { SplitText } from "gsap/all";
 
 export default class NavbarFX {
   #element: HTMLElement;
-  #state: boolean;
+  #state!: boolean;
   #splitter!: SplitText;
 
   #tl: GSAPTimeline = gsap.timeline({
@@ -14,12 +14,11 @@ export default class NavbarFX {
     },
   });
 
-  constructor(state: boolean, element?: unknown) {
+  constructor(element?: unknown) {
     if (!element || !(element instanceof HTMLElement)) {
       throw new Error("Invalid element provided.");
     }
     this.#element = element;
-    this.#state = state;
 
     this.#setup();
   }

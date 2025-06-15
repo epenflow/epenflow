@@ -1,27 +1,25 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { ThemeProvider } from "next-themes";
-import React from "react";
+import { Suspense } from "react";
+import FPSStats from "~/components/base/fps-stats";
 import Navbar from "~/components/base/navbar";
 import GSAPRegister from "~/components/utility/gsap";
 import { withLazy, withOptional } from "~/lib/utils";
 
-const resources = {
-  TanstackDevTools: withOptional(
-    withLazy(
-      import("@tanstack/react-router-devtools").then((res) => ({
-        default: res.TanStackRouterDevtools,
-      })),
-    ),
-    import.meta.env.DEV,
+const TanstackDevTools = withOptional(
+  withLazy(
+    import("@tanstack/react-router-devtools").then((res) => ({
+      default: res.TanStackRouterDevtools,
+    })),
   ),
-  FPSStats: withLazy(import("~/components/base/fps-stats")),
-};
+  import.meta.env.DEV,
+);
 
 export const Route = createRootRoute({
   component: () => {
     return (
       <>
-        <React.Suspense>
+        <Suspense>
           <GSAPRegister />
           <ThemeProvider
             attribute="class"
@@ -30,10 +28,10 @@ export const Route = createRootRoute({
             disableTransitionOnChange>
             <Navbar />
             <Outlet />
-            <resources.FPSStats width={160} bottom={32} right={32} />
-            <resources.TanstackDevTools />
+            <FPSStats width={160} bottom={32} right={32} />
+            <TanstackDevTools />
           </ThemeProvider>
-        </React.Suspense>
+        </Suspense>
       </>
     );
   },
