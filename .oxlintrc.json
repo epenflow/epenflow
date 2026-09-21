@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "oxc", "react"],
+  "jsPlugins": [
+    {
+      "name": "@tanstack/router",
+      "specifier": "@tanstack/eslint-plugin-router"
+    }
+  ],
+  "categories": {
+    "correctness": "error"
+  },
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "@tanstack/router/create-route-property-order": "error"
+  },
+  "env": {
+    "builtin": true
+  }
+}

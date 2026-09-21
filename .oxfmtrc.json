@@ -1,0 +1,29 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": [],
+  "useTabs": false,
+  "tabWidth": 2,
+  "bracketSameLine": true,
+  "endOfLine": "lf",
+  "trailingComma": "all",
+  "semi": true,
+  "sortPackageJson": {
+    "sortScripts": true
+  },
+  "sortTailwindcss": {
+    "functions": ["cn", "cva"],
+    "preserveWhitespace": false,
+    "preserveDuplicates": false
+  },
+  "sortImports": {
+    "customGroups": [
+      {
+        "groupName": "react",
+        "elementNamePattern": ["react", "react-dom/**"]
+      }
+    ],
+    "newlinesBetween": true,
+    "order": "desc",
+    "groups": ["react"]
+  }
+}
