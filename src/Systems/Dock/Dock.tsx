@@ -1,25 +1,18 @@
-import {
-  Activity,
-  Suspense,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type MouseEvent,
-} from "react";
+import { Activity, Suspense, useCallback, useRef, type MouseEvent } from "react";
 
 import { cn } from "cn";
 import { ProcessStore } from "#/Systems/Process/ProcessStore.ts";
+import { useHasProcessMaximized } from "#/Systems/Process/index.ts";
 import { useDockProcesses } from "#/Systems/Dock/useDockProcesses.ts";
 import { useDockPresences } from "#/Systems/Dock/useDockPresences.ts";
 import { DOCK_ITEM_SIZE, useDockMagnification } from "#/Systems/Dock/useDockMagnification.ts";
+import { useDockAutoHide } from "#/Systems/Dock/useDockAutoHide.ts";
 import { DockPrimitive } from "#/Systems/Dock/DockPrimitive.tsx";
 import type { Systems } from "#/lib/types.ts";
 import { gsap, useGSAP } from "#/lib/gsap.ts";
-import { DOCK_ANCHOR, DOCK_SIZE } from "#/lib/constants.ts";
+import { DOCK_ANCHOR } from "#/lib/constants.ts";
 import { useMounted } from "#/hooks/use-mounted.ts";
-import { useIsPrefersReducedMotion } from "#/hooks/use-media-query.ts";
+import { useIsPrefersReducedMotion, useMediaQuery } from "#/hooks/use-media-query.ts";
 
 const DOCK_GAP = 8;
 const ENTER_DURATION = 0.35;
@@ -29,106 +22,30 @@ const BOUNCE_HEIGHT = DOCK_ITEM_SIZE * 0.5;
 const BOUNCE_HALF_DURATION = 0.26;
 
 export function Dock() {
-  const listRef = useRef<HTMLElement>(null);
-  const timerRef = useRef<NodeJS.Timeout>(null);
   const mounted = useMounted();
   const processes = useDockProcesses();
+  const canHover = useMediaQuery("(hover: hover) and (pointer: fine)");
+  const maximized = useHasProcessMaximized();
+  const autoHide = maximized && canHover;
+  const [hidden, props] = useDockAutoHide(autoHide);
   const [presences, onComplete] = useDockPresences(processes);
   const [onRegisterListRef, onRegisterItemRef] = useDockMagnification();
-  const [isVisible, setVisible] = useState(false);
-  const hide = useMemo(
-    () => presences.some((process) => process.maximized && !process.minimized),
-    [presences],
-  );
-
-  useEffect(() => {
-    if (!hide || isVisible) return;
-
-    const handleMouseMove = (event: globalThis.MouseEvent) => {
-      const bottom = event.clientY >= window.innerHeight - DOCK_SIZE;
-
-      if (bottom && listRef.current) {
-        const rect = listRef.current.getBoundingClientRect();
-        const isWithinX = event.clientX >= rect.left && event.clientX <= rect.right;
-
-        if (isWithinX) {
-          if (!timerRef.current) {
-            timerRef.current = setTimeout(() => {
-              setVisible(true);
-              timerRef.current = null;
-            }, 150);
-          }
-        } else {
-          if (timerRef.current) {
-            clearTimeout(timerRef.current);
-            timerRef.current = null;
-          }
-        }
-      } else {
-        if (timerRef.current) {
-          clearTimeout(timerRef.current);
-          timerRef.current = null;
-        }
-      }
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-        timerRef.current = null;
-      }
-    };
-  }, [hide, isVisible]);
-
-  useGSAP(() => {
-    const show = isVisible || !hide;
-
-    gsap.to(listRef.current, {
-      y: show ? 0 : 120,
-      opacity: show ? 1 : 0,
-      duration: 0.4,
-      ease: "power3.out",
-      overwrite: "auto",
-    });
-  }, [isVisible, hide]);
-
-  const onRegisterRef = useCallback(
-    (node: HTMLElement | null) => {
-      listRef.current = node;
-      const unregister = onRegisterListRef(node);
-      return () => {
-        listRef.current = null;
-        unregister();
-      };
-    },
-    [onRegisterListRef],
-  );
-
-  const onMouseEnter = useCallback(() => {
-    if (!hide) return;
-    setVisible(true);
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-  }, [hide]);
-
-  const onMouseLeave = useCallback(() => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-    setVisible(false);
-  }, []);
 
   if (presences.length === 0) return null;
 
   return (
-    <DockPrimitive onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-      <DockPrimitive.List ref={onRegisterRef}>
+    <DockPrimitive {...props}>
+      <div
+        aria-hidden
+        className={cn(
+          "absolute inset-x-0 top-full h-10",
+          autoHide ? "pointer-events-auto" : "pointer-events-none",
+        )}
+      />
+      <DockPrimitive.List
+        ref={onRegisterListRef}
+        data-hidden={hidden || undefined}
+        className="transition-[translate,opacity] duration-300 ease-out data-hidden:translate-y-[calc(100%+1rem)] data-hidden:opacity-0 motion-reduce:transition-none">
         {presences.map((process) => {
           return (
             <Suspense key={process.id}>

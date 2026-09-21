@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import { useSelector, type UseSelectorOptions } from "@tanstack/react-store";
 import { ProcessStore } from "#/Systems/Process/ProcessStore.ts";
 import type { Systems } from "#/lib/types.ts";
@@ -29,4 +31,17 @@ export function useProcess<T>(
 
     return selector ? selector(process) : process;
   });
+}
+
+export function useHasProcessMaximized() {
+  const processes = useProcesses();
+
+  return useMemo(
+    () =>
+      processes.some(
+        (process) =>
+          process.window.maximized && !process.window.minimized && !process.window.closed,
+      ),
+    [processes],
+  );
 }
