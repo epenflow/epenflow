@@ -1,6 +1,6 @@
 import { lazy } from "react";
 
-import { ProcessRegistryRegisterMany } from "#/Systems/Process/ProcessRegistry.ts";
+import { processRegistryRegisterMany } from "#/Systems/Process/processRegistry.ts";
 import type { Systems } from "#/lib/types.ts";
 
 export default function processRegistryInit() {
@@ -94,5 +94,5 @@ export default function processRegistryInit() {
   }
 
   const processes = createProcesses();
-  ProcessRegistryRegisterMany(processes);
+  processRegistryRegisterMany(processes);
 }

@@ -2,13 +2,13 @@ import { Suspense } from "react";
 
 import { Window } from "#/Systems/Window/index.ts";
 import { useProcesses } from "#/Systems/Process/useProcess.ts";
-import { ProcessRegistry } from "#/Systems/Process/ProcessRegistry.ts";
+import { processRegistry } from "#/Systems/Process/processRegistry.ts";
 
 export function ProcessLoader() {
   const processes = useProcesses();
 
   return processes.map((process) => {
-    const definition = ProcessRegistry.get(process.id);
+    const definition = processRegistry.get(process.id);
     if (!definition) return;
 
     return (

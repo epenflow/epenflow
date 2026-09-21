@@ -1,10 +1,10 @@
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
-import processRegistryInit from "#/Systems/Process/processRegistryInit.tsx";
+import { processRegistry } from "#/Systems/Process/processRegistry.ts";
+
+await processRegistry.initialize();
 
 export function getRouter() {
-  processRegistryInit();
-
   const router = createTanStackRouter({
     routeTree,
     scrollRestoration: true,

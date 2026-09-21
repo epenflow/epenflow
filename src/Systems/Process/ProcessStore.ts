@@ -1,5 +1,5 @@
 import { Store } from "@tanstack/react-store";
-import { ProcessRegistry } from "#/Systems/Process/ProcessRegistry.ts";
+import { processRegistry } from "#/Systems/Process/processRegistry.ts";
 import type { Systems } from "#/lib/types.ts";
 import { PID_DELIMITER, PROCESS_STORE_VALUES, WINDOW_VALUES } from "#/lib/constants.ts";
 
@@ -61,7 +61,7 @@ export const ProcessStore = new Store<Systems.Process.Store, Systems.Process.Act
   PROCESS_STORE_VALUES,
   ({ setState, get }) => ({
     open: (id) => {
-      const definition = ProcessRegistry.getOrThrow(id);
+      const definition = processRegistry.getOrThrow(id);
       const state = get();
 
       if (definition.singleton) {

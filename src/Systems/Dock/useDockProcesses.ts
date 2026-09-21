@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
 import { useProcesses, useProcessSelector } from "#/Systems/Process/useProcess.ts";
-import { ProcessRegistry } from "#/Systems/Process/ProcessRegistry.ts";
+import { processRegistry } from "#/Systems/Process/processRegistry.ts";
 import type { Systems } from "#/lib/types.ts";
 import { WINDOW_VALUES } from "#/lib/constants.ts";
 
@@ -23,7 +23,7 @@ export function useDockProcesses() {
     }
 
     const createDockItem = (id: Systems.Process.Identifier): Systems.Dock.Process => {
-      const definition = ProcessRegistry.get(id);
+      const definition = processRegistry.get(id);
       const instance = instances.get(id) ?? [];
 
       const current = instance.find((current) => current.pid === pid);
@@ -43,7 +43,7 @@ export function useDockProcesses() {
       };
     };
 
-    const definitions = ProcessRegistry.getMany().filter((definition) => definition.pinned);
+    const definitions = processRegistry.getMany().filter((definition) => definition.pinned);
     const entries = new Set(definitions.map((definition) => definition.id));
 
     const running = [...instances.entries()]

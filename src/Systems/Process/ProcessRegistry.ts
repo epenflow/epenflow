@@ -1,7 +1,7 @@
 import type { Systems } from "#/lib/types.ts";
 
-export class ProcessRegistrySingleton {
-  private static instance: ProcessRegistrySingleton | null = null;
+export class processRegistrySingleton {
+  private static instance: processRegistrySingleton | null = null;
   private readonly definitions = new Map<
     Systems.Process.Identifier,
     Systems.Process.Definition<Systems.Process.Identifier>
@@ -9,15 +9,15 @@ export class ProcessRegistrySingleton {
   private cached: ReadonlyArray<any> | null = null;
 
   constructor() {
-    if (ProcessRegistrySingleton.instance) {
-      return ProcessRegistrySingleton.instance;
+    if (processRegistrySingleton.instance) {
+      return processRegistrySingleton.instance;
     }
-    ProcessRegistrySingleton.instance = this;
+    processRegistrySingleton.instance = this;
   }
 
   public register(definition: Systems.Process.Definition<Systems.Process.Identifier>): void {
     if (definition.id == null) {
-      throw new Error("[ProcessRegistry]: definition.id is required");
+      throw new Error("[processRegistry]: definition.id is required");
     }
 
     this.definitions.set(definition.id, definition);
@@ -58,7 +58,7 @@ export class ProcessRegistrySingleton {
     const definition = this.get(id);
 
     if (definition == null) {
-      throw new Error(`[ProcessRegistry]: no process is registered for ${id}`);
+      throw new Error(`[processRegistry]: no process is registered for ${id}`);
     }
 
     return definition;
@@ -77,11 +77,27 @@ export class ProcessRegistrySingleton {
     this.cached = null;
   }
 
-  static getInstance(): ProcessRegistrySingleton {
-    return (this.instance ??= new ProcessRegistrySingleton());
+  public async initialize() {
+    const modules = import.meta.glob<{ default?: (registry: processRegistrySingleton) => void }>(
+      "/src/**/*.registry.{ts,tsx}",
+      { eager: true },
+    );
+
+    for (const path in modules) {
+      const module = modules[path];
+
+      if (typeof module.default === "function") {
+        module.default(this);
+      }
+    }
+    console.info(`[processRegistry]: Initialized ${this.definitions.size} processes.`);
+  }
+
+  static getInstance(): processRegistrySingleton {
+    return (this.instance ??= new processRegistrySingleton());
   }
 }
 
-export const ProcessRegistry = ProcessRegistrySingleton.getInstance();
-export const ProcessRegistryGetMany = ProcessRegistry.getMany.bind(ProcessRegistry);
-export const ProcessRegistryRegisterMany = ProcessRegistry.registerMany.bind(ProcessRegistry);
+export const processRegistry = processRegistrySingleton.getInstance();
+export const processRegistryGetMany = processRegistry.getMany.bind(processRegistry);
+export const processRegistryRegisterMany = processRegistry.registerMany.bind(processRegistry);

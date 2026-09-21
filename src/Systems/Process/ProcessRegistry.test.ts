@@ -1,4 +1,4 @@
-import { ProcessRegistrySingleton } from "#/Systems/Process/ProcessRegistry.ts";
+import { processRegistrySingleton } from "#/Systems/Process/processRegistry.ts";
 import type { Systems } from "#/lib/types.ts";
 
 interface MockProcessDefinition extends Systems.Process.Definition<string> {
@@ -17,10 +17,10 @@ const definitions: MockProcessDefinition[] = [
   { id: "process-3", title: "process-3", component: () => null },
 ];
 
-describe("ProcessRegistry", () => {
-  let registry: ProcessRegistrySingleton;
+describe("processRegistry", () => {
+  let registry: processRegistrySingleton;
   beforeAll(() => {
-    registry = ProcessRegistrySingleton.getInstance();
+    registry = processRegistrySingleton.getInstance();
   });
 
   beforeEach(() => {
@@ -29,15 +29,15 @@ describe("ProcessRegistry", () => {
 
   describe("singleton instantiation", () => {
     it("it must return the same instance when called multiple times via getInstance()", () => {
-      const first = ProcessRegistrySingleton.getInstance();
-      const second = ProcessRegistrySingleton.getInstance();
+      const first = processRegistrySingleton.getInstance();
+      const second = processRegistrySingleton.getInstance();
 
       expect(first).toBe(second);
     });
 
     it("a safety constructor must always return the same instance when called with 'new'", () => {
-      const first = ProcessRegistrySingleton.getInstance();
-      const second = new ProcessRegistrySingleton();
+      const first = processRegistrySingleton.getInstance();
+      const second = new processRegistrySingleton();
 
       expect(first).toBe(second);
     });
@@ -54,7 +54,7 @@ describe("ProcessRegistry", () => {
       const invalid = { title: "process-1" } as unknown as MockProcessDefinition;
 
       expect(() => registry.register(invalid)).toThrow(
-        "[ProcessRegistry]: definition.id is required",
+        "[processRegistry]: definition.id is required",
       );
     });
 
@@ -66,7 +66,7 @@ describe("ProcessRegistry", () => {
 
     it("getOrThrow must throw an error if it attempts to access an unregistered id", () => {
       expect(() => registry.getOrThrow("process-1")).toThrow(
-        "[ProcessRegistry]: no process is registered for process-1",
+        "[processRegistry]: no process is registered for process-1",
       );
     });
   });

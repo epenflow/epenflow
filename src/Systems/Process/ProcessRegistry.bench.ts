@@ -1,4 +1,4 @@
-import { ProcessRegistrySingleton } from "#/Systems/Process/ProcessRegistry.ts";
+import { processRegistrySingleton } from "#/Systems/Process/processRegistry.ts";
 import type { Systems } from "#/lib/types.ts";
 
 function createDefinitions(amount: number = 100) {
@@ -18,11 +18,11 @@ const definition: Systems.Process.Definition<string> = {
   component: () => null,
 };
 
-describe("ProcessRegistry - Performance Benchmarks", () => {
-  let registry: ProcessRegistrySingleton;
+describe("processRegistry - Performance Benchmarks", () => {
+  let registry: processRegistrySingleton;
 
   beforeAll(() => {
-    registry = ProcessRegistrySingleton.getInstance();
+    registry = processRegistrySingleton.getInstance();
   });
 
   beforeEach(() => {

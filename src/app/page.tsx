@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Topbar } from "#/Systems/Topbar/index.ts";
 import { ProcessStore } from "#/Systems/Process/ProcessStore.ts";
-import { ProcessRegistry } from "#/Systems/Process/ProcessRegistry.ts";
+import { processRegistry } from "#/Systems/Process/processRegistry.ts";
 import { ProcessLoader } from "#/Systems/Process/ProcessLoader.tsx";
 import { useProcesses } from "#/Systems/Process/index.ts";
 import { Dock } from "#/Systems/Dock/index.ts";
@@ -37,7 +37,7 @@ function Home() {
       <Topbar />
       <Desktop.Viewport>
         <Desktop.Icons onOpenChange={onOpenChange}>
-          {ProcessRegistry.getMany().map((process) => (
+          {processRegistry.getMany().map((process) => (
             <Desktop.Icon key={process.id} value={process.id}>
               <Desktop.Icon.Thumbnail variant="default">
                 {process.title.slice(0, 1)}
