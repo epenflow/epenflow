@@ -29,6 +29,15 @@ export function Topbar() {
     },
     [pid],
   );
+  const onCloseProcesses = useCallback(
+    (event: MouseEvent<HTMLDivElement>) => {
+      event.preventDefault();
+
+      const next = Object.fromEntries(processes.map((process) => [process.pid, process]));
+      ProcessStore.actions.closeProcesses(next);
+    },
+    [processes],
+  );
 
   const disabled = pid == null;
   const maximized = processes.find((process) => process.pid === pid)?.window.maximized ?? false;
@@ -87,6 +96,11 @@ export function Topbar() {
                 </TopbarPrimitive.MenuItem>
                 <TopbarPrimitive.MenuItem disabled={disabled} onClick={onMinimizeChange}>
                   Minimize
+                </TopbarPrimitive.MenuItem>
+                <TopbarPrimitive.MenuItem
+                  disabled={processes.length === 0}
+                  onClick={onCloseProcesses}>
+                  Close Processes
                 </TopbarPrimitive.MenuItem>
               </TopbarPrimitive.MenuGroup>
             </TopbarPrimitive.MenuContent>

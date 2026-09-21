@@ -1,7 +1,7 @@
 import { useCallback, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 
 import type { RndDragCallback, RndResizeCallback } from "react-rnd";
-import { WindowGenie } from "#/Systems/Window/WindowGenie.ts";
+import { useWindowGenieThree } from "#/Systems/Window/WindowGenie.three.ts";
 import { useProcess, useProcessZIndex } from "#/Systems/Process/useProcess.ts";
 import { ProcessStore } from "#/Systems/Process/ProcessStore.ts";
 import { DockDOM } from "#/Systems/Dock/index.ts";
@@ -9,7 +9,7 @@ import { WindowStore } from "#/playground/WindowStore.ts";
 import { useViewportObserver } from "#/playground/ViewportObserver.ts";
 import type { Systems } from "#/lib/types.ts";
 import { gsap, useGSAP } from "#/lib/gsap.ts";
-import { DOCK_HEIGHT, TOPBAR_HEIGHT } from "#/lib/constants.ts";
+import { TOPBAR_HEIGHT } from "#/lib/constants.ts";
 import { useIsPrefersReducedMotion } from "#/hooks/use-media-query.ts";
 
 export type CenterPositionProps = {
@@ -25,7 +25,7 @@ function center({ target, container }: CenterPositionProps): Systems.Window.Posi
 }
 
 export function useWindowRnd(pid: string) {
-  const contentRef = useRef<HTMLElement>(null);
+  const genieRef = useRef<HTMLElement>(null);
 
   const zIndex = useProcessZIndex(pid);
   const id = useProcess(pid, (state) => state.id);
@@ -50,16 +50,14 @@ export function useWindowRnd(pid: string) {
         }),
       }),
   );
-  const [genie] = useState(
-    () =>
-      new WindowGenie({
-        duration: isReducedMotion ? 200 : 420,
-        stripCount: isReducedMotion ? 100 : 500,
-        xAxisEasing: isReducedMotion ? "linear" : "power2.inOut",
-        yAxisEasing: isReducedMotion ? "linear" : "power1.in",
-        kickoffDuration: isReducedMotion ? 0.05 : 0.12,
-      }),
-  );
+
+  const { genie } = useWindowGenieThree({
+    duration: isReducedMotion ? 200 : 420,
+    stripCount: isReducedMotion ? 100 : 500,
+    xAxisEasing: isReducedMotion ? "linear" : "power2.inOut",
+    yAxisEasing: isReducedMotion ? "linear" : "power1.in",
+    kickoffDuration: isReducedMotion ? 0.05 : 0.12,
+  });
 
   const snapshot = useSyncExternalStore(
     store.subscribe,
@@ -98,7 +96,7 @@ export function useWindowRnd(pid: string) {
         {
           y: TOPBAR_HEIGHT,
           x: 0,
-          height: viewport.height - (TOPBAR_HEIGHT + DOCK_HEIGHT),
+          height: viewport.height - TOPBAR_HEIGHT,
           width: viewport.width,
         },
         {
@@ -112,7 +110,7 @@ export function useWindowRnd(pid: string) {
 
   useGSAP(() => {
     const dock = DockDOM.query(id);
-    const content = contentRef.current;
+    const content = genieRef.current;
 
     if (!content || !dock) return;
     genie.prime(content);
@@ -172,7 +170,7 @@ export function useWindowRnd(pid: string) {
     (event, data) => {
       onDragChange(event, data);
 
-      const content = contentRef.current;
+      const content = genieRef.current;
       if (content) genie.prime(content);
     },
     // oxlint-disable-next-line react-hooks/exhaustive-deps
@@ -182,7 +180,7 @@ export function useWindowRnd(pid: string) {
     (event, direction, element, delta, position) => {
       onResizeChange(event, direction, element, delta, position);
 
-      const content = contentRef.current;
+      const content = genieRef.current;
       if (content) genie.prime(content);
     },
     // oxlint-disable-next-line react-hooks/exhaustive-deps
@@ -202,7 +200,7 @@ export function useWindowRnd(pid: string) {
 
   return {
     ...snapshot,
-    contentRef,
+    genieRef,
     enableResizing: resizable && interactive,
     disableDragging: !interactive,
     minWidth: Math.max(defaultSize.width - 50, viewport.width * 0.2),

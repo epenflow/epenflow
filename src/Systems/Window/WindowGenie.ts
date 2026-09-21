@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import type { Position } from "react-rnd";
 import { toCanvas } from "html-to-image";
 import { viewportObserver, type ViewportObserver } from "#/playground/ViewportObserver.ts";
@@ -563,4 +565,10 @@ export class WindowGenie {
       listener();
     }
   }
+}
+
+export function useWindowGenie(options: GenieOptions = {}) {
+  const [genie] = useState(() => new WindowGenie(options));
+
+  return genie;
 }

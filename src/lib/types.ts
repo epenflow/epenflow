@@ -90,6 +90,7 @@ export namespace Systems {
       blur(): void;
       maximize(pid: string, forced?: boolean): void;
       minimize(pid: string, forced?: boolean): void;
+      closeProcesses(processes: Processes, forced?: boolean): void;
     };
   }
 }

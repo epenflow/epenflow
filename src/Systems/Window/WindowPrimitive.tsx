@@ -12,7 +12,7 @@ import type { Systems } from "#/lib/types.ts";
 import { Portal } from "#/components/ui/portal.tsx";
 
 const rootVariants = cva(
-  "border-border bg-background isolate flex size-full overflow-hidden overscroll-none rounded-2xl border",
+  "border-border bg-background isolate flex size-full overflow-hidden overscroll-none rounded-2xl border shadow-2xl select-auto",
   {
     variants: {
       mode: {
@@ -27,7 +27,7 @@ const rootVariants = cva(
       },
       focused: {
         true: "ring-ring/20 ring-1",
-        false: "opacity-90 shadow-md",
+        false: "opacity-100 shadow-md",
       },
     },
     defaultVariants: {
@@ -102,7 +102,7 @@ function Root({
     variant?: VariantProps<typeof rootVariants>["variant"];
   } & Systems.Process.ComponentProps) {
   const {
-    contentRef,
+    genieRef,
     size,
     position,
     minWidth,
@@ -127,7 +127,7 @@ function Root({
 
   const children = useRender({
     render,
-    ref: [contentRef, motionRef],
+    ref: [genieRef, motionRef],
     defaultTagName: "div",
     state: {
       slot: "window",
@@ -154,7 +154,6 @@ function Root({
         position={position}
         minWidth={minWidth}
         minHeight={minHeight}
-        style={style}
         onDrag={onDragChange}
         onDragStart={onDragChange}
         onResize={onResizeChange}
@@ -300,7 +299,7 @@ function Viewport({ render, className, ...props }: useRender.ComponentProps<"div
       {
         "aria-label": "window viewport",
         className: cn(
-          "relative flex flex-1 cursor-default flex-col overflow-hidden overscroll-none",
+          "relative flex flex-1 cursor-auto flex-col overflow-hidden overscroll-none select-text",
           className,
         ),
       },

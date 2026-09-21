@@ -217,5 +217,59 @@ export const ProcessStore = new Store<Systems.Process.Store, Systems.Process.Act
     blur: () => {
       setState((current) => ({ ...current, pid: null }));
     },
+    closeProcesses: (processes, forced) => {
+      setState((current) => {
+        const pids = Object.keys(processes);
+
+        if (pids.length === 0) return current;
+        const entries = { ...current.processes };
+        let orders = [...current.orders];
+        let changed = false;
+
+        const removes: string[] = [];
+
+        for (const pid of pids) {
+          const process = entries[pid];
+          if (!process) continue;
+
+          const interactive = !forced && !process.window.closed;
+
+          if (interactive) {
+            entries[pid] = {
+              ...process,
+              window: { ...process.window, closed: true },
+            };
+            changed = true;
+          } else {
+            removes.push(pid);
+          }
+        }
+
+        if (removes.length > 0) {
+          for (const pid of removes) {
+            delete entries[pid];
+          }
+          orders = orders.filter((id) => !removes.includes(id));
+          changed = true;
+        }
+
+        if (!changed) return current;
+
+        let active = current.pid;
+        const affected =
+          current.pid && (removes.includes(current.pid) || entries[current.pid]?.window.closed);
+
+        if (affected && current.pid) {
+          active = findVisiblePID(current.pid, entries, orders);
+        }
+
+        return {
+          ...current,
+          pid: active,
+          processes: entries,
+          orders: orders,
+        };
+      });
+    },
   }),
 );
