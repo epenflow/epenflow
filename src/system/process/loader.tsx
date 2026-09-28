@@ -15,7 +15,13 @@ export function Loader() {
     return (
       <Suspense key={instance.pid}>
         <ProtoWindow pid={instance.pid}>
-          <definition.component pid={instance.pid} />
+          {typeof definition.Wrap !== "undefined" ? (
+            <definition.Wrap pid={instance.pid}>
+              <definition.Component pid={instance.pid} />
+            </definition.Wrap>
+          ) : (
+            <definition.Component pid={instance.pid} />
+          )}
         </ProtoWindow>
       </Suspense>
     );

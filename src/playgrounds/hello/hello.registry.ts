@@ -6,7 +6,7 @@ export default function (registry: System.Registry) {
   registry.register({
     id: "Hello",
     title: "Hello",
-    component: lazy(() => import("./hello")),
+    Component: lazy(() => import("./hello")),
     singleton: true,
   });
 }

@@ -1,4 +1,4 @@
-import type { ComponentType } from "react";
+import type { ComponentType, PropsWithChildren } from "react";
 
 import type { JSONValue } from "es-toolkit/types";
 
@@ -51,7 +51,8 @@ export namespace System {
   export namespace Desktop {}
 
   export interface Definition<T extends Process.Id = Process.Id> extends Process.Base<T> {
-    component: ComponentType<Process.ComponentProps>;
+    Wrap?: ComponentType<Process.ComponentProps & PropsWithChildren>;
+    Component: ComponentType<Process.ComponentProps>;
     window?: Partial<Window.State>;
     singleton?: boolean;
     pinned?: boolean;

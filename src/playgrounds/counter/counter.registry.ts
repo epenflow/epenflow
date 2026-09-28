@@ -6,6 +6,7 @@ export default function (registry: System.Registry) {
   registry.register({
     id: "Counter",
     title: "Counter",
-    component: lazy(() => import("./counter")),
+    Component: lazy(() => import("./counter")),
+    Wrap: lazy(() => import("./counter.context")),
   });
 }
