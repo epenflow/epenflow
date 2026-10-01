@@ -1,12 +1,12 @@
 import type { System } from "#/system/types.ts";
+import { DOCK_PRESENCES_SERVER_SNAPSHOT } from "#/system/constants.ts";
 
 export const DockDOM = {
-  assign: <T>(id: T) => ({ "data-dock": id }),
-  query: <T, U extends HTMLElement>(id: T): U | null =>
-    document.querySelector<U>(`[data-dock="${id}"]`),
+  assign: <T>(value: T) => ({ "data-dock": value }),
+  query: <T, H extends HTMLElement>(value: T): H | null =>
+    document.querySelector<H>(`[data-dock="${value}"]`),
 };
 
-const DOCK_PRESENCES_SERVER_SNAPSHOT: System.Dock.Presence[] = [];
 export function createDockPresences(instances: System.Dock.Instance[]) {
   let last = instances;
   let current = instances.map((process) => ({ ...process, completed: false }));
@@ -38,7 +38,7 @@ export function createDockPresences(instances: System.Dock.Instance[]) {
       last = next;
 
       setState((prev) => {
-        const entries = new Set(next.map((item) => item.id));
+        const identifiers = new Set(next.map((item) => item.id));
         const presences: System.Dock.Presence[] = next.map((item) => ({
           ...item,
           completed: false,
@@ -47,7 +47,7 @@ export function createDockPresences(instances: System.Dock.Instance[]) {
         let id: System.Process.Id | null = null;
 
         for (const item of prev) {
-          if (entries.has(item.id)) {
+          if (identifiers.has(item.id)) {
             id = item.id;
             continue;
           }

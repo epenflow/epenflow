@@ -25,7 +25,7 @@ const Group = ({ render, className, ...props }: useRender.ComponentProps<"ul">) 
       {
         role: "toolbar",
         className: cn(
-          "pointer-events-auto flex items-end gap-2 rounded-xl p-2",
+          "pointer-events-auto flex items-end gap-(--gap,8px) rounded-xl p-2",
           "bg-card border-border border",
           className,
         ),

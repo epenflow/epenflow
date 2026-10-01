@@ -12,7 +12,16 @@ import {
   useDockMagnify,
   useDockPresences,
 } from "#/system/dock/hooks.ts";
-import { DOCK_ITEM_STYLES, DOCK_MAGNIFY_SIZE } from "#/system/constants.ts";
+import {
+  DOCK_GROUP_STYLE,
+  DOCK_ITEM_BOUNCE_COUNT,
+  DOCK_ITEM_BOUNCE_HALF_DURATION,
+  DOCK_ITEM_BOUNCE_HEIGHT,
+  DOCK_ITEM_ENTER_DURATION,
+  DOCK_ITEM_EXIT_DURATION,
+  DOCK_ITEM_GAP,
+  DOCK_ITEM_SIZE,
+} from "#/system/constants.ts";
 import { gsap, useGSAP } from "#/lib/gsap.ts";
 import { useIsMouseDevice, useIsReduceMotion } from "#/hooks/use-media-query.ts";
 import { useIsMounted } from "#/hooks/use-is-mounted.ts";
@@ -42,6 +51,7 @@ export function Dock() {
       />
       <DockPrimitive.Group
         ref={registerGroupRef}
+        style={DOCK_GROUP_STYLE}
         className={cn(
           "transition-[translate,opacity] duration-500 ease-out",
           engaged && "translate-y-full opacity-0",
@@ -60,13 +70,6 @@ export function Dock() {
     </DockPrimitive>
   );
 }
-
-const DOCK_GAP = 8;
-const ENTER_DURATION = 0.35;
-const EXIT_DURATION = 0.3;
-const BOUNCE_COUNT = 3;
-const BOUNCE_HEIGHT = DOCK_MAGNIFY_SIZE * 0.5;
-const BOUNCE_HALF_DURATION = 0.26;
 
 interface DockItemProps {
   instance: System.Dock.Presence;
@@ -100,12 +103,12 @@ function DockItem({
 
       gsap.fromTo(
         scope,
-        { maxWidth: 0, marginRight: -DOCK_GAP, opacity: 0 },
+        { maxWidth: 0, marginRight: -DOCK_ITEM_GAP, opacity: 0 },
         {
-          maxWidth: DOCK_MAGNIFY_SIZE,
+          maxWidth: DOCK_ITEM_SIZE,
           marginRight: 0,
           opacity: 1,
-          duration: ENTER_DURATION,
+          duration: DOCK_ITEM_ENTER_DURATION,
           ease: "power3.out",
           clearProps: true,
         },
@@ -131,10 +134,10 @@ function DockItem({
       );
 
       gsap.to("button", {
-        y: -BOUNCE_HEIGHT,
-        duration: BOUNCE_HALF_DURATION,
+        y: -DOCK_ITEM_BOUNCE_HEIGHT,
+        duration: DOCK_ITEM_BOUNCE_HALF_DURATION,
         ease: "power2.out",
-        repeat: BOUNCE_COUNT * 2 - 1,
+        repeat: DOCK_ITEM_BOUNCE_COUNT * 2 - 1,
         yoyo: true,
         onComplete: () => gsap.set("button", { clearProps: true }),
       });
@@ -154,9 +157,9 @@ function DockItem({
           { maxWidth: scope.offsetWidth },
           {
             maxWidth: 0,
-            marginRight: -DOCK_GAP,
+            marginRight: -DOCK_ITEM_GAP,
             opacity: 0,
-            duration: isReducedMotion ? 0 : EXIT_DURATION,
+            duration: isReducedMotion ? 0 : DOCK_ITEM_EXIT_DURATION,
             ease: "power2.inOut",
             overwrite: "auto",
             onComplete: () => onComplete(instance.id),
@@ -169,10 +172,10 @@ function DockItem({
         interruptRef.current = false;
 
         gsap.to(scope, {
-          maxWidth: DOCK_MAGNIFY_SIZE,
+          maxWidth: DOCK_ITEM_SIZE,
           marginRight: 0,
           opacity: 1,
-          duration: isReducedMotion ? 0 : ENTER_DURATION,
+          duration: isReducedMotion ? 0 : DOCK_ITEM_ENTER_DURATION,
           ease: "power3.out",
           overwrite: "auto",
           clearProps: true,
@@ -221,10 +224,7 @@ function DockItem({
   );
 
   return (
-    <DockPrimitive.Item
-      ref={onRegisterRef}
-      style={DOCK_ITEM_STYLES}
-      {...DockDOM.assign(instance.id)}>
+    <DockPrimitive.Item ref={onRegisterRef} {...DockDOM.assign(instance.id)}>
       <DockPrimitive.Button onClick={onOpenChange}>
         <span>{instance.title.slice(0, 1)}</span>
         <Activity mode={instance.count > 1 ? "visible" : "hidden"}>

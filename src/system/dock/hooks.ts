@@ -16,8 +16,8 @@ import { createDockPresences } from "#/system/dock/utils.ts";
 import {
   DOCK_ENGAGE_HIDE_DELAY,
   DOCK_ENGAGE_SHOW_DELAY,
+  DOCK_ITEM_SIZE,
   DOCK_MAGNIFY_SCALE,
-  DOCK_MAGNIFY_SIZE,
   WINDOW_STATE_VALUES,
 } from "#/system/constants.ts";
 import { gsap, useGSAP } from "#/lib/gsap.ts";
@@ -61,7 +61,7 @@ export function useDockMagnify(enabled: boolean = true) {
 
       const reset = () => {
         for (const entry of entries.values()) {
-          setterFor(entry)(parseFloat(entry.getAttribute("data-size") ?? `${DOCK_MAGNIFY_SIZE}`));
+          setterFor(entry)(parseFloat(entry.getAttribute("data-size") ?? `${DOCK_ITEM_SIZE}`));
         }
       };
 
@@ -73,7 +73,7 @@ export function useDockMagnify(enabled: boolean = true) {
           cached.set(entry, {
             center: rect.left + rect.width / 2,
             scale: parseFloat(entry.getAttribute("data-scale") ?? `${DOCK_MAGNIFY_SCALE}`),
-            size: parseFloat(entry.getAttribute("data-size") ?? `${DOCK_MAGNIFY_SIZE}`),
+            size: parseFloat(entry.getAttribute("data-size") ?? `${DOCK_ITEM_SIZE}`),
           });
         }
       };
@@ -100,7 +100,7 @@ export function useDockMagnify(enabled: boolean = true) {
             center = cached.center;
           } else {
             const rect = entry.getBoundingClientRect();
-            size = parseFloat(entry.getAttribute("data-size") ?? `${DOCK_MAGNIFY_SIZE}`);
+            size = parseFloat(entry.getAttribute("data-size") ?? `${DOCK_ITEM_SIZE}`);
             scale = parseFloat(entry.getAttribute("data-scale") ?? `${DOCK_MAGNIFY_SCALE}`);
             center = rect.left + rect.width / 2;
           }
