@@ -41,7 +41,7 @@ export function Dock() {
   if (instances.length === 0) return null;
 
   return (
-    <DockPrimitive {...props}>
+    <DockPrimitive data-slot="dock" {...props}>
       <div
         aria-hidden={true}
         className={cn(
@@ -50,6 +50,7 @@ export function Dock() {
         )}
       />
       <DockPrimitive.Group
+        data-slot="dock-group"
         ref={registerGroupRef}
         style={DOCK_GROUP_STYLE}
         className={cn(
@@ -224,7 +225,7 @@ function DockItem({
   );
 
   return (
-    <DockPrimitive.Item ref={onRegisterRef} {...DockDOM.assign(instance.id)}>
+    <DockPrimitive.Item data-slot="dock-item" ref={onRegisterRef} {...DockDOM.assign(instance.id)}>
       <DockPrimitive.Button onClick={onOpenChange}>
         <span>{instance.title.slice(0, 1)}</span>
         <Activity mode={instance.count > 1 ? "visible" : "hidden"}>

@@ -38,9 +38,11 @@ export const DOCK_ITEM_EXIT_DURATION = 0.3;
 export const DOCK_ITEM_BOUNCE_COUNT = 3;
 export const DOCK_ITEM_BOUNCE_HEIGHT = DOCK_ITEM_SIZE * 0.5;
 export const DOCK_ITEM_BOUNCE_HALF_DURATION = 0.26;
+export const DOCK_ITEM_Z_INDEX = 100;
 export const DOCK_GROUP_STYLE = {
   "--gap": `${DOCK_ITEM_GAP}px`,
   "--size": `${DOCK_ITEM_SIZE}px`,
+  "--zIndex": DOCK_ITEM_Z_INDEX,
 } as CSSProperties;
 
 export const GENIE_EASE_LUT_SIZE = 256;

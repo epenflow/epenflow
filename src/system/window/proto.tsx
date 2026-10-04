@@ -60,12 +60,12 @@ export function ProtoWindow({ children, pid }: PropsWithChildren & System.Proces
         </div>
       </Rnd>
       <Portal
+        container={document.querySelector("[data-slot='dock-group']")}
         render={
           <canvas
             ref={onAttachCanvasRef}
             aria-hidden={true}
-            style={{ zIndex }}
-            className="pointer-events-none fixed inset-0 isolate overflow-clip rounded-xl"
+            className="pointer-events-none fixed inset-0 overflow-clip rounded-xl"
           />
         }
       />

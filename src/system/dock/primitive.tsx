@@ -9,7 +9,7 @@ const Root = ({ render, className, ...props }: useRender.ComponentProps<"nav">) 
     props: mergeProps<"nav">(
       {
         className: cn(
-          "pointer-events-none fixed inset-x-0 bottom-2 z-[calc(infinity)] flex justify-center",
+          "pointer-events-none fixed inset-x-0 bottom-2 isolate z-[calc(infinity)] flex justify-center",
           className,
         ),
       },
@@ -40,7 +40,11 @@ const Item = ({ render, className, ...props }: useRender.ComponentProps<"li">) =
     defaultTagName: "li",
     props: mergeProps<"li">(
       {
-        className: cn("relative flex shrink-0 items-end", "size-(--size,48px)", className),
+        className: cn(
+          "relative isolate flex shrink-0 items-end",
+          "z-(--zIndex,10) size-(--size,48px)",
+          className,
+        ),
       },
       props,
     ),
