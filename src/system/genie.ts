@@ -311,8 +311,8 @@ export class Genie {
   };
 
   /**
-   * @template {HTMLElement} F
-   * @template {HTMLElement} T
+   * @template {HTMLElement} [F=HTMLElement]
+   * @template {HTMLElement} [T=HTMLElement]
    * @param {F} from
    * @param {T} to
    * @param {VoidFunction} onComplete
@@ -373,6 +373,14 @@ export class Genie {
     );
   };
 
+  /**
+   * @template {HTMLElement} [F=HTMLElement]
+   * @template {HTMLElement} [T=HTMLElement]
+   * @param {F} from
+   * @param {T} to
+   * @param {VoidFunction} onComplete
+   * @returns {void}
+   */
   public restore = <F extends HTMLElement = HTMLElement, T extends HTMLElement = HTMLElement>(
     from: F,
     to: T,
@@ -478,11 +486,11 @@ export class Genie {
   };
 
   /**
-   *
-   * @param {HTMLElement} from
+   * @template {HTMLElement} [T=HTMLElement]
+   * @param {T} from
    * @returns {void}
    */
-  public prime = (from: HTMLElement): void => {
+  public prime = <T extends HTMLElement = HTMLElement>(from: T): void => {
     if (this.isAnimating || this.promise || !isBrowser()) return;
 
     const promise = this.capture(from).then((canvas) => {
@@ -509,15 +517,17 @@ export class Genie {
 
   /**
    *
+   * @template {HTMLElement} [F=HTMLElement]
+   * @template {HTMLElement} [T=HTMLElement]
    * @param {System.Genie.Phase} phase
-   * @param {HTMLElement} from
-   * @param {HTMLElement} to
+   * @param {F} from
+   * @param {T} to
    * @param {VoidFunction} done
    */
-  private play(
+  private play<F extends HTMLElement = HTMLElement, T extends HTMLElement = HTMLElement>(
     phase: System.Genie.Phase,
-    from: HTMLElement,
-    to: HTMLElement,
+    from: F,
+    to: T,
     done: VoidFunction,
   ): void {
     this.tween?.kill();
@@ -572,11 +582,11 @@ export class Genie {
   }
 
   /**
-   *
-   * @param {HTMLElement} from
+   * @template {HTMLElement} [T=HTMLElement]
+   * @param {T} from
    * @returns {Promise<HTMLCanvasElement>}
    */
-  private capture(from: HTMLElement): Promise<HTMLCanvasElement> {
+  private capture<T extends HTMLElement = HTMLElement>(from: T): Promise<HTMLCanvasElement> {
     return toCanvas(from, {
       pixelRatio: this.config.pixelRatio,
       cacheBust: false,
