@@ -4,13 +4,15 @@ import { Rnd } from "react-rnd";
 import { useWindowRnd } from "#/system/window/hooks.ts";
 import type { System } from "#/system/types.ts";
 import { close, focus, maximize, minimize } from "#/system/process/index.ts";
-import { useProcessFocusable, useProcessStack } from "#/system/process/hooks.ts";
+import { useInstance, useProcessFocusable, useProcessStack } from "#/system/process/hooks.ts";
+import { DockDOM } from "#/system/dock/index.ts";
 import { Portal } from "#/components/portal.tsx";
 
 export function ProtoWindow({ children, pid }: PropsWithChildren & System.Process.ComponentProps) {
   const rndRef = useRef<Rnd>(null);
   const zIndex = useProcessStack(pid);
   const focused = useProcessFocusable(pid);
+  const instanceId = useInstance(pid, (state) => state.id);
 
   const { size, position, onDragChange, onResizeChange, onAttachCanvasRef, fromRef } =
     useWindowRnd(pid);
@@ -36,7 +38,7 @@ export function ProtoWindow({ children, pid }: PropsWithChildren & System.Proces
         onDragStop={onDragChange}
         onResizeStop={onResizeChange}
         onMouseDown={onFocus}>
-        <div ref={fromRef} className="bg-card border-border size-full border">
+        <div ref={fromRef} className="border-border size-full border bg-indigo-500">
           <p className="text-2xl font-medium">{pid}</p>
           <div data-dragging="none" className="inline-flex items-center gap-1">
             <button
@@ -59,16 +61,13 @@ export function ProtoWindow({ children, pid }: PropsWithChildren & System.Proces
           {children}
         </div>
       </Rnd>
-      <Portal
-        container={document.querySelector("[data-slot='dock-group']")}
-        render={
-          <canvas
-            ref={onAttachCanvasRef}
-            aria-hidden={true}
-            className="pointer-events-none fixed inset-0 overflow-clip rounded-xl"
-          />
-        }
-      />
+      <Portal mount={DockDOM.selector(instanceId)}>
+        <canvas
+          ref={onAttachCanvasRef}
+          aria-hidden={true}
+          className="pointer-events-none fixed inset-0 overflow-clip rounded-xl"
+        />
+      </Portal>
     </>
   );
 }

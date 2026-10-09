@@ -5,6 +5,7 @@ export const DockDOM = {
   assign: <T>(value: T) => ({ "data-dock": value }),
   query: <T, H extends HTMLElement>(value: T): H | null =>
     document.querySelector<H>(`[data-dock="${value}"]`),
+  selector: <T>(value: T) => `[data-dock="${value}"]`,
 };
 
 export function createDockPresences(instances: System.Dock.Instance[]) {

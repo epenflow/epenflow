@@ -1,19 +1,44 @@
+import { useCallback, useSyncExternalStore, type ReactNode } from "react";
+
 import { createPortal } from "react-dom";
-import { useRender } from "@base-ui/react";
-import { useIsMounted } from "#/hooks/use-is-mounted.ts";
 
-export function Portal({
-  render,
-  container: containerProp,
-  ...props
-}: useRender.ComponentProps<"div"> & {
-  container?: Element | DocumentFragment | null;
-}) {
-  const mounted = useIsMounted();
-  const container = containerProp ?? (mounted ? document.body : null);
-  const children = useRender({ render, defaultTagName: "div", props });
+type PortalTarget = Element | DocumentFragment;
 
-  if (!container) return null;
+interface PortalProps {
+  mount?: PortalTarget | string;
+  fallback?: PortalTarget | null;
+  strict?: boolean;
+  children?: ReactNode;
+}
 
-  return createPortal(children, container);
+function resolve(mount?: PortalTarget | string): PortalTarget | null {
+  if (mount == null) return null;
+
+  if (typeof mount !== "string") return mount;
+
+  return document.querySelector(mount);
+}
+
+export function Portal({ mount, fallback, strict = false, children }: PortalProps) {
+  const subscribe = useCallback(
+    (onChange: VoidFunction) => {
+      if (typeof mount !== "string") return () => {};
+
+      const observer = new MutationObserver(onChange);
+      observer.observe(document.body, { childList: true, subtree: true });
+
+      return () => observer.disconnect();
+    },
+    [mount],
+  );
+
+  const getSnapshot = useCallback(() => resolve(mount), [mount]);
+
+  const snapshot = useSyncExternalStore(subscribe, getSnapshot, () => null);
+
+  const resolved = snapshot ?? (strict ? null : (fallback ?? document.body));
+
+  if (!resolved) return null;
+
+  return createPortal(children, resolved);
 }

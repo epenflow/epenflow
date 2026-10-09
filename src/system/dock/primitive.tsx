@@ -40,11 +40,7 @@ const Item = ({ render, className, ...props }: useRender.ComponentProps<"li">) =
     defaultTagName: "li",
     props: mergeProps<"li">(
       {
-        className: cn(
-          "relative isolate flex shrink-0 items-end",
-          "z-(--zIndex,10) size-(--size,48px)",
-          className,
-        ),
+        className: cn("relative isolate flex shrink-0 items-end", "size-(--size,48px)", className),
       },
       props,
     ),
@@ -59,6 +55,7 @@ const Button = ({ render, className, ...props }: useRender.ComponentProps<"butto
         className: cn(
           "absolute bottom-0 flex aspect-square w-full origin-bottom items-center justify-center rounded-xl",
           "bg-card border-border border",
+          "z-(--zIndex,10)",
           className,
         ),
       },
