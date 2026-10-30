@@ -103,5 +103,14 @@ export function useWindowRnd(pid: string) {
     [genie.attach],
   );
 
-  return { size, position, onDragChange, onResizeChange, fromRef, onAttachCanvasRef };
+  return {
+    size,
+    position,
+    onDragChange,
+    onResizeChange,
+    fromRef,
+    onAttachCanvasRef,
+    onResizeStopChange,
+    onDragStopChange,
+  };
 }

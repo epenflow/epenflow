@@ -14,7 +14,7 @@ export function ProtoWindow({ children, pid }: PropsWithChildren & System.Proces
   const focused = useProcessFocusable(pid);
   const instanceId = useInstance(pid, (state) => state.id);
 
-  const { size, position, onDragChange, onResizeChange, onAttachCanvasRef, fromRef } =
+  const { size, position, onDragStopChange, onResizeStopChange, onAttachCanvasRef, fromRef } =
     useWindowRnd(pid);
 
   const onFocus = useCallback(
@@ -35,8 +35,9 @@ export function ProtoWindow({ children, pid }: PropsWithChildren & System.Proces
         style={{ zIndex }}
         position={position}
         size={size}
-        onDragStop={onDragChange}
-        onResizeStop={onResizeChange}
+        onDragStop={onDragStopChange}
+        onResizeStop={onResizeStopChange}
+
         onMouseDown={onFocus}>
         <div ref={fromRef} className="border-border size-full border bg-indigo-500">
           <p className="text-2xl font-medium">{pid}</p>
